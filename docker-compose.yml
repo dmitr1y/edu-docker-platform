@@ -1,0 +1,57 @@
+version: '2'
+services:
+  nginx:
+    image: 'nginx:latest'
+    #    container_name: web
+    ports:
+    - '80:80'
+    - '443:443'
+    volumes:
+    - './core:/core'
+    - './docker/nginx/main.conf:/etc/nginx/conf.d/default.conf'
+    - './docker/nginx/certs/edu-selfsigned.crt:/etc/ssl/certs/edu-selfsigned.crt'
+    - './docker/nginx/certs/edu-selfsigned.key:/etc/ssl/private/edu-selfsigned.key'
+    networks:
+    - backend
+    - frontend
+    - user_apps_net
+  #    restart: always
+  core:
+    build: ./docker/php/
+    #    container_name: core
+    volumes:
+    - './core:/core'
+    #    - '/var/run/docker.sock:/var/run/docker.sock'
+    networks:
+    - backend
+  #    restart: always
+  mysql:
+    image: mysql:5.7
+    container_name: mysql_db
+    environment:
+    - MYSQL_ROOT_PASSWORD=password
+    - MYSQL_DATABASE=edu
+    volumes:
+    - '~/db/mysql:/var/lib/mysql'
+    ports:
+    - "3306:3306"
+    networks:
+    - backend
+  # docker manager UI
+  portainer:
+    image: portainer/portainer
+    command: -H unix:///var/run/docker.sock
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - portainer_data:/data
+    ports:
+    - '9000:9000'
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+  user_apps_net:
+    driver: bridge
+volumes:
+  portainer_data:
