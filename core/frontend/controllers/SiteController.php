@@ -1,6 +1,8 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Docker\DockerCompose;
+use common\models\Docker\DockerService;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -211,5 +213,18 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    public function actionCompose()
+    {
+        $compose = new DockerCompose();
+        $service = new DockerService();
+        $service->image = "test_image";
+        $service->name = "testServiceName";
+        $service->ports[] = "80:80";
+
+        $compose->addService($service->getService());
+
+        return $this->render('compose', ['model' => $compose]);
     }
 }

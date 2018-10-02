@@ -6,15 +6,38 @@
  * Time: 17:59
  */
 
+namespace common\models\Docker;
+
+use http\Exception\UnexpectedValueException;
+
 class DockerNetwork
 {
     public $name;
-    public $mode;
-    public $aliases;
+//    public $mode;
+    public $driver;
 
-    public function __construct()
+//    public $aliases;
+
+    public function getNetwork()
     {
-
+        return $this->prepareArray(
+            [
+                'name' => $this->name,
+                'driver' => $this->driver
+            ]
+        );
     }
 
+    private function prepareArray($array)
+    {
+        foreach ($array as $key => $value) {
+            if (!isset($array[$key]))
+                unset($array[$key]);
+            if ($key === "driver") {
+                if ($value !== "bridge" || $value !== "host" || $value !== "overlay" || $value !== "macvlan" || $value !== "none")
+                    $array[$key] = "bridge";
+            }
+        }
+        return $array;
+    }
 }

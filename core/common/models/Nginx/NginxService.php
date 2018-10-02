@@ -6,6 +6,7 @@
  * Time: 18:38
  */
 
+namespace common\models\Nginx;
 class NginxService
 {
     public $confsDir;

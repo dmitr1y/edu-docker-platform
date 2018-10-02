@@ -6,6 +6,7 @@
  * Time: 18:37
  */
 
+namespace common\models\Nginx;
 class NginxConf
 {
     public $host;
