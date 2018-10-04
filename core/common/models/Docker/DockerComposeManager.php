@@ -29,7 +29,7 @@ class DockerComposeManager
 
     public function up($services = null)
     {
-        $cmd = "docker-compose up";
+        $cmd = "up";
         if ($services !== null)
             $cmd .= ' ' . $services;
         return $this->exec($cmd);
@@ -37,7 +37,7 @@ class DockerComposeManager
 
     public function build($services = null)
     {
-        $cmd = "docker-compose build";
+        $cmd = "build";
         if ($services !== null)
             $cmd .= ' ' . $services;
         return $this->exec($cmd);
@@ -45,7 +45,7 @@ class DockerComposeManager
 
     public function stop($services = null)
     {
-        $cmd = "docker-compose stop";
+        $cmd = "stop";
         if ($services !== null)
             $cmd .= ' ' . $services;
         return $this->exec($cmd);
@@ -53,7 +53,7 @@ class DockerComposeManager
 
     public function down($services = null)
     {
-        $cmd = "docker-compose down";
+        $cmd = "down";
         if ($services !== null)
             $cmd .= ' ' . $services;
         return $this->exec($cmd);
@@ -61,7 +61,7 @@ class DockerComposeManager
 
     private function exec($cmd)
     {
-        $process = new Process($cmd);
+        $process = new Process('docker-compose -f ' . $this->storagePath . '/docker-compose.yml ' . $cmd);
         $process->run();
 
         // executes after the command finishes

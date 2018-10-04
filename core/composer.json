@@ -25,7 +25,8 @@
     "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
     "docker-php/docker-php": "^2.0",
     "omauger/docker-compose-php": "@dev",
-    "symfony/process": "^4.1"
+    "symfony/process": "^4.1",
+    "symfony/yaml": "^4.1"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.0.0",

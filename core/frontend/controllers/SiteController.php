@@ -219,16 +219,17 @@ class SiteController extends Controller
     public function actionCompose()
     {
         $compose = new DockerCompose();
-        $service = new DockerService();
-        $service->image = "test_image";
-        $service->name = "testServiceName";
-        $service->ports[] = "80:80";
 
-        $newModel = new DockerService();
-        $newModel->setService($service->getService());
-//        $compose->addService($service->getService());
+        $service = new DockerService();
+        $service->image = "busybox";
+        $service->name = "testServiceName";
+        $service->command = 'echo "Hello world!"';
+
+        $compose->addService($service->getService());
+//        $compose->save();
         $manager = new DockerComposeManager();
         $log = $manager->up();
-        return $this->render('compose', ['model' => $service, 'log' => $log]);
+
+        return $this->render('compose', ['model' => $compose, 'log' => $log]);
     }
 }
