@@ -10,6 +10,7 @@ namespace common\models\Docker;
 
 use phpDocumentor\Reflection\Types\This;
 use function Couchbase\defaultDecoder;
+use Symfony\Component\Yaml\Yaml;
 
 class DockerCompose
 {
@@ -85,23 +86,15 @@ class DockerCompose
             $this->file[$key] = $value;
         }
         unset($this->file['pathToFile'], $this->file['file']);
-        yaml_emit_file($this->pathToFile, $this->file);
+        $yaml = Yaml::dump($this->file);
+        file_put_contents($this->pathToFile, $yaml);
     }
 
-    public function load($pathToFile)
+    public function load()
     {
-        $this->file = yaml_parse(file_get_contents($pathToFile, FILE_USE_INCLUDE_PATH));
+        $this->file = Yaml::parseFile($this->pathToFile);
         foreach ($this->file as $key => $value) {
             $this->{$key} = $value;
         }
-//        $this->version = $this->file['version'];
-//        $this->services = $this->file['services'];
-//        $this->networks = $this->file['networks'];
-//        $this->volumes = $this->file['volumes'];
-    }
-
-    private function prepareToExec()
-    {
-
     }
 }
