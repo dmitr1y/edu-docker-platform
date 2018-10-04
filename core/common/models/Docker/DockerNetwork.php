@@ -28,6 +28,13 @@ class DockerNetwork
         );
     }
 
+    public function setNetwork($network)
+    {
+        foreach ($network as $key => $value) {
+            $this->{$key} = $value;
+        }
+    }
+
     private function prepareArray($array)
     {
         foreach ($array as $key => $value) {

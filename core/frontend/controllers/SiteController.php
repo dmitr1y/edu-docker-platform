@@ -2,6 +2,7 @@
 namespace frontend\controllers;
 
 use common\models\Docker\DockerCompose;
+use common\models\Docker\DockerComposeManager;
 use common\models\Docker\DockerService;
 use Yii;
 use yii\base\InvalidParamException;
@@ -223,8 +224,11 @@ class SiteController extends Controller
         $service->name = "testServiceName";
         $service->ports[] = "80:80";
 
-        $compose->addService($service->getService());
-
-        return $this->render('compose', ['model' => $compose]);
+        $newModel = new DockerService();
+        $newModel->setService($service->getService());
+//        $compose->addService($service->getService());
+        $manager = new DockerComposeManager();
+        $log = $manager->up();
+        return $this->render('compose', ['model' => $service, 'log' => $log]);
     }
 }

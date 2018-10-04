@@ -26,7 +26,7 @@ class DockerService
             [
                 'name' => $this->name,
                 'image' => $this->image,
-                'container_name' => $this->containerName,
+                'containerName' => $this->containerName,
                 'command' => $this->command,
                 'environment' => $this->environment,
                 'ports' => $this->ports,
@@ -36,9 +36,11 @@ class DockerService
         );
     }
 
-    public function setService()
+    public function setService($service)
     {
-
+        foreach ($service as $key => $value) {
+            $this->{$key} = $value;
+        }
     }
 
     /**
