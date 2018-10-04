@@ -21,7 +21,7 @@ services:
     #    container_name: core
     volumes:
     - './:/platform'
-    #    - '/var/run/docker.sock:/var/run/docker.sock'
+    - '/var/run/docker.sock:/var/run/docker.sock'
     networks:
     - backend
   #    restart: always

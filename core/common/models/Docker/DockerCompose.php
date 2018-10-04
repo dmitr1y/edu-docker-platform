@@ -28,7 +28,7 @@ class DockerCompose
     public function __construct($pathToComposeFile = null)
     {
         if ($pathToComposeFile == null)
-            $this->pathToFile = $_SERVER['DOCUMENT_ROOT'] . '/../storage/docker-compose.yml';
+            $this->pathToFile = realpath(\Yii::$app->basePath . '/../../storage/docker-compose.yml');
         else
             $this->pathToFile = $pathToComposeFile;
         $this->load($this->pathToFile);

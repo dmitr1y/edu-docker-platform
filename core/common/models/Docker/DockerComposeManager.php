@@ -18,8 +18,7 @@ class DockerComposeManager
 
     public function __construct()
     {
-        $this->storagePath = realpath($_SERVER['DOCUMENT_ROOT'] . '/../storage');
-//        $this->storagePath = realpath(\Yii::$app->basePath.'/../../storage');
+        $this->storagePath = realpath(\Yii::$app->basePath . '/../../storage');
     }
 
     public function setDockerCompose($compose)
@@ -61,6 +60,7 @@ class DockerComposeManager
 
     private function exec($cmd)
     {
+//        todo пофиксить права запуска команды
         $process = new Process('docker-compose -f ' . $this->storagePath . '/docker-compose.yml ' . $cmd);
         $process->run();
 
