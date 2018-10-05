@@ -2,7 +2,6 @@ version: '3'
 services:
   nginx:
     image: 'nginx:latest'
-    #    container_name: web
     ports:
     - '80:80'
     - '443:443'
@@ -12,16 +11,17 @@ services:
     - './docker/nginx/certs/edu-selfsigned.crt:/etc/ssl/certs/edu-selfsigned.crt'
     - './docker/nginx/certs/edu-selfsigned.key:/etc/ssl/private/edu-selfsigned.key'
     networks:
-    - backend
     - frontend
+    - backend
     - user_apps_net
   #    restart: always
   core:
     build: ./docker/php/
-    #    container_name: core
     volumes:
     - './:/platform'
-    - '/var/run/docker.sock:/var/run/docker.sock'
+    #    - '/var/run/docker.sock:/var/run/docker.sock'
+    environment:
+    - DOCKER_HOST=tcp://docker:2375
     networks:
     - backend
   #    restart: always
@@ -37,6 +37,15 @@ services:
     - "3306:3306"
     networks:
     - backend
+  # docker in docker
+  docker:
+    image: docker:stable-dind
+    privileged: true
+    command: --storage-driver=vfs
+    networks:
+    - backend
+  #    volumes:
+  #    - /var/run/docker.sock:/var/run/docker.sock
   # docker manager UI
   portainer:
     image: portainer/portainer

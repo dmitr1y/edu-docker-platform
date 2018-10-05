@@ -60,6 +60,9 @@ class DockerComposeManager
 
     private function exec($cmd)
     {
+        if (!isset($cmd) || empty($cmd))
+            return null;
+
 //        todo пофиксить права запуска команды
         $process = new Process('docker-compose -f ' . $this->storagePath . '/docker-compose.yml ' . $cmd);
         $process->run();

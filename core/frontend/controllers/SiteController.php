@@ -4,6 +4,7 @@ namespace frontend\controllers;
 use common\models\Docker\DockerCompose;
 use common\models\Docker\DockerComposeManager;
 use common\models\Docker\DockerService;
+use Symfony\Component\Process\Process;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -218,6 +219,19 @@ class SiteController extends Controller
 
     public function actionCompose()
     {
+//        $process = new Process('whoami');
+//        $process->run();
+//
+//        // executes after the command finishes
+//        $log = $process->getOutput();
+//        if ($process->isSuccessful()) {
+//            $log = "[SUCCESS] " . $log;
+//        } else {
+//            //            throw new ProcessFailedException($process);
+//            $log = "[ERROR " . $process->getExitCodeText() . "] " . $process->getErrorOutput();
+//        }
+//        echo $log;
+//        exit;
         $compose = new DockerCompose();
 
         $service = new DockerService();
