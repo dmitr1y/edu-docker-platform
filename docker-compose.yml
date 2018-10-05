@@ -6,20 +6,21 @@ services:
     - '80:80'
     - '443:443'
     volumes:
-    - './:/platform'
-    - './docker/nginx/main.conf:/etc/nginx/conf.d/default.conf'
-    #    - './docker/nginx/portainer.conf:/etc/nginx/conf.d/portainer.conf'
-    - './docker/nginx/certs/edu-selfsigned.crt:/etc/ssl/certs/edu-selfsigned.crt'
-    - './docker/nginx/certs/edu-selfsigned.key:/etc/ssl/private/edu-selfsigned.key'
+    - ./:/platform
+    - ./docker/nginx/main.conf:/etc/nginx/conf.d/default.conf
+    - ./docker/nginx/test.conf:/etc/nginx/conf.d/test.conf
+    - ./docker/nginx/certs/edu-selfsigned.crt:/etc/ssl/certs/edu-selfsigned.crt
+    - ./docker/nginx/certs/edu-selfsigned.key:/etc/ssl/private/edu-selfsigned.key
     networks:
     - frontend
     - backend
     - user_apps_net
+    - docker
   #    restart: always
   core:
     build: ./docker/php/
     volumes:
-    - './:/platform'
+    - ./:/platform
     environment:
     - DOCKER_HOST=tcp://docker:2375
     networks:
@@ -33,16 +34,19 @@ services:
     - MYSQL_ROOT_PASSWORD=password
     - MYSQL_DATABASE=edu
     volumes:
-    - '~/db/mysql:/var/lib/mysql'
+    - ~/db/mysql:/var/lib/mysql
     ports:
-    - "3306:3306"
+    - 3306:3306
     networks:
     - backend
   # docker in docker
   docker:
-    image: docker:stable-dind
+    image: docker:dind
     privileged: true
     command: --storage-driver=vfs
+    volumes:
+    - ./storage:/storage
+    - ./dind:/dind
     networks:
     - docker
   # docker manager UI

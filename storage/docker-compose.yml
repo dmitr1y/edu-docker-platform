@@ -1,0 +1,11 @@
+version: '2'
+services:
+  hello:
+    image: crccheck/hello-world
+  nginx:
+    image: 'nginx:latest'
+    volumes:
+    - /dind/nginx/main.conf:/etc/nginx/conf.d/app.conf
+    ports:
+    - 80:80
+    restart: always
