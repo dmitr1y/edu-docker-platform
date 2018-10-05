@@ -8,17 +8,15 @@
 
 namespace common\models\Docker;
 
-use phpDocumentor\Reflection\Types\This;
-use function Couchbase\defaultDecoder;
 use Symfony\Component\Yaml\Yaml;
 
 class DockerCompose
 {
     public $version;
-    public $file;
     public $services;
     public $networks;
     public $volumes;
+    private $file;
     private $pathToFile;
 
     /**
@@ -31,7 +29,7 @@ class DockerCompose
             $this->pathToFile = realpath(\Yii::$app->basePath . '/../../storage/docker-compose.yml');
         else
             $this->pathToFile = $pathToComposeFile;
-        $this->load($this->pathToFile);
+        $this->load();
     }
 
     public function addService($service)
@@ -45,7 +43,12 @@ class DockerCompose
      */
     public function addNetwork($network)
     {
-        $this->networks[] = $network;
+        $name = $network['name'];
+        unset($network['name']);
+        foreach ($network as $key => $value) {
+            if (isset($network[$key]) && !empty($network[$key]))
+                $this->networks[$name][$key] = $value;
+        }
     }
 
     /**
@@ -83,8 +86,11 @@ class DockerCompose
     public function save()
     {
         foreach ($this as $key => $value) {
-            $this->file[$key] = $value;
+            if (isset($this->{$key}) || !empty($this->{$key})) {
+                $this->file[$key] = $value;
+            }
         }
+//        exit;
         unset($this->file['pathToFile'], $this->file['file']);
         $yaml = Yaml::dump($this->file);
         file_put_contents($this->pathToFile, $yaml);

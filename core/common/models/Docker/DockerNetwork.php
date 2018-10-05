@@ -13,17 +13,18 @@ use http\Exception\UnexpectedValueException;
 class DockerNetwork
 {
     public $name;
-//    public $mode;
     public $driver;
-
-//    public $aliases;
+    public $external;
 
     public function getNetwork()
     {
         return $this->prepareArray(
             [
                 'name' => $this->name,
-                'driver' => $this->driver
+                'driver' => $this->driver,
+                'external' => [
+                    'name' => $this->external
+                ]
             ]
         );
     }
@@ -37,12 +38,19 @@ class DockerNetwork
 
     private function prepareArray($array)
     {
-        foreach ($array as $key => $value) {
-            if (!isset($array[$key]))
-                unset($array[$key]);
-            if ($key === "driver") {
-                if ($value !== "bridge" || $value !== "host" || $value !== "overlay" || $value !== "macvlan" || $value !== "none")
-                    $array[$key] = "bridge";
+        if (empty($array['name'])) {
+            return null;
+        }
+
+        if (!empty($array['driver'])) {
+            $drv = $array['driver'];
+            if ($drv !== "bridge" || $drv !== "host" || $drv !== "overlay" || $drv !== "macvlan" || $drv !== "none")
+                $array['driver'] = "bridge";
+        }
+
+        if (!empty($array['external'])) {
+            if (empty($array['external']['name'])) {
+                return null;
             }
         }
         return $array;

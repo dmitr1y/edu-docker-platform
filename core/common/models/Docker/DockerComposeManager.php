@@ -28,7 +28,7 @@ class DockerComposeManager
 
     public function up($services = null)
     {
-        $cmd = "up";
+        $cmd = "up -d";
         if ($services !== null)
             $cmd .= ' ' . $services;
         return $this->exec($cmd);

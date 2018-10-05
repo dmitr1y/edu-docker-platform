@@ -3,6 +3,7 @@ namespace frontend\controllers;
 
 use common\models\Docker\DockerCompose;
 use common\models\Docker\DockerComposeManager;
+use common\models\Docker\DockerNetwork;
 use common\models\Docker\DockerService;
 use Symfony\Component\Process\Process;
 use Yii;
@@ -219,31 +220,25 @@ class SiteController extends Controller
 
     public function actionCompose()
     {
-//        $process = new Process('whoami');
-//        $process->run();
-//
-//        // executes after the command finishes
-//        $log = $process->getOutput();
-//        if ($process->isSuccessful()) {
-//            $log = "[SUCCESS] " . $log;
-//        } else {
-//            //            throw new ProcessFailedException($process);
-//            $log = "[ERROR " . $process->getExitCodeText() . "] " . $process->getErrorOutput();
-//        }
-//        echo $log;
-//        exit;
         $compose = new DockerCompose();
 
         $service = new DockerService();
-        $service->image = "busybox";
-        $service->name = "testServiceName";
-        $service->command = 'echo "Hello world!"';
+        $service->image = "crccheck/hello-world";
+        $service->name = "hello";
+        $service->networks[] = "backend";
+//        $service->command = 'echo "Hello world!"';
 
+        $network = new DockerNetwork();
+        $network->name = "backend";
+//        $network->driver="bridge";
+        $network->external = "edudockerplatform_backend";
+
+        $compose->addNetwork($network->getNetwork());
         $compose->addService($service->getService());
-//        $compose->save();
+        $compose->save();
         $manager = new DockerComposeManager();
         $log = $manager->up();
-
+//        $log = null;
         return $this->render('compose', ['model' => $compose, 'log' => $log]);
     }
 }
