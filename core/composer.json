@@ -26,7 +26,8 @@
     "docker-php/docker-php": "^2.0",
     "omauger/docker-compose-php": "@dev",
     "symfony/process": "^4.1",
-    "symfony/yaml": "^4.1"
+    "symfony/yaml": "^4.1",
+    "romanpitak/nginx-config-processor": "^0.2.1"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.0.0",

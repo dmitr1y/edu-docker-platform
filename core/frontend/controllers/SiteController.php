@@ -5,6 +5,7 @@ use common\models\Docker\DockerCompose;
 use common\models\Docker\DockerComposeManager;
 use common\models\Docker\DockerNetwork;
 use common\models\Docker\DockerService;
+use common\models\Nginx\NginxConf;
 use Symfony\Component\Process\Process;
 use Yii;
 use yii\base\InvalidParamException;
@@ -216,6 +217,26 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    public function actionNginx()
+    {
+        $nginx = new NginxConf();
+        $nginx->serviceName = "app1";
+        $nginx->proxyPort = 80;
+        $nginx->proxyServer = "docker";
+        $nginx->listen = 443;
+        $nginx->subdomain = "apps";
+        $conf = $nginx->createMainConf();
+        $nginx->listen = 80;
+        $nginx->proxyServer = "hello";
+        $nginx->proxyPort = 8000;
+        $conf = $nginx->createSubConf();
+        echo '<pre>';
+        print_r($conf);
+        echo '</pre>';
+        exit;
+        return $this->render('compose', ['model' => $nginx]);
     }
 
     public function actionCompose()
