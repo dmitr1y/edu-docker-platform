@@ -1,13 +1,13 @@
 version: '3'
 services:
   nginx:
-    build: ./docker/nginx/
+    image: nginx:latest
     ports:
     - '80:80'
     - '443:443'
     volumes:
     - ./:/platform
-    - ./storage/nginx/main:/etc/nginx/conf.d
+    - ./docker/nginx/confs:/etc/nginx/conf.d
     - ./docker/nginx/certs/edu-selfsigned.crt:/etc/ssl/certs/edu-selfsigned.crt
     - ./docker/nginx/certs/edu-selfsigned.key:/etc/ssl/private/edu-selfsigned.key
     networks:
