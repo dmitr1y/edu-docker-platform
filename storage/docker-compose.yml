@@ -3,9 +3,18 @@ services:
   hello:
     image: crccheck/hello-world
   nginx:
-    image: 'nginx:latest'
+    build: ./nginx/docker/
+    #    path in dind container
     volumes:
-    - /dind/nginx/main.conf:/etc/nginx/conf.d/app.conf
+    - /storage/nginx/dind:/etc/nginx/conf.d
     ports:
     - 80:80
     restart: always
+  portainer:
+    image: portainer/portainer
+    command: -H unix:///var/run/docker.sock
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - portainer_data:/data
+volumes:
+  portainer_data:

@@ -1,2 +1,3 @@
 *.conf
+!portainer.conf
 !default.conf

@@ -1,7 +1,6 @@
 version: '3'
 services:
   nginx:
-    #    image: 'nginx:latest'
     build: ./docker/nginx/
     ports:
     - '80:80'
@@ -16,13 +15,13 @@ services:
     - backend
     - user_apps_net
     - docker
-  #    restart: always
+    restart: always
   core:
     build: ./docker/php/
     volumes:
     - ./:/platform
     environment:
-    - DOCKER_HOST=tcp://docker:2375
+    - DOCKER_HOST=tcp://dind:2375
     networks:
     - backend
     - docker
@@ -40,7 +39,7 @@ services:
     networks:
     - backend
   # docker in docker
-  docker:
+  dind:
     image: docker:dind
     privileged: true
     command: --storage-driver=vfs
