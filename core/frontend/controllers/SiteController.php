@@ -223,17 +223,9 @@ class SiteController extends Controller
     {
         $nginx = new NginxConf();
         $nginx->serviceName = "app1";
-        $nginx->proxyPort = 80;
-        $nginx->proxyServer = "dind";
-        $nginx->listen = '443 ssl';
-        $nginx->ssl_certificate = '/etc/ssl/certs/edu-selfsigned.crt';
-        $nginx->ssl_certificate_key = '/etc/ssl/private/edu-selfsigned.key';
-        $nginx->subdomain = "apps";
-        $conf = $nginx->createMainConf();
-        $nginx->listen = 80;
         $nginx->proxyServer = "hello";
         $nginx->proxyPort = 8000;
-        $conf = $nginx->createSubConf();
+        $conf = $nginx->create();
         echo '<pre>';
         print_r($conf);
         echo '</pre>';
