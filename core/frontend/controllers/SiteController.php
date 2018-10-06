@@ -237,24 +237,37 @@ class SiteController extends Controller
     {
         $compose = new DockerCompose();
 
+        $nginxConf = new NginxConf();
+
         $service = new DockerService();
-        $service->build = "./app1/";
-//        $service->image = "crccheck/hello-world";
-        $service->name = "hello";
-        $service->networks[] = "backend";
-//        $service->command = 'echo "Hello world!"';
+//        $service->build = "./user_apps/app1/";
 
-        $network = new DockerNetwork();
-        $network->name = "backend";
-//        $network->driver="bridge";
-        $network->external = "edudockerplatform_backend";
+        $nginxConf->proxyPort = 8000;
 
-        $compose->addNetwork($network->getNetwork());
+        $nginxConf->serviceName = 'app1';
+        $service->image = "crccheck/hello-world";
+        $nginxConf->proxyServer = $service->name = "hello1";
         $compose->addService($service->getService());
+        $nginxConf->create();
+
+        $nginxConf->serviceName = 'app2';
+        $service->image = "crccheck/hello-world";
+        $nginxConf->proxyServer = $service->name = "hello2";
+        $compose->addService($service->getService());
+        $nginxConf->create();
+
+        $nginxConf->serviceName = 'app3';
+        $service->image = "crccheck/hello-world";
+        $nginxConf->proxyServer = $service->name = "hello3";
+        $compose->addService($service->getService());
+        $nginxConf->create();
+
         $compose->save();
+
+
         $manager = new DockerComposeManager();
-//        $log = $manager->up();
-        $log = null;
+        $log = $manager->up();
+//        $log = null;
         return $this->render('compose', ['model' => $compose, 'log' => $log]);
     }
 }

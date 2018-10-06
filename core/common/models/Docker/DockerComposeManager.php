@@ -23,7 +23,9 @@ class DockerComposeManager
 
     public function setDockerCompose($compose)
     {
-
+        foreach ($compose as $key => $value) {
+            $this->{$key} = $value;
+        }
     }
 
     public function up($services = null)
@@ -63,7 +65,6 @@ class DockerComposeManager
         if (!isset($cmd) || empty($cmd))
             return null;
 
-//        todo пофиксить права запуска команды
         $process = new Process('docker-compose -f ' . $this->storagePath . '/docker-compose.yml ' . $cmd);
         $process->run();
 

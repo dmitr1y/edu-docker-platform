@@ -3,7 +3,7 @@ echo "[AUTORELOAD NGINX] starting Nginx">&2
 /usr/sbin/nginx -g "daemon on;"
 
 echo "[AUTORELOAD NGINX] starting Nginx conf watcher">&2
-DIR="/etc/nginx/conf.d"
+DIR="/etc/nginx/conf.d/user_confs"
 inotifywait -m -r -e moved_to -e create -e delete "$DIR" --format "%f" | while read f
 do
     echo "[AUTORELOAD NGINX] reloading Nginx configuration">&2

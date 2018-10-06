@@ -1,9 +1,9 @@
 version: '2'
 services:
-  hello: { build: ./app1/, networks: [backend] }
-  nginx: { build: ./nginx/docker/, volumes: ['/storage/nginx/dind:/etc/nginx/conf.d'], ports: ['80:80'], restart: always }
-  portainer: { image: portainer/portainer, command: '-H unix:///var/run/docker.sock', volumes: ['/var/run/docker.sock:/var/run/docker.sock', 'portainer_data:/data'] }
+    nginx: { build: ./nginx/docker/, volumes: ['/storage/nginx/dind:/etc/nginx/conf.d'], ports: ['80:80'], restart: always }
+    portainer: { image: portainer/portainer, command: '-H unix:///var/run/docker.sock', volumes: ['/var/run/docker.sock:/var/run/docker.sock', 'portainer_data:/data'] }
+    hello1: { image: crccheck/hello-world }
+    hello2: { image: crccheck/hello-world }
+    hello3: { image: crccheck/hello-world }
 volumes:
-  portainer_data: null
-networks:
-  backend: { external: { name: edudockerplatform_backend } }
+    portainer_data: null
