@@ -21,6 +21,8 @@ class NginxConf
     public $listen;
     public $serviceName;
     public $proxyServer;
+    public $ssl_certificate;
+    public $ssl_certificate_key;
     public $proxyPort;
     public $pathToFile;
 
@@ -45,6 +47,8 @@ class NginxConf
             ->addDirective(Directive::create('server')
                 ->setChildScope(Scope::create()
                     ->addDirective(Directive::create('listen', $this->listen))
+                    ->addDirective(Directive::create('ssl_certificate', $this->ssl_certificate))
+                    ->addDirective(Directive::create('ssl_certificate_key', $this->ssl_certificate_key))
                     ->addDirective(Directive::create('server_name', $this->serviceName . '.' . $this->subdomain . '.' . $this->host))
                     ->addDirective(Directive::create('location', '/', Scope::create()
                         ->addDirective(Directive::create('proxy_pass', 'http://' . $this->proxyServer . ':' . $this->proxyPort . '/' . $this->serviceName))
