@@ -1,20 +1,9 @@
 version: '2'
 services:
-  hello:
-    image: crccheck/hello-world
-  nginx:
-    build: ./nginx/docker/
-    #    path in dind container
-    volumes:
-    - /storage/nginx/dind:/etc/nginx/conf.d
-    ports:
-    - 80:80
-    restart: always
-  portainer:
-    image: portainer/portainer
-    command: -H unix:///var/run/docker.sock
-    volumes:
-    - /var/run/docker.sock:/var/run/docker.sock
-    - portainer_data:/data
+  hello: { build: ./app1/, networks: [backend] }
+  nginx: { build: ./nginx/docker/, volumes: ['/storage/nginx/dind:/etc/nginx/conf.d'], ports: ['80:80'], restart: always }
+  portainer: { image: portainer/portainer, command: '-H unix:///var/run/docker.sock', volumes: ['/var/run/docker.sock:/var/run/docker.sock', 'portainer_data:/data'] }
 volumes:
-  portainer_data:
+  portainer_data: null
+networks:
+  backend: { external: { name: edudockerplatform_backend } }

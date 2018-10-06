@@ -11,6 +11,7 @@ class DockerService
 {
     public $name;
     public $image;
+    public $build;
     public $containerName;
     public $environment;
     public $command;
@@ -26,6 +27,7 @@ class DockerService
             [
                 'name' => $this->name,
                 'image' => $this->image,
+                'build' => $this->build,
                 'containerName' => $this->containerName,
                 'command' => $this->command,
                 'environment' => $this->environment,

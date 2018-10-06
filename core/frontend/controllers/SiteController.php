@@ -238,7 +238,8 @@ class SiteController extends Controller
         $compose = new DockerCompose();
 
         $service = new DockerService();
-        $service->image = "crccheck/hello-world";
+        $service->build = "./app1/";
+//        $service->image = "crccheck/hello-world";
         $service->name = "hello";
         $service->networks[] = "backend";
 //        $service->command = 'echo "Hello world!"';
@@ -252,8 +253,8 @@ class SiteController extends Controller
         $compose->addService($service->getService());
         $compose->save();
         $manager = new DockerComposeManager();
-        $log = $manager->up();
-//        $log = null;
+//        $log = $manager->up();
+        $log = null;
         return $this->render('compose', ['model' => $compose, 'log' => $log]);
     }
 }
