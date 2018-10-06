@@ -12,12 +12,13 @@ namespace common\models\Docker;
 class Dockerfile
 {
     public $pathToFile;
-    public $image;
+    public $appName;
     public $file;
 
     public function __construct()
     {
-        $this->file = null;
+//        $this->file = null;
+        $this->pathToFile = realpath(\Yii::$app->basePath . '/../../storage/user_apps');
     }
 
     public function set($dockerfile)
@@ -29,6 +30,16 @@ class Dockerfile
 
     public function get()
     {
-        return $this->file;
+        if (isset($this->pathToFile, $this->appName))
+            return file_get_contents($this->pathToFile . '/' . $this->appName . '/Dockerfile', $this->file);
+        else return null;
+    }
+
+    public function save()
+    {
+        if (mkdir($this->pathToFile . '/' . $this->appName, 0777, true) &&
+            file_put_contents($this->pathToFile . '/' . $this->appName . '/Dockerfile', $this->file))
+            return true;
+        return false;
     }
 }
