@@ -113,9 +113,4 @@ RUN apt-get update \
 	nano \
 	procps
 
-# docker.io
-#RUN groupadd -r -g 3000 docker
-#RUN usermod -aG docker www-data
-#RUN usermod -u 3000 docker
-
-WORKDIR /core
+WORKDIR /platform/core

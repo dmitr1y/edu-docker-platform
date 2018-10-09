@@ -13,6 +13,13 @@ use yii\rest\Controller;
 
 class AppController extends Controller
 {
+    public function behaviors()
+    {
+        $behaviours = parent::behaviors();
+        unset($behaviours['access']);
+        return $behaviours;
+    }
+
     public function actionIndex()
     {
         return 'api/app';

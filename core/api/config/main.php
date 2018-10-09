@@ -12,7 +12,12 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'api\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'user' => [
+            // following line will restrict access to admin controller from frontend application
+            'as frontend' => 'dektrium\user\filters\FrontendFilter',
+        ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-api',
@@ -21,11 +26,11 @@ return [
                 'application/json' => 'yii\web\JsonParser',
             ]
         ],
-        'user' => [
-            'identityClass' => 'common\models\User',
-            'enableAutoLogin' => true,
-            'identityCookie' => ['name' => '_identity-api', 'httpOnly' => true],
-        ],
+//        'user' => [
+//            'identityClass' => 'common\models\User',
+//            'enableAutoLogin' => true,
+//            'identityCookie' => ['name' => '_identity-api', 'httpOnly' => true],
+//        ],
         'session' => [
             // this is the name of the session cookie used for login on the api
             'name' => 'advanced-api',
