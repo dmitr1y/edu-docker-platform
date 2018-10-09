@@ -6,6 +6,8 @@
  * Time: 22:04
  */
 
+namespace common\models\App;
+
 class UserApp
 {
     public $id;
