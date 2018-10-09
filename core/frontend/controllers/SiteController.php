@@ -1,11 +1,11 @@
 <?php
 namespace frontend\controllers;
 
-use common\models\Docker\DockerCompose;
-use common\models\Docker\DockerComposeManager;
-use common\models\Docker\DockerNetwork;
-use common\models\Docker\DockerService;
-use common\models\Nginx\NginxConf;
+use common\models\docker\DockerCompose;
+use common\models\docker\DockerComposeManager;
+use common\models\docker\DockerNetwork;
+use common\models\docker\DockerService;
+use common\models\nginx\NginxConf;
 use Symfony\Component\Process\Process;
 use Yii;
 use yii\base\InvalidParamException;

@@ -6,7 +6,7 @@
  * Time: 17:59
  */
 
-namespace common\models\Docker;
+namespace common\models\docker;
 
 use http\Exception\UnexpectedValueException;
 

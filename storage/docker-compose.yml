@@ -5,5 +5,6 @@ services:
     hello1: { image: crccheck/hello-world }
     hello2: { image: crccheck/hello-world }
     hello3: { image: crccheck/hello-world, build: ./user_apps/ }
+    nice-app: { image: crccheck/hello-world }
 volumes:
     portainer_data: null

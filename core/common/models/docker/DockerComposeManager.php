@@ -6,7 +6,7 @@
  * Time: 15:51
  */
 
-namespace common\models\Docker;
+namespace common\models\docker;
 
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;

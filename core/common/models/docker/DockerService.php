@@ -6,7 +6,8 @@
  * Time: 17:54
  */
 
-namespace common\models\Docker;
+namespace common\models\docker;
+
 class DockerService
 {
     public $name;

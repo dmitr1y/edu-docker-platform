@@ -6,7 +6,7 @@
  * Time: 23:25
  */
 
-namespace common\models\Docker;
+namespace common\models\docker;
 
 
 class Dockerfile

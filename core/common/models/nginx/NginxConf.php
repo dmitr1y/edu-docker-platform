@@ -6,7 +6,7 @@
  * Time: 18:37
  */
 
-namespace common\models\Nginx;
+namespace common\models\nginx;
 
 
 use RomanPitak\Nginx\Config\Directive;
@@ -46,8 +46,16 @@ class NginxConf
                 ->addDirective(Directive::create('proxy_pass', 'http://' . $this->proxyServer . ':' . $this->proxyPort . '/'))
             ))
             ->prettyPrint(0);
-        file_put_contents($this->pathToFile . '/' . $this->serviceName . ".conf", $conf);
+        $this->save($this->pathToFile, $this->serviceName . ".conf", $conf);
         return $conf;
+    }
+
+    private function save($path, $fileName, $file)
+    {
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
+        file_put_contents($path . '/' . $fileName, $file);
     }
 
     /**

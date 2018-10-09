@@ -6,7 +6,7 @@
  * Time: 14:23
  */
 
-namespace common\models\Docker;
+namespace common\models\docker;
 
 use Symfony\Component\Yaml\Yaml;
 
