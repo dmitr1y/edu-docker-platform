@@ -8,7 +8,7 @@ $params = array_merge(
 
 return [
     'id' => 'app-api',
-    'homeUrl' => '/api',
+    'homeUrl' => '/',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'api\controllers',
     'bootstrap' => ['log'],
@@ -17,11 +17,15 @@ return [
             // following line will restrict access to admin controller from frontend application
             'as frontend' => 'dektrium\user\filters\FrontendFilter',
         ],
+        'v1' => [
+            'class' => 'api\modules\v1\Module',
+            'basePath' => '@app/modules/v1',
+        ],
     ],
     'components' => [
         'request' => [
+            'class' => '\yii\web\Request',
             'csrfParam' => '_csrf-api',
-            'baseUrl' => '/api',
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
             ]
@@ -51,11 +55,9 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'auth' => 'site/login',
-                '' => 'site/index',
-
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'app'],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/app', 'v1/user', 'v1/default']],
             ],
         ],
     ],
