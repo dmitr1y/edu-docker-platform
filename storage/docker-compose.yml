@@ -4,6 +4,6 @@ services:
     portainer: { image: portainer/portainer, command: '-H unix:///var/run/docker.sock', volumes: ['/var/run/docker.sock:/var/run/docker.sock', 'portainer_data:/data'] }
     hello1: { image: crccheck/hello-world }
     hello2: { image: crccheck/hello-world }
-    hello3: { image: crccheck/hello-world }
+    hello3: { image: crccheck/hello-world, build: ./user_apps/ }
 volumes:
     portainer_data: null
