@@ -3,6 +3,8 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+
+use frontend\assets\BootboxAsset;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
@@ -11,6 +13,7 @@ use frontend\assets\AppAsset;
 use common\widgets\Alert;
 
 AppAsset::register($this);
+BootboxAsset::overrideSystemConfirm();
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

@@ -23,12 +23,11 @@
     "yiisoft/yii2": "~2.0.6",
     "yiisoft/yii2-bootstrap": "~2.0.0",
     "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
-    "docker-php/docker-php": "^2.0",
-    "omauger/docker-compose-php": "@dev",
     "symfony/process": "^4.1",
     "symfony/yaml": "^4.1",
     "romanpitak/nginx-config-processor": "^0.2.1",
-    "dektrium/yii2-user": "^0.9.14"
+    "dektrium/yii2-user": "^0.9.14",
+    "bower-asset/bootbox": "~4.3.0"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.0.0",
