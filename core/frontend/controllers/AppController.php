@@ -20,6 +20,8 @@ use yii\web\Controller;
 
 class AppController extends Controller
 {
+    private const domain = "apps.localhost";
+
     public function actionIndex($id = null, $logFlag = null)
     {
         if (empty($id))
@@ -38,29 +40,41 @@ class AppController extends Controller
 
     public function actionManager()
     {
-        $app = Yii::$app->request->post('app');
+        $appName = Yii::$app->request->post('app');
+
         $action = Yii::$app->request->post('action');
         $id = Yii::$app->request->post('id');
 
-        if (!isset($app) || empty($app))
+//        todo Вывод ошибки "приложение не найдено"
+        if (!isset($appName) || empty($appName))
             return $this->redirect(['app/index']);
+
+        $app = Apps::findOne(['id' => $id]);
+//        $appName=DockerService::prepareServiceName($app->name);
+
         $log = null;
+
         $composeManager = new DockerComposeManager();
-        $composeManager->up('nginx');
+//        todo Проверка запущен ли nginx и БД
+//        $composeManager->up('nginx');
         switch ($action) {
             case 'Run':
-                $log = $composeManager->up($app);
+                $log = $composeManager->up($appName);
+                $this->createNginx($appName, $app->port);
                 break;
             case 'Stop':
-                $log = $composeManager->stop($app);
+                $log = $composeManager->stop($appName);
                 break;
             case 'Remove':
-                $log = $composeManager->down($app);
+//                todo При удалении контейнера удалять образ, Dockerfile, БД, конфиг Nginx
+                $log = $composeManager->down($appName);
                 break;
             default:
                 break;
         }
 
+//       todo Вырезать из лога "storage_"
+//        todo Добавить перенос строк
         $appLog = AppsLog::findOne(['appId' => $id]);
         if (empty($appLog)) {
             $appLog = new AppsLog();
@@ -91,17 +105,28 @@ class AppController extends Controller
     private function createCompose($model)
     {
         $compose = new DockerCompose();
-        $nginxConf = new NginxConf();
         $service = new DockerService();
-        $nginxConf->proxyPort = 8000;
 
-        $nginxConf->serviceName = strtolower(preg_replace('/\s+/', '-', $model->name));
-        $service->image = "crccheck/hello-world";
-        $nginxConf->proxyServer = $service->name = strtolower(preg_replace('/\s+/', '-', $model->name));
+        $service->name = strtolower(preg_replace('/\s+/', '-', $model->name));
+//        todo Добавление пути к Dockerfile
+        $service->image = $model->image;
+
         $compose->addService($service->getService());
-        $nginxConf->create();
         $compose->save();
-        $model->url = strtolower(preg_replace('/\s+/', '-', $model->name)) . '.apps.localhost';
+
+        $model->url = DockerService::prepareServiceName($model->name) . '.' . $this::domain;
         $model->save();
+    }
+
+    private function createNginx($serviceName, $servicePort = 80)
+    {
+        if (!isset($serviceName) || empty($serviceName))
+            return null;
+
+        $nginxConf = new NginxConf();
+        $nginxConf->proxyPort = $servicePort;
+        $nginxConf->serviceName = DockerService::prepareServiceName($serviceName);
+        $nginxConf->proxyServer = DockerService::prepareServiceName($serviceName);
+        $nginxConf->create();
     }
 }

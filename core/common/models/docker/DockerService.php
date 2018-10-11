@@ -59,4 +59,8 @@ class DockerService
         return $array;
     }
 
+    public static function prepareServiceName($name)
+    {
+        return strtolower(preg_replace('/\s+/', '-', $name));
+    }
 }

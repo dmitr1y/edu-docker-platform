@@ -17,8 +17,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'name') ?>
-
     <?= $form->field($model, 'description') ?>
+    <?= $form->field($model, 'port') ?>
     <?= $form->field($model, 'image') ?>
     <?= $form->field($model, 'file')->fileInput() ?>
 

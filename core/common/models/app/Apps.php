@@ -13,6 +13,7 @@ use Yii;
  * @property string $file
  * @property string $image
  * @property string $url
+ * @property integer $port
  */
 class Apps extends \yii\db\ActiveRecord
 {
@@ -34,6 +35,7 @@ class Apps extends \yii\db\ActiveRecord
             [['description', 'file', 'url'], 'string'],
             [['name'], 'string', 'max' => 32],
             [['image'], 'string', 'max' => 255],
+            [['port'], 'integer'],
         ];
     }
 
@@ -49,6 +51,7 @@ class Apps extends \yii\db\ActiveRecord
             'file' => Yii::t('app', 'Dockerfile'),
             'image' => Yii::t('app', 'Image from Docker Hu'),
             'url' => Yii::t('app', 'Link to app'),
+            'port' => Yii::t('app', 'App port'),
         ];
     }
 

@@ -31,7 +31,7 @@ class DockerComposeManager
     public function up($services = null)
     {
         $cmd = "up -d";
-        if ($services !== null)
+        if (!empty($services))
             $cmd .= ' ' . $services;
         return $this->exec($cmd);
     }
@@ -39,7 +39,7 @@ class DockerComposeManager
     public function build($services = null)
     {
         $cmd = "build";
-        if ($services !== null)
+        if (!empty($services))
             $cmd .= ' ' . $services;
         return $this->exec($cmd);
     }
@@ -47,7 +47,7 @@ class DockerComposeManager
     public function stop($services = null)
     {
         $cmd = "stop";
-        if ($services !== null)
+        if (!empty($services))
             $cmd .= ' ' . $services;
         return $this->exec($cmd);
     }
@@ -55,26 +55,26 @@ class DockerComposeManager
     public function down($services = null)
     {
         $cmd = "down";
-        if ($services !== null)
+        if (!empty($services))
             $cmd .= ' ' . $services;
         return $this->exec($cmd);
     }
 
     private function exec($cmd)
     {
-        if (!isset($cmd) || empty($cmd))
+        if (empty($cmd))
             return null;
 
         $process = new Process('docker-compose -f ' . $this->storagePath . '/docker-compose.yml ' . $cmd);
         $process->run();
 
         // executes after the command finishes
-        $log = $process->getOutput();
+        $log = $process->getOutput() . ' ' . $process->getErrorOutput();
         if ($process->isSuccessful()) {
             $log = "[SUCCESS] " . $log;
         } else {
             //            throw new ProcessFailedException($process);
-            $log = "[ERROR " . $process->getExitCodeText() . "] " . $process->getErrorOutput();
+            $log = "[ERROR " . $process->getExitCodeText() . "] " . $log;
         }
 
         return $log;
