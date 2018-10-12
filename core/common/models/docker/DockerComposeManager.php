@@ -13,7 +13,6 @@ use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class DockerComposeManager
 {
-    private $dockerCompose;
     private $storagePath;
 
     public function __construct()
@@ -52,13 +51,16 @@ class DockerComposeManager
         return $this->exec($cmd);
     }
 
-    public function down($services = null)
+    public function down($service = null)
     {
 //        todo окончательное удаление - вместе с томом данных или удаление только контейнера
-        $cmd = "down";
-        if (!empty($services))
-            $cmd .= ' ' . $services;
-        return $this->exec($cmd);
+        if (empty($service))
+            return false;
+        $this->stop($service);
+        $manager = new DockerCompose();
+        $manager->removeService(['name' => $service]);
+        $manager->save();
+        return true;
     }
 
     private function exec($cmd)

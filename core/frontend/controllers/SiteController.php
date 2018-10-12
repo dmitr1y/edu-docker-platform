@@ -247,20 +247,20 @@ class SiteController extends Controller
         $nginxConf->serviceName = 'app1';
         $service->image = "crccheck/hello-world";
         $nginxConf->proxyServer = $service->name = "hello1";
-        $compose->addService($service->getService());
+        $compose->setService($service->getService());
         $nginxConf->create();
 
         $nginxConf->serviceName = 'app2';
         $service->image = "crccheck/hello-world";
         $nginxConf->proxyServer = $service->name = "hello2";
-        $compose->addService($service->getService());
+        $compose->setService($service->getService());
         $nginxConf->create();
 
         $nginxConf->serviceName = 'app3_3';
 //        $service->image = "crccheck/hello-world";
         $service->build = "./user_apps/";
         $nginxConf->proxyServer = $service->name = "hello3";
-        $compose->addService($service->getService());
+        $compose->setService($service->getService());
         $nginxConf->create();
 
         $compose->save();

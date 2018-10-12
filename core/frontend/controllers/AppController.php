@@ -16,6 +16,7 @@ use common\models\docker\DockerComposeManager;
 use common\models\docker\DockerService;
 use common\models\nginx\NginxConf;
 use Yii;
+use yii\db\StaleObjectException;
 use yii\web\Controller;
 
 class AppController extends Controller
@@ -41,7 +42,6 @@ class AppController extends Controller
     public function actionManager()
     {
         $appName = Yii::$app->request->post('app');
-
         $action = Yii::$app->request->post('action');
         $id = Yii::$app->request->post('id');
 
@@ -56,7 +56,7 @@ class AppController extends Controller
 
         $composeManager = new DockerComposeManager();
 //        todo Проверка запущен ли nginx и БД
-//        $composeManager->up('nginx');
+
         switch ($action) {
             case 'Run':
                 $log = $composeManager->up($appName);
@@ -66,11 +66,21 @@ class AppController extends Controller
                 $log = $composeManager->stop($appName);
                 break;
             case 'Remove':
-//                todo При удалении контейнера удалять образ, Dockerfile, БД, конфиг Nginx
+//                todo Удаление образа (автоочистка каждый день), Dockerfile, БД
                 $this->removeNginx($appName);
-                $log = $composeManager->down($appName);
+                $composeManager->down($appName);
+                $conf = new NginxConf();
+                $conf->serviceName = $appName;
+                $conf->remove();
+                try {
+                    $app->delete();
+                } catch (StaleObjectException $e) {
+                } catch (\Throwable $e) {
+                }
+                return $this->render('removed');
                 break;
             default:
+                throw  new \yii\web\NotFoundHttpException();
                 break;
         }
 
@@ -112,7 +122,7 @@ class AppController extends Controller
 //        todo Добавление пути к Dockerfile
         $service->image = $model->image;
 
-        $compose->addService($service->getService());
+        $compose->setService($service->getService());
         $compose->save();
 
         $model->url = DockerService::prepareServiceName($model->name) . '.' . $this::domain;

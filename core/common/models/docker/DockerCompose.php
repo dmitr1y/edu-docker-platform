@@ -32,7 +32,7 @@ class DockerCompose
         $this->load();
     }
 
-    public function addService($service)
+    public function setService($service)
     {
         $this->services[$service['name']] = $service;
         unset($this->services[$service['name']]['name']);
@@ -56,7 +56,8 @@ class DockerCompose
      */
     public function removeService($service)
     {
-        unset($this->services[$service['name']]);
+        if (isset($this->services[$service['name']]))
+            unset($this->services[$service['name']]);
     }
 
     /**

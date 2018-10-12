@@ -64,7 +64,7 @@ class NginxConf
      */
     public function remove()
     {
-        if (!empty($this->serviceName))
+        if (!empty($this->serviceName) && file_exists($this->pathToFile . '/' . $this->serviceName . '.conf'))
             return unlink($this->pathToFile . '/' . $this->serviceName . '.conf');
         return false;
     }
