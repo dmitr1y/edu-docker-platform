@@ -54,6 +54,7 @@ class DockerComposeManager
 
     public function down($services = null)
     {
+//        todo окончательное удаление - вместе с томом данных или удаление только контейнера
         $cmd = "down";
         if (!empty($services))
             $cmd .= ' ' . $services;

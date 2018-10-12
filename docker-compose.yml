@@ -48,6 +48,12 @@ services:
     - ./dind:/dind
     networks:
     - docker
+  cleaner:
+    build: ./docker/cleaner
+    environment:
+    - DOCKER_HOST=tcp://dind:2375
+    networks:
+    - docker
   # docker manager UI
   portainer:
     image: portainer/portainer

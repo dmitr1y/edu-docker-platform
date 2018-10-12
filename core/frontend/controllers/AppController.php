@@ -67,6 +67,7 @@ class AppController extends Controller
                 break;
             case 'Remove':
 //                todo При удалении контейнера удалять образ, Dockerfile, БД, конфиг Nginx
+                $this->removeNginx($appName);
                 $log = $composeManager->down($appName);
                 break;
             default:
@@ -128,5 +129,12 @@ class AppController extends Controller
         $nginxConf->serviceName = DockerService::prepareServiceName($serviceName);
         $nginxConf->proxyServer = DockerService::prepareServiceName($serviceName);
         $nginxConf->create();
+    }
+
+    private function removeNginx($serviceName)
+    {
+        $nginxConf = new NginxConf();
+        $nginxConf->serviceName = $serviceName;
+        return $nginxConf->remove();
     }
 }
