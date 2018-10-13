@@ -58,6 +58,7 @@ class DockerCompose
     {
         if (isset($this->services[$service['name']]))
             unset($this->services[$service['name']]);
+        return true;
     }
 
     /**

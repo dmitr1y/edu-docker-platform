@@ -56,11 +56,11 @@ class DockerComposeManager
 //        todo окончательное удаление - вместе с томом данных или удаление только контейнера
         if (empty($service))
             return false;
-        $this->stop($service);
+        $log = "Stoping service: " . $this->stop($service);
         $manager = new DockerCompose();
-        $manager->removeService(['name' => $service]);
+        $log .= "\n Removing service: " . $manager->removeService(['name' => $service]);
         $manager->save();
-        return true;
+        return $log;
     }
 
     private function exec($cmd)

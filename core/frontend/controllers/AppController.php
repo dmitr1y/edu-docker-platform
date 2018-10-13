@@ -13,9 +13,12 @@ use common\models\app\AppsLog;
 use common\models\docker\DockerCompose;
 use common\models\docker\DockerComposeManager;
 use common\models\docker\DockerService;
+use common\models\docker\RemoveDockerService;
 use common\models\docker\RunDockerService;
+use common\models\docker\StopDockerService;
 use common\models\nginx\CreateNginxConf;
 use common\models\nginx\NginxConf;
+use common\models\nginx\RemoveNginxConf;
 use Yii;
 use yii\db\StaleObjectException;
 use yii\queue\db\Queue;
@@ -56,46 +59,39 @@ class AppController extends Controller
 
         $log = null;
 
-        $composeManager = new DockerComposeManager();
 //        todo Проверка запущен ли nginx и БД
 
         switch ($action) {
             case 'Run':
-//                $log = $composeManager->up($appName);
-//                $this->createNginx($appName, $app->port);
                 Yii::$app->queue->push(new RunDockerService([
                     'serviceName' => $appName,
                     'appModel' => $app
                 ]));
-                Yii::$app->queue->on(Queue::EVENT_AFTER_EXEC, function ($event) {
-                    if ($event->error instanceof TemporaryUnprocessableJobException) {
-//                        $queue = $event->sender;
-//                        $queue->delay(7200)->push($event->job);
-                        echo 'test event';
-                    }
-                });
                 Yii::$app->queue->push(new CreateNginxConf([
                     'serviceName' => $appName,
                     'servicePort' => $app->port,
                 ]));
-                return $this->render('processing');
+//                return $this->render('processing');
 
                 break;
             case 'Stop':
-                $log = $composeManager->stop($appName);
+                Yii::$app->queue->push(new RemoveNginxConf([
+                    'serviceName' => $appName
+                ]));
+                Yii::$app->queue->push(new StopDockerService([
+                    'serviceName' => $appName,
+                    'appModel' => $app
+                ]));
                 break;
             case 'Remove':
 //                todo Удаление образа (автоочистка каждый день), Dockerfile, БД
-                $this->removeNginx($appName);
-                $composeManager->down($appName);
-                $conf = new NginxConf();
-                $conf->serviceName = $appName;
-                $conf->remove();
-                try {
-                    $app->delete();
-                } catch (StaleObjectException $e) {
-                } catch (\Throwable $e) {
-                }
+                Yii::$app->queue->push(new RemoveDockerService([
+                    'serviceName' => $appName,
+                    'appModel' => $app
+                ]));
+                Yii::$app->queue->push(new RemoveNginxConf([
+                    'serviceName' => $appName
+                ]));
                 return $this->render('removed');
                 break;
             default:
@@ -146,17 +142,5 @@ class AppController extends Controller
 
         $model->url = DockerService::prepareServiceName($model->name) . '.' . $this::domain;
         $model->save();
-    }
-
-    private function removeNginx($serviceName)
-    {
-        $nginxConf = new NginxConf();
-        $nginxConf->serviceName = $serviceName;
-        return $nginxConf->remove();
-    }
-
-    public function buildEvent($event)
-    {
-
     }
 }
