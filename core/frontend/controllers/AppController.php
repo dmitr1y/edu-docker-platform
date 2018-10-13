@@ -10,13 +10,15 @@ namespace frontend\controllers;
 
 use common\models\app\Apps;
 use common\models\app\AppsLog;
-use common\models\app\AppsQuery;
 use common\models\docker\DockerCompose;
 use common\models\docker\DockerComposeManager;
 use common\models\docker\DockerService;
+use common\models\docker\RunDockerService;
+use common\models\nginx\CreateNginxConf;
 use common\models\nginx\NginxConf;
 use Yii;
 use yii\db\StaleObjectException;
+use yii\queue\db\Queue;
 use yii\web\Controller;
 
 class AppController extends Controller
@@ -29,7 +31,7 @@ class AppController extends Controller
             return $this->redirect(['app/create']);
 
         $model = Apps::find()->where(['id' => $id])->one();
-
+        $log = null;
         if (!empty($logFlag)) {
             if (!empty($id))
                 $log = AppsLog::findOne(['appId' => $model->id]);
@@ -59,8 +61,25 @@ class AppController extends Controller
 
         switch ($action) {
             case 'Run':
-                $log = $composeManager->up($appName);
-                $this->createNginx($appName, $app->port);
+//                $log = $composeManager->up($appName);
+//                $this->createNginx($appName, $app->port);
+                Yii::$app->queue->push(new RunDockerService([
+                    'serviceName' => $appName,
+                    'appModel' => $app
+                ]));
+                Yii::$app->queue->on(Queue::EVENT_AFTER_EXEC, function ($event) {
+                    if ($event->error instanceof TemporaryUnprocessableJobException) {
+//                        $queue = $event->sender;
+//                        $queue->delay(7200)->push($event->job);
+                        echo 'test event';
+                    }
+                });
+                Yii::$app->queue->push(new CreateNginxConf([
+                    'serviceName' => $appName,
+                    'servicePort' => $app->port,
+                ]));
+                return $this->render('processing');
+
                 break;
             case 'Stop':
                 $log = $composeManager->stop($appName);
@@ -129,22 +148,15 @@ class AppController extends Controller
         $model->save();
     }
 
-    private function createNginx($serviceName, $servicePort = 80)
-    {
-        if (!isset($serviceName) || empty($serviceName))
-            return null;
-
-        $nginxConf = new NginxConf();
-        $nginxConf->proxyPort = $servicePort;
-        $nginxConf->serviceName = DockerService::prepareServiceName($serviceName);
-        $nginxConf->proxyServer = DockerService::prepareServiceName($serviceName);
-        $nginxConf->create();
-    }
-
     private function removeNginx($serviceName)
     {
         $nginxConf = new NginxConf();
         $nginxConf->serviceName = $serviceName;
         return $nginxConf->remove();
+    }
+
+    public function buildEvent($event)
+    {
+
     }
 }

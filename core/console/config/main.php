@@ -20,6 +20,27 @@ return [
             'class' => 'yii\console\controllers\FixtureController',
             'namespace' => 'common\fixtures',
         ],
+        'migrate-queue' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'migrationPath' => null,
+            'migrationNamespaces' => [
+                'yii\queue\db\migrations',
+            ],
+        ],
+        'migrate-rbac' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'migrationPath' => "@yii/rbac/migrations",
+            'migrationNamespaces' => [
+                'yii\rbac\migrations',
+            ],
+        ],
+        'migrate-user' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'migrationPath' => "@vendor/dektrium/yii2-user/migrations",
+            'migrationNamespaces' => [
+                'dektrium\user\migrations\Migration',
+            ],
+        ],
     ],
     'components' => [
         'log' => [

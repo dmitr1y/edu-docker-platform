@@ -3,17 +3,16 @@ FROM php:7.2-fpm
 MAINTAINER Dmitriy Konstantinov <dmitriy@konstantinov.com.ru>
 
 ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get update
 
 # PHP
 # intl
-RUN apt-get update \
-	&& apt-get install -y libicu-dev \
+RUN apt-get install -y libicu-dev \
 	&& docker-php-ext-configure intl \
 	&& docker-php-ext-install intl
 
 # xml
-RUN apt-get update \
-	&& apt-get install -y \
+RUN apt-get install -y \
 	libxml2-dev \
 	libxslt-dev \
 	&& docker-php-ext-install \
@@ -22,8 +21,7 @@ RUN apt-get update \
 		xsl
 
 # images
-RUN apt-get update \
-	&& apt-get install -y \
+RUN apt-get install -y \
 	libfreetype6-dev \
 	libjpeg62-turbo-dev \
 	libpng-dev \
@@ -45,16 +43,14 @@ RUN docker-php-ext-install \
 	mbstring
 
 # math
-RUN apt-get update \
-	&& apt-get install -y libgmp-dev \
+RUN apt-get install -y libgmp-dev \
 	&& ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
 	&& docker-php-ext-install \
 		gmp \
 		bcmath
 
 # compression
-RUN apt-get update \
-	&& apt-get install -y \
+RUN apt-get install -y \
 	libbz2-dev \
 	zlib1g-dev \
 	&& docker-php-ext-install \
@@ -62,20 +58,17 @@ RUN apt-get update \
 		bz2
 
 # ftp
-RUN apt-get update \
-	&& apt-get install -y \
+RUN apt-get install -y \
 	libssl-dev \
 	&& docker-php-ext-install \
 		ftp
 
 # ssh2
-RUN apt-get update \
-	&& apt-get install -y \
+RUN apt-get install -y \
 	libssh2-1-dev
 
 # memcached
-RUN apt-get update \
-	&& apt-get install -y \
+RUN apt-get install -y \
 	libmemcached-dev \
 	libmemcached11
 
@@ -90,27 +83,31 @@ RUN docker-php-ext-install \
 
 # yaml
 RUN buildRequirements="libyaml-dev" \
-	&& apt-get update && apt-get install -y ${buildRequirements} \
+	&& apt-get install -y ${buildRequirements} \
 	&& pecl install yaml \
 	&& echo "extension=yaml.so" > /usr/local/etc/php/conf.d/ext-yaml.ini \
-	&& apt-get purge -y ${buildRequirements} \
-	&& rm -rf /var/lib/apt/lists/*
+	&& apt-get purge -y ${buildRequirements}
 
 # git
-RUN apt-get update \
-	&& apt-get install -y \
-	git
+RUN apt-get install -y git
 
 # composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # docker-compose
-RUN apt-get update && apt-get install -y docker-compose
+RUN apt-get install -y docker-compose
+
+# supervisor
+RUN apt-get install -y supervisor
+ADD yii2_queue.conf /etc/supervisor/conf.d/yii2_queue.conf
 
 # test
-RUN apt-get update \
-	&& apt-get install -y \
-	nano \
-	procps
+RUN apt-get install -y nano procps
+
+RUN rm -rf /var/lib/apt/lists/*
 
 WORKDIR /platform/core
+
+EXPOSE 9000
+
+CMD /usr/bin/supervisord && php-fpm

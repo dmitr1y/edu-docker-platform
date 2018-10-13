@@ -25,7 +25,8 @@ class m181009_200835_create_apps_table extends Migration
             'file' => $this->text(),
             'image' => $this->string(255),
             'url' => $this->text(),
-            'port' => $this->integer()
+            'port' => $this->integer(),
+            'status' => $this->integer()
         ], $tableOptions);
     }
 

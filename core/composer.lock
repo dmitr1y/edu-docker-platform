@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-  "content-hash": "338c815163350be130cf5cd47b1a8f78",
+  "content-hash": "c52cfef605cb871cf1725c241e854881",
     "packages": [
         {
           "name": "bower-asset/bootbox",
@@ -999,6 +999,90 @@
           ],
           "time": "2018-09-23T21:53:35+00:00"
         },
+      {
+        "name": "yiisoft/yii2-queue",
+        "version": "2.1.0",
+        "source": {
+          "type": "git",
+          "url": "https://github.com/yiisoft/yii2-queue.git",
+          "reference": "d04b4b3c932081200876a351cc6c3502e89e11b8"
+        },
+        "dist": {
+          "type": "zip",
+          "url": "https://api.github.com/repos/yiisoft/yii2-queue/zipball/d04b4b3c932081200876a351cc6c3502e89e11b8",
+          "reference": "d04b4b3c932081200876a351cc6c3502e89e11b8",
+          "shasum": ""
+        },
+        "require": {
+          "php": ">=5.5.0",
+          "symfony/process": "*",
+          "yiisoft/yii2": "~2.0.14"
+        },
+        "require-dev": {
+          "aws/aws-sdk-php": ">=2.4",
+          "enqueue/amqp-lib": "^0.8",
+          "jeremeamia/superclosure": "*",
+          "pda/pheanstalk": "*",
+          "php-amqplib/php-amqplib": "*",
+          "phpunit/phpunit": "~4.4",
+          "yiisoft/yii2-debug": "*",
+          "yiisoft/yii2-gii": "*",
+          "yiisoft/yii2-redis": "*"
+        },
+        "suggest": {
+          "aws/aws-sdk-php": "Need for aws SQS.",
+          "enqueue/amqp-lib": "Need for AMQP interop queue.",
+          "ext-gearman": "Need for Gearman queue.",
+          "ext-pcntl": "Need for process signals.",
+          "pda/pheanstalk": "Need for Beanstalk queue.",
+          "php-amqplib/php-amqplib": "Need for AMQP queue.",
+          "yiisoft/yii2-redis": "Need for Redis queue."
+        },
+        "type": "yii2-extension",
+        "extra": {
+          "branch-alias": {
+            "dev-master": "2.0.x-dev"
+          }
+        },
+        "autoload": {
+          "psr-4": {
+            "yii\\queue\\": "src",
+            "yii\\queue\\amqp\\": "src/drivers/amqp",
+            "yii\\queue\\amqp_interop\\": "src/drivers/amqp_interop",
+            "yii\\queue\\beanstalk\\": "src/drivers/beanstalk",
+            "yii\\queue\\db\\": "src/drivers/db",
+            "yii\\queue\\file\\": "src/drivers/file",
+            "yii\\queue\\gearman\\": "src/drivers/gearman",
+            "yii\\queue\\redis\\": "src/drivers/redis",
+            "yii\\queue\\sync\\": "src/drivers/sync",
+            "yii\\queue\\sqs\\": "src/drivers/sqs"
+          }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+          "BSD-3-Clause"
+        ],
+        "authors": [
+          {
+            "name": "Roman Zhuravlev",
+            "email": "zhuravljov@gmail.com"
+          }
+        ],
+        "description": "Yii2 Queue Extension which supported DB, Redis, RabbitMQ, Beanstalk, SQS and Gearman",
+        "keywords": [
+          "async",
+          "beanstalk",
+          "db",
+          "gearman",
+          "gii",
+          "queue",
+          "rabbitmq",
+          "redis",
+          "sqs",
+          "yii"
+        ],
+        "time": "2018-05-23T21:04:57+00:00"
+      },
       {
             "name": "yiisoft/yii2-swiftmailer",
             "version": "2.1.2",
