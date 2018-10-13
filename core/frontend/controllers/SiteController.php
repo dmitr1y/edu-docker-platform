@@ -225,7 +225,7 @@ class SiteController extends Controller
         $nginx->serviceName = "app1";
         $nginx->proxyServer = "hello";
         $nginx->proxyPort = 8000;
-        $conf = $nginx->create();
+        $conf = $nginx->createProxy();
         echo '<pre>';
         print_r($conf);
         echo '</pre>';
@@ -248,20 +248,20 @@ class SiteController extends Controller
         $service->image = "crccheck/hello-world";
         $nginxConf->proxyServer = $service->name = "hello1";
         $compose->setService($service->getService());
-        $nginxConf->create();
+        $nginxConf->createProxy();
 
         $nginxConf->serviceName = 'app2';
         $service->image = "crccheck/hello-world";
         $nginxConf->proxyServer = $service->name = "hello2";
         $compose->setService($service->getService());
-        $nginxConf->create();
+        $nginxConf->createProxy();
 
         $nginxConf->serviceName = 'app3_3';
 //        $service->image = "crccheck/hello-world";
         $service->build = "./user_apps/";
         $nginxConf->proxyServer = $service->name = "hello3";
         $compose->setService($service->getService());
-        $nginxConf->create();
+        $nginxConf->createProxy();
 
         $compose->save();
 

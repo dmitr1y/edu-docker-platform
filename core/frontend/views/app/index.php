@@ -8,7 +8,6 @@
 
 use yii\helpers\Html;
 
-//$this->title = 'App';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-about">

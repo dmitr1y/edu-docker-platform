@@ -19,8 +19,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $form->field($model, 'name') ?>
     <?= $form->field($model, 'description') ?>
-    <?= $form->field($model, 'port') ?>
-    <?= $form->field($model, 'image') ?>
     <?= $form->field($model, 'file')->fileInput() ?>
 
     <div class="form-group">

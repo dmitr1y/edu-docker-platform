@@ -125,22 +125,47 @@ class AppController extends Controller
         return $this->render('create', ['model' => $model]);
     }
 
+    public function actionCreateStatic()
+    {
+        Yii::$app->view->title = 'Create static app';
+        $model = new Apps();
+
+        if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
+            $model->save();
+            $this->createStatic($model);
+            return $this->redirect(['app/index', 'id' => $model->id]);
+        }
+        return $this->render('create_static', ['model' => $model]);
+    }
+
     /**
-     * @param $model Apps
+     * @param $appModel Apps
      */
-    private function createCompose($model)
+    private function createCompose($appModel)
     {
         $compose = new DockerCompose();
         $service = new DockerService();
 
-        $service->name = strtolower(preg_replace('/\s+/', '-', $model->name));
+        $service->name = strtolower(preg_replace('/\s+/', '-', $appModel->name));
 //        todo Добавление пути к Dockerfile
-        $service->image = $model->image;
+        $service->image = $appModel->image;
 
         $compose->setService($service->getService());
         $compose->save();
 
-        $model->url = DockerService::prepareServiceName($model->name) . '.' . $this::domain;
-        $model->save();
+        $appModel->url = DockerService::prepareServiceName($appModel->name) . '.' . $this::domain;
+        $appModel->save();
+    }
+
+    /**
+     * @param $appModel Apps
+     */
+    private function createStatic($appModel)
+    {
+        $conf = new NginxConf();
+        $conf->serviceName = DockerService::prepareServiceName($appModel->name);
+        $conf->createStatic();
+        $appModel->url = DockerService::prepareServiceName($appModel->name) . '.' . $this::domain;
+        $appModel->save();
     }
 }

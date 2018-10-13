@@ -15,7 +15,6 @@ use yii\queue\Queue;
 class CreateNginxConf extends BaseObject implements \yii\queue\JobInterface
 {
     public $serviceName;
-    public $servicePort;
 
     /**
      * @param Queue $queue which pushed and is handling the job
@@ -25,12 +24,8 @@ class CreateNginxConf extends BaseObject implements \yii\queue\JobInterface
         if (!isset($this->serviceName) || empty($this->serviceName))
             return null;
 
-        if (empty($this->servicePort))
-            $this->servicePort = 80;
-
         $nginxConf = new NginxConf();
-        $nginxConf->proxyPort = $this->servicePort;
         $nginxConf->proxyServer = $nginxConf->serviceName = DockerService::prepareServiceName($this->serviceName);
-        $nginxConf->createProxy();
+        $nginxConf->createStatic();
     }
 }
