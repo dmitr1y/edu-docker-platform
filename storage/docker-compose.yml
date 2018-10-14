@@ -2,5 +2,6 @@ version: '2'
 services:
     nginx: { build: ./nginx/docker/, volumes: ['/storage/nginx/dind:/etc/nginx/conf.d', '/storage/user_apps:/usr/share/nginx/html'], ports: ['80:80'], restart: always }
     portainer: { image: portainer/portainer, command: '-H unix:///var/run/docker.sock', volumes: ['/var/run/docker.sock:/var/run/docker.sock', 'portainer_data:/data'] }
+    test-app: { image: '' }
 volumes:
     portainer_data: null

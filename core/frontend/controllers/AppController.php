@@ -11,18 +11,17 @@ namespace frontend\controllers;
 use common\models\app\Apps;
 use common\models\app\AppsLog;
 use common\models\docker\DockerCompose;
-use common\models\docker\DockerComposeManager;
 use common\models\docker\DockerService;
 use common\models\docker\RemoveDockerService;
 use common\models\docker\RunDockerService;
 use common\models\docker\StopDockerService;
+use common\models\DockerfileUploadForm;
 use common\models\nginx\CreateNginxConf;
 use common\models\nginx\NginxConf;
 use common\models\nginx\RemoveNginxConf;
 use Yii;
-use yii\db\StaleObjectException;
-use yii\queue\db\Queue;
 use yii\web\Controller;
+use yii\web\UploadedFile;
 
 class AppController extends Controller
 {
@@ -71,8 +70,6 @@ class AppController extends Controller
                     'serviceName' => $appName,
                     'servicePort' => $app->port,
                 ]));
-//                return $this->render('processing');
-
                 break;
             case 'Stop':
                 Yii::$app->queue->push(new RemoveNginxConf([
@@ -116,13 +113,22 @@ class AppController extends Controller
     {
         Yii::$app->view->title = 'Create';
         $model = new Apps();
+        $modelUpload = new DockerfileUploadForm();
+
 
         if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
+            $modelUpload->dockerfile = UploadedFile::getInstance($model, 'file');
+            $dockerfilePath = $modelUpload->upload(Yii::$app->user->id);
+            if (!empty($dockerfilePath)) {
+                $model->file = $dockerfilePath;
+                if (!empty($model->image))
+                    $model->image = null;
+            }
             $model->save();
             $this->createCompose($model);
             return $this->redirect(['app/index', 'id' => $model->id]);
         }
-        return $this->render('create', ['model' => $model]);
+        return $this->render('create', ['model' => $model, 'modelUpload' => $modelUpload]);
     }
 
     public function actionCreateStatic()
