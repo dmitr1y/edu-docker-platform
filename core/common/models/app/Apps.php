@@ -82,6 +82,7 @@ class Apps extends \yii\db\ActiveRecord
     {
         if (file_exists($this->file)) {
             unlink($this->file);
+            rmdir(str_replace('/Dockerfile', '', $this->file));
             return true;
         }
         return false;

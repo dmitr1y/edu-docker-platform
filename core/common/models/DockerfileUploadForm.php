@@ -33,16 +33,14 @@ class DockerfileUploadForm extends Model
         ];
     }
 
-    public function upload($userid = null)
+    public function upload($userid = null, $appId = null)
     {
-        if ($this->validate() && !empty($userid)) {
-            $this->path = $this->path . '/' . $userid;
-
+        if ($this->validate() && !empty($userid) && !empty($appId)) {
+            $this->path = $this->path . '/' . $userid . '/' . $appId;
 //            todo fix permissions
             if (!file_exists($this->path)) {
                 mkdir($this->path, 0777, true);
             }
-
             $this->path .= '/Dockerfile';
             $this->dockerfile->saveAs($this->path);
             return $this->path;

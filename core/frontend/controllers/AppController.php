@@ -19,6 +19,7 @@ use common\models\DockerfileUploadForm;
 use common\models\nginx\CreateNginxConf;
 use common\models\nginx\NginxConf;
 use common\models\nginx\RemoveNginxConf;
+use function PHPSTORM_META\elementType;
 use Yii;
 use yii\web\Controller;
 use yii\web\UploadedFile;
@@ -118,7 +119,8 @@ class AppController extends Controller
 
         if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
             $modelUpload->dockerfile = UploadedFile::getInstance($model, 'file');
-            $dockerfilePath = $modelUpload->upload(Yii::$app->user->id);
+            $model->save();
+            $dockerfilePath = $modelUpload->upload(Yii::$app->user->id, $model->id);
             if (!empty($dockerfilePath)) {
                 $model->file = $dockerfilePath;
                 if (!empty($model->image))
@@ -146,6 +148,7 @@ class AppController extends Controller
 
     /**
      * @param $appModel Apps
+     * @return bool
      */
     private function createCompose($appModel)
     {
@@ -154,13 +157,19 @@ class AppController extends Controller
 
         $service->name = strtolower(preg_replace('/\s+/', '-', $appModel->name));
 //        todo Добавление пути к Dockerfile
-        $service->image = $appModel->image;
+        if (!empty($appModel->image))
+            $service->image = $appModel->image;
+        else
+            if (!empty($appModel->file))
+                $service->build = str_replace('Dockerfile', '', $appModel->file);
+            else
+                return false;
 
         $compose->setService($service->getService());
         $compose->save();
 
         $appModel->url = DockerService::prepareServiceName($appModel->name) . '.' . $this::domain;
-        $appModel->save();
+        return $appModel->save();
     }
 
     /**
