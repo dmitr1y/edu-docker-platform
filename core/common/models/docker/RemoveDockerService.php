@@ -44,6 +44,7 @@ class RemoveDockerService extends BaseObject implements \yii\queue\JobInterface
         }
         $manager = new DockerComposeManager();
         $manager->down($this->serviceName);
+        $this->appModel->removeFile();
         try {
             $this->appModel->delete();
         } catch (StaleObjectException $e) {

@@ -77,4 +77,13 @@ class Apps extends \yii\db\ActiveRecord
     {
 
     }
+
+    public function removeFile()
+    {
+        if (file_exists($this->file)) {
+            unlink($this->file);
+            return true;
+        }
+        return false;
+    }
 }
