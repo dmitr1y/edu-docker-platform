@@ -110,4 +110,5 @@ WORKDIR /platform/core
 
 EXPOSE 9000
 
-CMD /usr/bin/supervisord && php-fpm
+CMD /usr/bin/supervisord && docker-compose -f /platform/storage/docker-compose.yml up -d portainer nginx \
+&& docker-compose -f /platform/storage/docker-compose.yml exec nginx nginx -s reload && php-fpm
