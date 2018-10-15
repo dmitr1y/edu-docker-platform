@@ -19,6 +19,7 @@ use common\models\DockerfileUploadForm;
 use common\models\nginx\CreateNginxConf;
 use common\models\nginx\NginxConf;
 use common\models\nginx\RemoveNginxConf;
+use common\models\StaticAppUploadForm;
 use function PHPSTORM_META\elementType;
 use Yii;
 use yii\web\Controller;
@@ -90,6 +91,7 @@ class AppController extends Controller
                 Yii::$app->queue->push(new RemoveNginxConf([
                     'serviceName' => $appName
                 ]));
+                $this->removeStaticApp(Yii::$app->user->id, DockerService::prepareServiceName($app->name));
                 return $this->render('removed');
                 break;
             default:
@@ -137,8 +139,15 @@ class AppController extends Controller
     {
         Yii::$app->view->title = 'Create static app';
         $model = new Apps();
+        $modelUpload = new StaticAppUploadForm();
 
         if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
+            $modelUpload->app = UploadedFile::getInstance($model, 'file');
+            $model->save();
+            $appPath = $modelUpload->upload(Yii::$app->user->id, DockerService::prepareServiceName($model->name));
+            if (!empty($appPath)) {
+                $model->file = $appPath;
+            }
             $model->save();
             $this->createStatic($model);
             return $this->redirect(['app/index', 'id' => $model->id]);
@@ -179,8 +188,34 @@ class AppController extends Controller
     {
         $conf = new NginxConf();
         $conf->serviceName = DockerService::prepareServiceName($appModel->name);
-        $conf->createStatic();
+        $conf->createStatic(Yii::$app->user->id);
         $appModel->url = DockerService::prepareServiceName($appModel->name) . '.' . $this::domain;
         $appModel->save();
+    }
+
+    private function removeStaticApp($userId, $appName)
+    {
+        if (empty($userId) || empty($appName))
+            return false;
+        if (!empty($appName) && is_dir(\Yii::$app->basePath . '/../../storage/user_apps/' . $appName))
+            return $this->rrmdir(\Yii::$app->basePath . '/../../storage/user_apps/' . $userId . '/' . $appName);
+        return false;
+    }
+
+    private function rrmdir($dir)
+    {
+        if (is_dir($dir)) {
+            $objects = scandir($dir);
+            foreach ($objects as $object) {
+                if ($object != "." && $object != "..") {
+                    if (is_dir($dir . "/" . $object))
+                        rrmdir($dir . "/" . $object);
+                    else
+                        unlink($dir . "/" . $object);
+                }
+            }
+            return rmdir($dir);
+        }
+        return false;
     }
 }

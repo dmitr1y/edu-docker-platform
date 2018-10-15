@@ -26,6 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
     <a href="/app/create" class="btn btn-info">Create new</a>
+    <a href="/app/create-static" class="btn btn-info">Create new static app</a>
 
     <code><?= __FILE__ ?></code>
 </div>

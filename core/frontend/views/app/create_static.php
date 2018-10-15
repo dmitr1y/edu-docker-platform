@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $form->field($model, 'name') ?>
     <?= $form->field($model, 'description') ?>
-    <?= $form->field($model, 'file')->fileInput() ?>
+    <?= $form->field($model, 'file')->fileInput()->label('App in zip archive or just html page') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
