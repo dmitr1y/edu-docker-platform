@@ -20,7 +20,6 @@ use common\models\nginx\CreateNginxConf;
 use common\models\nginx\NginxConf;
 use common\models\nginx\RemoveNginxConf;
 use common\models\StaticAppUploadForm;
-use function PHPSTORM_META\elementType;
 use Yii;
 use yii\web\Controller;
 use yii\web\UploadedFile;
@@ -86,12 +85,12 @@ class AppController extends Controller
 //                todo Удаление образа (автоочистка каждый день), Dockerfile, БД
                 Yii::$app->queue->push(new RemoveDockerService([
                     'serviceName' => $appName,
-                    'appModel' => $app
+                    'appModel' => $app,
+                    'userId' => Yii::$app->user->id
                 ]));
                 Yii::$app->queue->push(new RemoveNginxConf([
                     'serviceName' => $appName
                 ]));
-                $this->removeStaticApp(Yii::$app->user->id, DockerService::prepareServiceName($app->name));
                 return $this->render('removed');
                 break;
             default:
@@ -119,7 +118,7 @@ class AppController extends Controller
         $modelUpload = new DockerfileUploadForm();
 
 
-        if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
+        if ($model->load(\Yii::$app->request->post()) && $model->validate() && $model->isUnique()) {
             $modelUpload->dockerfile = UploadedFile::getInstance($model, 'file');
             $model->save();
             $dockerfilePath = $modelUpload->upload(Yii::$app->user->id, $model->id);
@@ -141,7 +140,7 @@ class AppController extends Controller
         $model = new Apps();
         $modelUpload = new StaticAppUploadForm();
 
-        if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
+        if ($model->load(\Yii::$app->request->post()) && $model->validate() && $model->isUnique()) {
             $modelUpload->app = UploadedFile::getInstance($model, 'file');
             $model->save();
             $appPath = $modelUpload->upload(Yii::$app->user->id, DockerService::prepareServiceName($model->name));
@@ -191,31 +190,5 @@ class AppController extends Controller
         $conf->createStatic(Yii::$app->user->id);
         $appModel->url = DockerService::prepareServiceName($appModel->name) . '.' . $this::domain;
         $appModel->save();
-    }
-
-    private function removeStaticApp($userId, $appName)
-    {
-        if (empty($userId) || empty($appName))
-            return false;
-        if (!empty($appName) && is_dir(\Yii::$app->basePath . '/../../storage/user_apps/' . $appName))
-            return $this->rrmdir(\Yii::$app->basePath . '/../../storage/user_apps/' . $userId . '/' . $appName);
-        return false;
-    }
-
-    private function rrmdir($dir)
-    {
-        if (is_dir($dir)) {
-            $objects = scandir($dir);
-            foreach ($objects as $object) {
-                if ($object != "." && $object != "..") {
-                    if (is_dir($dir . "/" . $object))
-                        rrmdir($dir . "/" . $object);
-                    else
-                        unlink($dir . "/" . $object);
-                }
-            }
-            return rmdir($dir);
-        }
-        return false;
     }
 }

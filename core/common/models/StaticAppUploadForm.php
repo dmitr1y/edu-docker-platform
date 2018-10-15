@@ -34,10 +34,10 @@ class StaticAppUploadForm extends Model
         ];
     }
 
-    public function upload($userid = null, $appName = null)
+    public function upload($userId = null, $appName = null)
     {
-        if ($this->validate() && !empty($userid) && !empty($appName)) {
-            $this->path = $this->path . '/' . $userid . '/' . $appName;
+        if ($this->validate() && !empty($userId) && !empty($appName)) {
+            $this->path = $this->path . '/' . $userId . '/' . $appName;
 //            todo fix permissions
             if (!file_exists($this->path)) {
                 mkdir($this->path, 0777, true);

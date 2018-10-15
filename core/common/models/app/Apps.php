@@ -2,6 +2,7 @@
 
 namespace common\models\app;
 
+use common\models\docker\DockerService;
 use Yii;
 
 /**
@@ -78,13 +79,54 @@ class Apps extends \yii\db\ActiveRecord
 
     }
 
-    public function removeFile()
+    public function removeFile($userId = null)
     {
         if (file_exists($this->file)) {
-            unlink($this->file);
-            rmdir(str_replace('/Dockerfile', '', $this->file));
-            return true;
+            if (is_dir($this->file) && !empty($userId))
+                return $this->removeStaticApp($userId);
+            else {
+                unlink($this->file);
+                rmdir(str_replace('/Dockerfile', '', $this->file));
+                return true;
+            }
         }
         return false;
+    }
+
+    private function removeStaticApp($userId)
+    {
+        if (empty($userId))
+            return false;
+        if (is_dir(\Yii::$app->basePath . '/../../storage/user_apps/' . DockerService::prepareServiceName($this->name)))
+            return $this->rrmdir(\Yii::$app->basePath . '/../../storage/user_apps/' . $userId . '/' . DockerService::prepareServiceName($this->name));
+        return false;
+    }
+
+    private function rrmdir($dir)
+    {
+        if (is_dir($dir)) {
+            $objects = scandir($dir);
+            foreach ($objects as $object) {
+                if ($object != "." && $object != "..") {
+                    if (is_dir($dir . "/" . $object))
+                        rrmdir($dir . "/" . $object);
+                    else
+                        unlink($dir . "/" . $object);
+                }
+            }
+            return rmdir($dir);
+        }
+        return false;
+    }
+
+    public function isUnique($appName = null)
+    {
+
+        $result = null;
+        if (!empty($appName))
+            $result = $this::findOne(['name' => $appName]);
+        else
+            $result = $this::findOne(['name' => $this->name]);
+        return empty($result);
     }
 }
