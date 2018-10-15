@@ -21,6 +21,7 @@ use common\models\nginx\NginxConf;
 use common\models\nginx\RemoveNginxConf;
 use common\models\StaticAppUploadForm;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\UploadedFile;
 
@@ -190,5 +191,18 @@ class AppController extends Controller
         $conf->createStatic(Yii::$app->user->id);
         $appModel->url = DockerService::prepareServiceName($appModel->name) . '.' . $this::domain;
         $appModel->save();
+    }
+
+    public function actionList()
+    {
+        $this->view->title = "Apps catalog";
+        $appsQuery = Apps::find()->where(['status' => 1]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $appsQuery,
+            'pagination' => [
+                'pageSize' => 20,
+            ],
+        ]);
+        return $this->render('list', ['dataProvider' => $dataProvider]);
     }
 }
