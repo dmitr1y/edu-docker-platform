@@ -12,7 +12,7 @@ use Yii;
  * @property string $user_password
  * @property string $permissions
  * @property string $database
- * @property int $owned_id
+ * @property int $owner_id
  * @property string $timestamp
  */
 class AppsDbUsers extends \yii\db\ActiveRecord
@@ -40,9 +40,9 @@ class AppsDbUsers extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'user_password', 'owned_id'], 'required'],
+            [['username', 'user_password'], 'required'],
             [['permissions'], 'string'],
-            [['owned_id'], 'integer'],
+            [['owner_id'], 'integer'],
             [['timestamp'], 'safe'],
             [['username', 'user_password', 'database'], 'string', 'max' => 255],
             [['username'], 'unique'],
@@ -60,8 +60,35 @@ class AppsDbUsers extends \yii\db\ActiveRecord
             'user_password' => Yii::t('app', 'User Password'),
             'permissions' => Yii::t('app', 'Permissions'),
             'database' => Yii::t('app', 'Database'),
-            'owned_id' => Yii::t('app', 'Owned ID'),
+            'owner_id' => Yii::t('app', 'Owned ID'),
             'timestamp' => Yii::t('app', 'Timestamp'),
         ];
+    }
+
+    public function save($runValidation = true, $attributeNames = null)
+    {
+        return parent::save($runValidation, $attributeNames) && $this->createUserDb();
+    }
+
+    public function delete()
+    {
+        return parent::delete() && $this->removeUserDb();
+    }
+
+    private function createUserDb()
+    {
+        $query = "CREATE DATABASE IF NOT EXISTS " . $this->database . ";" .
+            "CREATE USER IF NOT EXISTS'" . $this->username . "'@'%' IDENTIFIED BY '" . $this->user_password . "';" .
+            "GRANT ALL PRIVILEGES ON " . $this->database . ".* TO '" . $this->username . "'@'%';" .
+            "FLUSH PRIVILEGES;";
+        return Yii::$app->db2->createCommand($query)->execute();
+    }
+
+    private function removeUserDb()
+    {
+        $query = "DROP DATABASE IF EXISTS " . $this->database . ";" .
+            "DROP USER IF EXISTS '" . $this->username . "'@'%';" .
+            "FLUSH PRIVILEGES;";
+        return Yii::$app->db2->createCommand($query)->execute();
     }
 }

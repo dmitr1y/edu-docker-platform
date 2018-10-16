@@ -3,21 +3,19 @@ namespace frontend\controllers;
 
 use common\models\docker\DockerCompose;
 use common\models\docker\DockerComposeManager;
-use common\models\docker\DockerNetwork;
 use common\models\docker\DockerService;
-use common\models\nginx\NginxConf;
-use Symfony\Component\Process\Process;
-use Yii;
-use yii\base\InvalidParamException;
-use yii\web\BadRequestHttpException;
-use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 use common\models\LoginForm;
+use common\models\nginx\NginxConf;
+use frontend\models\ContactForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
-use frontend\models\ContactForm;
+use Yii;
+use yii\base\InvalidParamException;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
+use yii\web\BadRequestHttpException;
+use yii\web\Controller;
 
 /**
  * Site controller
@@ -236,39 +234,24 @@ class SiteController extends Controller
     public function actionCompose()
     {
         $compose = new DockerCompose();
-
-        $nginxConf = new NginxConf();
-
         $service = new DockerService();
-//        $service->build = "./user_apps/app1/";
 
-        $nginxConf->proxyPort = 8000;
+        $service->image = " mysql:5.7";
+        $service->name = "mysql";
+        $service->environment = [
+            'MYSQL_ROOT_PASSWORD=password',
+            'MYSQL_DATABASE=edu'
+        ];
+        $service->ports = ['3306:3306'];
 
-        $nginxConf->serviceName = 'app1';
-        $service->image = "crccheck/hello-world";
-        $nginxConf->proxyServer = $service->name = "hello1";
         $compose->setService($service->getService());
-        $nginxConf->createProxy();
-
-        $nginxConf->serviceName = 'app2';
-        $service->image = "crccheck/hello-world";
-        $nginxConf->proxyServer = $service->name = "hello2";
-        $compose->setService($service->getService());
-        $nginxConf->createProxy();
-
-        $nginxConf->serviceName = 'app3_3';
-//        $service->image = "crccheck/hello-world";
-        $service->build = "./user_apps/";
-        $nginxConf->proxyServer = $service->name = "hello3";
-        $compose->setService($service->getService());
-        $nginxConf->createProxy();
 
         $compose->save();
 
 
         $manager = new DockerComposeManager();
-        $log = $manager->up();
+//        $log = $manager->up();
 //        $log = null;
-        return $this->render('compose', ['model' => $compose, 'log' => $log]);
+        return $this->render('compose', ['model' => $compose]);
     }
 }

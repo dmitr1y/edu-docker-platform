@@ -33,7 +33,7 @@ services:
     - MYSQL_ROOT_PASSWORD=password
     - MYSQL_DATABASE=edu
     volumes:
-    - ~/db/mysql:/var/lib/mysql
+    - ~/db/mysql/core:/var/lib/mysql
     ports:
     - 3306:3306
     networks:
@@ -46,6 +46,9 @@ services:
     volumes:
     - ./storage:/storage
     - ./dind:/dind
+    - ~/db/mysql/user_apps:/db/mysql_apps
+    ports:
+    - 3307:3307
     networks:
     - docker
   cleaner:
