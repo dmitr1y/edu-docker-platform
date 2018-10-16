@@ -9,9 +9,8 @@ use Yii;
  *
  * @property int $id
  * @property string $appId
- * @property string $build
- * @property string $run
- * @property string $error
+ * @property string $log
+ * @property string $timestamp
  */
 class AppsLog extends \yii\db\ActiveRecord
 {
@@ -30,7 +29,8 @@ class AppsLog extends \yii\db\ActiveRecord
     {
         return [
             [['appId'], 'required'],
-            [['build', 'run', 'error'], 'string'],
+            [['log'], 'string'],
+            [['timestamp'], 'safe'],
             [['appId'], 'string', 'max' => 255],
             [['appId'], 'unique'],
         ];
@@ -44,9 +44,8 @@ class AppsLog extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'appId' => Yii::t('app', 'App ID'),
-            'build' => Yii::t('app', 'Build'),
-            'run' => Yii::t('app', 'Run'),
-            'error' => Yii::t('app', 'Error'),
+            'log' => Yii::t('app', 'Log'),
+            'timestamp' => Yii::t('app', 'Created at'),
         ];
     }
 

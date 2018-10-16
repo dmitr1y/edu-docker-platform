@@ -107,7 +107,7 @@ class AppController extends Controller
             $appLog->appId = $id;
         }
 
-        $appLog->build = $log;
+        $appLog->log = $log;
         $appLog->save();
         return $this->redirect(['app/index', 'logFlag' => true, 'id' => $id]);
     }
@@ -190,13 +190,14 @@ class AppController extends Controller
         $conf->serviceName = DockerService::prepareServiceName($appModel->name);
         $conf->createStatic(Yii::$app->user->id);
         $appModel->url = DockerService::prepareServiceName($appModel->name) . '.' . $this::domain;
+        $appModel->status = 2;
         $appModel->save();
     }
 
     public function actionList()
     {
         $this->view->title = "Apps catalog";
-        $appsQuery = Apps::find()->where(['status' => 1]);
+        $appsQuery = Apps::find()->where(['status' => 2]);
         $dataProvider = new ActiveDataProvider([
             'query' => $appsQuery,
             'pagination' => [

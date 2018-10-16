@@ -37,7 +37,7 @@ class RunDockerService extends BaseObject implements \yii\queue\JobInterface
             $log->appId = $this->appModel->id;
         }
         $manager = new DockerComposeManager();
-        $log->build = $manager->up($this->serviceName);
+        $log->log = $manager->up($this->serviceName);
         $log->save();
         $this->appModel->status = '2';
         $this->appModel->save();

@@ -95,6 +95,7 @@ RUN apt-get install -y git
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # docker-compose
+RUN apt-get install -y python python-pip python-requests
 RUN apt-get install -y docker-compose
 
 # supervisor
@@ -110,5 +111,4 @@ WORKDIR /platform/core
 
 EXPOSE 9000
 
-CMD /usr/bin/supervisord && docker-compose -f /platform/storage/docker-compose.yml up -d portainer nginx \
-&& docker-compose -f /platform/storage/docker-compose.yml exec nginx nginx -s reload && php-fpm
+CMD /usr/bin/supervisord && docker-compose -f /platform/storage/docker-compose.yml up -d nginx portainer && php-fpm

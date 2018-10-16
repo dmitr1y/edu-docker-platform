@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;;
         <?php
         if (isset($model))
             foreach ($model as $key => $value) {
-                if (isset($model->{$key})) {
+                if (isset($model->{$key}) || $key === 'status') {
                     echo "<tr>";
 //                    echo "<td>" . $key . "</td><td>" . $value . "</td>";
 
@@ -66,67 +66,38 @@ $this->params['breadcrumbs'][] = $this->title;;
 
     <?php
     if (isset($model->url) && !empty($model->url)) {
-        ?>
-        <form class="form-group" action="/app/manager" method="post">
-            <input class="btn btn-info" type="submit" name="action" value="Run"/>
-            <input class="btn btn-info" type="submit" name="action" value="Stop"/>
-            <input class="btn btn-danger" type="submit" name="action" value="Remove"/>
-            <input type="hidden" name="app" value="<?= strtolower(preg_replace('/\s+/', '-', $model->name)) ?>">
-            <input type="hidden" name="id" value="<?= $model->id ?>">
-            <input id="form-token" type="hidden" name="<?= Yii::$app->request->csrfParam ?>"
-                   value="<?= Yii::$app->request->csrfToken ?>"/>
-        </form>
+    ?>
+    <form class="form-group" action="/app/manager" method="post">
+        <input class="btn btn-info" type="submit" name="action" value="Run"/>
+        <input class="btn btn-info" type="submit" name="action" value="Stop"/>
+        <input class="btn btn-danger" type="submit" name="action" value="Remove"/>
+        <input type="hidden" name="app" value="<?= strtolower(preg_replace('/\s+/', '-', $model->name)) ?>">
+        <input type="hidden" name="id" value="<?= $model->id ?>">
+        <input id="form-token" type="hidden" name="<?= Yii::$app->request->csrfParam ?>"
+               value="<?= Yii::$app->request->csrfToken ?>"/>
+    </form>
 
-        <?php
-        if (!empty($log)) {
-            ?>
-            <div class="row">
-            <?php if (isset($log->build) && !empty($log->build)) { ?>
-                <div class="panel panel-info autocollapse">
-                    <div class="panel-heading clickable">
-                        <h3 class="panel-title">
-                            Build
-                        </h3>
-                    </div>
-                    <div class="panel-body">
-                        <?= $log->build ?>
-                    </div>
+    <?php
+    if (!empty($log)) {
+    ?>
+    <div class="row">
+        <?php if (isset($log->log) && !empty($log->log)) { ?>
+            <div class="panel panel-info autocollapse">
+                <div class="panel-heading clickable">
+                    <h3 class="panel-title">
+                        Log
+                    </h3>
                 </div>
-                <?php
-            }
-
-            if (isset($log->run) && !empty($log->run)) { ?>
-                <div class="panel panel-info autocollapse">
-                    <div class="panel-heading clickable">
-                        <h3 class="panel-title">
-                            Run
-                        </h3>
-                    </div>
-                    <div class="panel-body">
-                        <?= $log->run ?>
-                    </div>
+                <div class="panel-body">
+                    <?= $log->log ?>
                 </div>
-                <?php
-            }
-
-            if (isset($log->error) && !empty($log->error)) { ?>
-                <div class="panel panel-danger autocollapse">
-                    <div class="panel-heading clickable">
-                        <h3 class="panel-title">
-                            Error
-                        </h3>
-                    </div>
-                    <div class="panel-body">
-                        <?= $log->error ?>
-                    </div>
-                </div>
-                </div>
-                <?php
-            }
-            ?>
+            </div>
             <?php
         }
-    }
-    ?>
-    <code><?= __FILE__ ?></code>
-</div>
+        ?>
+        <?php
+        }
+        }
+        ?>
+        <code><?= __FILE__ ?></code>
+    </div>

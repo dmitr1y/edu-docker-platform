@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `apps`.
+ * Handles the creation of table `apps_db_users`.
  */
-class m181009_200835_create_apps_table extends Migration
+class m181016_093227_create_apps_db_users_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -18,15 +18,13 @@ class m181009_200835_create_apps_table extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('apps', [
+        $this->createTable('apps_db_users', [
             'id' => $this->primaryKey(),
-            'name' => $this->string(32)->notNull(),
-            'description' => $this->text(),
-            'file' => $this->text(),
-            'image' => $this->string(255),
-            'url' => $this->text(),
-            'port' => $this->integer(),
-            'status' => $this->integer(),
+            'username' => $this->string(255)->notNull()->unique(),
+            'user_password' => $this->string(255)->notNull(),
+            'permissions' => $this->text(),
+            'database' => $this->string(255),
+            'owned_id' => $this->integer()->notNull(),
             'timestamp' => 'timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP'
         ], $tableOptions);
     }
@@ -36,6 +34,6 @@ class m181009_200835_create_apps_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('apps');
+        $this->dropTable('apps_db_users');
     }
 }

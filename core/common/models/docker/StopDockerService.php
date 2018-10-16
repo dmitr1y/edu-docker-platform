@@ -37,7 +37,7 @@ class StopDockerService extends BaseObject implements \yii\queue\JobInterface
             $log->appId = $this->appModel->id;
         }
         $manager = new DockerComposeManager();
-        $log->build = $manager->stop($this->serviceName);
+        $log->log = $manager->stop($this->serviceName);
         $log->save();
         $this->appModel->status = '0';
         $this->appModel->save();
