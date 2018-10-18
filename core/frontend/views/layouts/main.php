@@ -4,13 +4,13 @@
 /* @var $content string */
 
 
+use common\widgets\Alert;
+use frontend\assets\AppAsset;
 use frontend\assets\BootboxAsset;
-use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
-use frontend\assets\AppAsset;
-use common\widgets\Alert;
 
 AppAsset::register($this);
 BootboxAsset::overrideSystemConfirm();

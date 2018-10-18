@@ -152,7 +152,7 @@ class AppController extends Controller
             $this->createStatic($model);
             return $this->redirect(['app/index', 'id' => $model->id]);
         }
-        return $this->render('create_static', ['model' => $model]);
+        return $this->render('createStatic', ['model' => $model]);
     }
 
     /**
