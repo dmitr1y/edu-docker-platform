@@ -19,6 +19,7 @@ class CreateNginxConf extends BaseObject implements \yii\queue\JobInterface
 
     /**
      * @param Queue $queue which pushed and is handling the job
+     * @return null
      */
     public function execute($queue)
     {

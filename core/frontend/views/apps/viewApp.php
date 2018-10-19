@@ -29,10 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;;
             foreach ($model as $key => $value) {
                 if (isset($model->{$key}) || $key === 'status') {
                     echo "<tr>";
-//                    echo "<td>" . $key . "</td><td>" . $value . "</td>";
+//                    echo "<td>" . $key . "</td><td>" . $value . "/apps/hello-wrold</td>";
 
                     if ($key === 'url')
-                        echo "<td>" . $key . "</td><td><a href='https://" . $value . "'>" . $value . "</a></td>";
+                        echo "<td>" . $key . "</td><td><a href='" . $value . "'>" . $value . "</a></td>";
                     else {
                         if ($key === 'status') {
                             echo "<td>" . $key . "</td><td>";
@@ -67,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;;
     <?php
     if (isset($model->url) && !empty($model->url)) {
     ?>
-    <form class="form-group" action="/app/manager" method="post">
+    <form class="form-group" action="/apps/manager" method="post">
         <input class="btn btn-info" type="submit" name="action" value="Run"/>
         <input class="btn btn-info" type="submit" name="action" value="Stop"/>
         <input class="btn btn-danger" type="submit" name="action" value="Remove"/>

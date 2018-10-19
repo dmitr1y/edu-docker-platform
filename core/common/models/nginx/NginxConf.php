@@ -9,7 +9,6 @@
 namespace common\models\nginx;
 
 
-use phpDocumentor\Reflection\Types\This;
 use RomanPitak\Nginx\Config\Directive;
 use RomanPitak\Nginx\Config\Scope;
 
@@ -56,16 +55,11 @@ class NginxConf
         if (empty($userId))
             return null;
         $conf = Scope::create()
-            ->addDirective(Directive::create('location', '/' . $this->serviceName . '/', Scope::create()
+            ->addDirective(Directive::create('location', '/' . $this->serviceName, Scope::create()
                 ->addDirective(Directive::create('root', '/usr/share/nginx/html/' . $userId))//todo change root dir
                 ->addDirective(Directive::create('index', 'index.html index.htm'))
             ))
             ->prettyPrint(0);
-
-        //        todo for debug only
-//        if (!file_exists(\Yii::$app->basePath . '/../../storage/user_apps/' . $this->serviceName)) {
-//            mkdir(\Yii::$app->basePath . '/../../storage/user_apps/' . $this->serviceName, 0777, true);
-//        }
 
         $this->save($this->pathToFile, $this->serviceName . ".conf", $conf);
         return $conf;
@@ -73,6 +67,7 @@ class NginxConf
 
     private function save($path, $fileName, $file)
     {
+//    todo change permissions
         if (!file_exists($path)) {
             mkdir($path, 0777, true);
         }

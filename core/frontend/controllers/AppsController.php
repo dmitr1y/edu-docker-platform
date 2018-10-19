@@ -25,14 +25,14 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\UploadedFile;
 
-class AppController extends Controller
+class AppsController extends Controller
 {
-    private const domain = "apps.localhost";
+    private const domain = "app";
 
     public function actionIndex($id = null, $logFlag = null)
     {
         if (empty($id))
-            return $this->redirect(['app/create']);
+            return $this->redirect(['apps/create']);
 
         $model = Apps::find()->where(['id' => $id])->one();
         $log = null;
@@ -53,7 +53,7 @@ class AppController extends Controller
 
 //        todo Вывод ошибки "приложение не найдено"
         if (!isset($appName) || empty($appName))
-            return $this->redirect(['app/index']);
+            return $this->redirect(['apps/index']);
 
         $app = Apps::findOne(['id' => $id]);
 //        $appName=DockerService::prepareServiceName($app->name);
@@ -109,7 +109,7 @@ class AppController extends Controller
 
         $appLog->log = $log;
         $appLog->save();
-        return $this->redirect(['app/index', 'logFlag' => true, 'id' => $id]);
+        return $this->redirect(['apps/index', 'logFlag' => true, 'id' => $id]);
     }
 
     public function actionCreate()
@@ -130,7 +130,7 @@ class AppController extends Controller
             }
             $model->save();
             $this->createCompose($model);
-            return $this->redirect(['app/index', 'id' => $model->id]);
+            return $this->redirect(['apps/index', 'id' => $model->id]);
         }
         return $this->render('create', ['model' => $model, 'modelUpload' => $modelUpload]);
     }
@@ -150,7 +150,7 @@ class AppController extends Controller
             }
             $model->save();
             $this->createStatic($model);
-            return $this->redirect(['app/index', 'id' => $model->id]);
+            return $this->redirect(['apps/index', 'id' => $model->id]);
         }
         return $this->render('createStatic', ['model' => $model]);
     }
@@ -177,7 +177,7 @@ class AppController extends Controller
         $compose->setService($service->getService());
         $compose->save();
 
-        $appModel->url = DockerService::prepareServiceName($appModel->name) . '.' . $this::domain;
+        $appModel->url = '/' . $this::domain . '/' . DockerService::prepareServiceName($appModel->name);
         return $appModel->save();
     }
 
@@ -189,7 +189,7 @@ class AppController extends Controller
         $conf = new NginxConf();
         $conf->serviceName = DockerService::prepareServiceName($appModel->name);
         $conf->createStatic(Yii::$app->user->id);
-        $appModel->url = DockerService::prepareServiceName($appModel->name) . '.' . $this::domain;
+        $appModel->url = '/' . $this::domain . '/' . DockerService::prepareServiceName($appModel->name);
         $appModel->status = 2;
         $appModel->save();
     }
