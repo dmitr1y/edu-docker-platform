@@ -13,13 +13,13 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
-    <ul class="list-group">
+    <div class="list-group">
         <?php
         echo ListView::widget([
             'dataProvider' => $dataProvider,
             'itemView' => '_listViewApp',
         ]);
         ?>
-    </ul>
+    </div>
     <code><?= __FILE__ ?></code>
 </div>
