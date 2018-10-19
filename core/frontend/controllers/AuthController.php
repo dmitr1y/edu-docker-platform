@@ -54,23 +54,27 @@ class AuthController extends \yii\web\Controller
 //        return $behaviors;
 //    }
 
-    public function actionIndex($args = null)
+    public function actionIndex()
     {
-        $data = null;
-//        $data['args'] = $args;
-//        $data['headers'] = $headers = Yii::$app->response->headers;
-//        $data['username'] = $username = Yii::$app->user->id;
-//        $authHeader = Yii::$app->request->getHeaders();
-        $data['request'] = $req = Yii::$app->request;
-//        $data['authUser'] = Yii::$app->request->authUser;
-        $data['$_SERVER'] = $_SERVER;
-//        $data['session'] = Yii::$app->session;
-        $data['$_COOKIES'] = Yii::$app->response->cookies;
-
-        file_put_contents(realpath(\Yii::$app->basePath . '/../../storage/user_apps') . '/auth.txt', json_encode($data, JSON_PRETTY_PRINT));
-
-//        $headers->add('X-Username', $username);
-
+//        $data = null;
+//        $data ['COOKIE']= $_SERVER['HTTP_COOKIE'];
+//        $data ['user id']= Yii::$app->user->id;
+//
+////        $session = Yii::$app->session->getId();
+//
+//        $data['session'] = $session = Yii::$app->session->getId();
+//        $user = new User();
+//        $user->finder->findAccountById(Yii::$app->user->id);
+//
+//        $data ['user']=$user;
+//        $data ['guest check']=Yii::$app->user->isGuest;
+//
+//        file_put_contents(realpath(\Yii::$app->basePath . '/../../storage/user_apps') . '/auth.txt', json_encode($data, JSON_PRETTY_PRINT));
+//
+////        $headers->add('X-Username', $username);
+        if (Yii::$app->user->isGuest)
+            Yii::$app->response->statusCode = 401;
         Yii::$app->response->statusCode = 200;
+
     }
 }
