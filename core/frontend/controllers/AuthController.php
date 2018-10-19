@@ -57,19 +57,19 @@ class AuthController extends \yii\web\Controller
     public function actionIndex($args = null)
     {
         $data = null;
-        $data['args'] = $args;
-        $data['headers'] = $headers = Yii::$app->response->headers;
-        $data['username'] = $username = Yii::$app->user->id;
+//        $data['args'] = $args;
+//        $data['headers'] = $headers = Yii::$app->response->headers;
+//        $data['username'] = $username = Yii::$app->user->id;
 //        $authHeader = Yii::$app->request->getHeaders();
         $data['request'] = $req = Yii::$app->request;
-        $data['authUser'] = Yii::$app->request->authUser;
+//        $data['authUser'] = Yii::$app->request->authUser;
         $data['$_SERVER'] = $_SERVER;
-        $data['session'] = Yii::$app->session;
-        $data['cookies'] = Yii::$app->response->cookies;
+//        $data['session'] = Yii::$app->session;
+        $data['$_COOKIES'] = Yii::$app->response->cookies;
 
         file_put_contents(realpath(\Yii::$app->basePath . '/../../storage/user_apps') . '/auth.txt', json_encode($data, JSON_PRETTY_PRINT));
 
-        $headers->add('X-Username', $username);
+//        $headers->add('X-Username', $username);
 
         Yii::$app->response->statusCode = 200;
     }
