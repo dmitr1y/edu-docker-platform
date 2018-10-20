@@ -4,12 +4,10 @@
  * @var \common\models\app\Apps $model
  */
 ?>
-<a href="<?= $model->url ?>" class="list-group-item list-group-item-action flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1"><?= ucfirst($model->name) ?></h5>
-        <small><?= $model->timestamp ?></small>
-    </div>
-    <p class="mb-1">
+<a href="<?= '/apps/detail?id=' . $model->id ?>"
+   class="list-group-item list-group-item-action flex-column align-items-start">
+    <h4 class="list-group-item-heading"><b><?= ucfirst($model->name) ?></b></h4>
+    <p class="list-group-item-text">
         <?php
         $strLimit = 150;
         $description = strip_tags($model->description);
@@ -19,5 +17,8 @@
             echo $description;
         ?>
     </p>
-    <small>Author</small>
+    <div>
+        <small>Author</small>
+        <small><?= $model->timestamp ?></small>
+    </div>
 </a>

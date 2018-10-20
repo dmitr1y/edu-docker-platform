@@ -206,4 +206,14 @@ class AppsController extends Controller
         ]);
         return $this->render('list', ['dataProvider' => $dataProvider]);
     }
+
+    public function actionDetail($id = null)
+    {
+        if (empty($id))
+            throw  new \yii\web\NotFoundHttpException();
+
+        $model = Apps::findOne(['id' => $id]);
+
+        return $this->render('_listViewAppDetail', ['model' => $model]);
+    }
 }
