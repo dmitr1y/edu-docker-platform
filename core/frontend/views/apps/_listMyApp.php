@@ -4,9 +4,10 @@
  * @var \common\models\app\Apps $model
  */
 ?>
-<a href="<?= '/apps/detail?id=' . $model->id ?>"
+<a href="<?= '/apps/manage?id=' . $model->id ?>"
    class="list-group-item list-group-item-action flex-column align-items-start">
     <h4 class="list-group-item-heading"><b><?= ucfirst($model->name) ?></b></h4>
+    <small>status: <?= $model->status ?> </small>
     <p class="list-group-item-text">
         <?php
         $strLimit = 150;

@@ -134,6 +134,7 @@ class AppsController extends Controller
 
         if ($model->load(\Yii::$app->request->post()) && $model->validate() && $model->isUnique()) {
             $modelUpload->dockerfile = UploadedFile::getInstance($model, 'file');
+            $model->owner_id = Yii::$app->user->id;
             $model->save();
             $dockerfilePath = $modelUpload->upload(Yii::$app->user->id, $model->id);
             if (!empty($dockerfilePath)) {
@@ -156,6 +157,7 @@ class AppsController extends Controller
 
         if ($model->load(\Yii::$app->request->post()) && $model->validate() && $model->isUnique()) {
             $modelUpload->app = UploadedFile::getInstance($model, 'file');
+            $model->owner_id = Yii::$app->user->id;
             $model->save();
             $appPath = $modelUpload->upload(Yii::$app->user->id, DockerService::prepareServiceName($model->name));
             if (!empty($appPath)) {
@@ -228,5 +230,18 @@ class AppsController extends Controller
         $model = Apps::findOne(['id' => $id]);
 
         return $this->render('_listViewAppDetail', ['model' => $model]);
+    }
+
+    public function actionMyApps()
+    {
+        $this->view->title = "My apps";
+        $appsQuery = Apps::find()->where(['owner_id' => Yii::$app->user->id]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $appsQuery,
+            'pagination' => [
+                'pageSize' => 20,
+            ],
+        ]);
+        return $this->render('myList', ['dataProvider' => $dataProvider]);
     }
 }

@@ -21,6 +21,7 @@ class m181009_200835_create_apps_table extends Migration
         $this->createTable('apps', [
             'id' => $this->primaryKey(),
             'name' => $this->string(32)->notNull(),
+            'owner_id' => $this->integer(32)->notNull(),
             'description' => $this->text(),
             'file' => $this->text(),
             'image' => $this->string(255),

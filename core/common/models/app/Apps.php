@@ -9,6 +9,7 @@ use Yii;
  * This is the model class for table "apps".
  *
  * @property int $id
+ * @property int $owner_id
  * @property string $name
  * @property string $description
  * @property string $file
@@ -39,7 +40,7 @@ class Apps extends \yii\db\ActiveRecord
             [['name'], 'string', 'max' => 32],
             [['image'], 'string', 'max' => 255],
             [['timestamp'], 'safe'],
-            [['port', 'status'], 'integer'],
+            [['port', 'status', 'owner_id'], 'integer'],
         ];
     }
 
@@ -50,6 +51,7 @@ class Apps extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'App ID'),
+            'owner_id' => Yii::t('app', 'Owner ID'),
             'name' => Yii::t('app', 'App name'),
             'description' => Yii::t('app', 'Description'),
             'file' => Yii::t('app', 'Dockerfile'),
@@ -75,11 +77,6 @@ class Apps extends \yii\db\ActiveRecord
         foreach ($app as $key => $value) {
             $this->{$key} = $value;
         }
-    }
-
-    public function create()
-    {
-
     }
 
     public function removeFile($userId = null)
