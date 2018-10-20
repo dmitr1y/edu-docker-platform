@@ -60,7 +60,7 @@ class AppsController extends Controller
 
 //        todo Вывод ошибки "приложение не найдено"
         if (!isset($appName) || empty($appName))
-            return $this->redirect(['apps/index']);
+            throw  new \yii\web\NotFoundHttpException();
 
         $app = Apps::findOne(['id' => $id]);
 //        $appName=DockerService::prepareServiceName($app->name);
@@ -116,7 +116,7 @@ class AppsController extends Controller
 
         $appLog->log = $log;
         $appLog->save();
-        return $this->redirect(['apps/index', 'logFlag' => true, 'id' => $id]);
+        return $this->redirect(['apps/manage', 'logFlag' => true, 'id' => $id]);
     }
 
     public function actionCreate()
