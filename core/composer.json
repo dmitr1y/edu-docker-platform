@@ -28,7 +28,8 @@
     "romanpitak/nginx-config-processor": "^0.2.1",
     "dektrium/yii2-user": "^0.9.14",
     "bower-asset/bootbox": "~4.3.0",
-    "yiisoft/yii2-queue": "^2.1"
+    "yiisoft/yii2-queue": "^2.1",
+    "rmrevin/yii2-fontawesome": "~3.2"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.0.0",

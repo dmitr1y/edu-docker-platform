@@ -3,11 +3,33 @@
 /**
  * @var \common\models\app\Apps $model
  */
+
+use rmrevin\yii\fontawesome\FAS;
+
 ?>
 <a href="<?= '/apps/manage?id=' . $model->id ?>"
    class="list-group-item list-group-item-action flex-column align-items-start">
-    <h4 class="list-group-item-heading"><b><?= ucfirst($model->name) ?></b></h4>
-    <small>status: <?= $model->status ?> </small>
+
+    <h4 class="list-group-item-heading">
+        <?php
+        switch ($model->status) {
+            case 0:
+                echo FAS::i('stop-circle');
+                break;
+            case 1:
+                echo FAS::i('spinner');
+                break;
+            case 2:
+                echo FAS::i('check-circle');
+                break;
+            default:
+                echo FAS::i('exclamation-circle');
+                break;
+        }
+        ?>
+        <b><?= ucfirst($model->name) ?></b>
+    </h4>
+
     <p class="list-group-item-text">
         <?php
         $strLimit = 150;

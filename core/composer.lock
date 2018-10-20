@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-  "content-hash": "c52cfef605cb871cf1725c241e854881",
+  "content-hash": "4ab9a868521c21a5f8e05f6ac0993fc3",
     "packages": [
         {
           "name": "bower-asset/bootbox",
@@ -404,30 +404,38 @@
             "time": "2018-02-23T01:58:20+00:00"
         },
         {
-          "name": "romanpitak/nginx-config-processor",
-          "version": "v0.2.1",
+          "name": "rmrevin/yii2-fontawesome",
+          "version": "3.2.0",
           "source": {
             "type": "git",
-            "url": "https://github.com/romanpitak/Nginx-Config-Processor.git",
-            "reference": "0dfcbbda696c7baeed8f955e4831696d90e56758"
+            "url": "https://github.com/rmrevin/yii2-fontawesome.git",
+            "reference": "0b05ae6ddaed96490a195057e11f9a3dc5952cb9"
           },
           "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/romanpitak/Nginx-Config-Processor/zipball/0dfcbbda696c7baeed8f955e4831696d90e56758",
-            "reference": "0dfcbbda696c7baeed8f955e4831696d90e56758",
+            "url": "https://api.github.com/repos/rmrevin/yii2-fontawesome/zipball/0b05ae6ddaed96490a195057e11f9a3dc5952cb9",
+            "reference": "0b05ae6ddaed96490a195057e11f9a3dc5952cb9",
             "shasum": ""
           },
           "require": {
-            "php": ">=5.3.3"
+            "php": ">=5.4.0",
+            "yiisoft/yii2": "^2.0.0"
           },
           "require-dev": {
-            "codacy/coverage": "dev-master",
-            "codeclimate/php-test-reporter": "dev-master"
+            "doctrine/instantiator": "1.0.*",
+            "phpdocumentor/reflection-docblock": "~3.1.0",
+            "phpunit/phpunit": "^4.8"
           },
-          "type": "library",
+          "type": "yii2-extension",
+          "extra": {
+            "asset-installer-paths": {
+              "npm-asset-library": "vendor/npm",
+              "bower-asset-library": "vendor/bower"
+            }
+          },
           "autoload": {
             "psr-4": {
-              "RomanPitak\\Nginx\\Config\\": "src/"
+              "rmrevin\\yii\\fontawesome\\": ""
             }
           },
           "notification-url": "https://packagist.org/downloads/",
@@ -436,30 +444,78 @@
           ],
           "authors": [
             {
-              "name": "Roman Piták",
-              "email": "roman@pitak.net",
-              "homepage": "http://pitak.net",
-              "role": "Developer"
+              "name": "Revin Roman",
+              "email": "roman@rmrevin.com",
+              "homepage": "https://rmrevin.com/"
             }
           ],
-          "description": "Nginx configuration files processor.",
-          "homepage": "https://github.com/romanpitak/Nginx-Config-Processor",
+          "description": "Asset Bundle for Yii2 with Font Awesome",
           "keywords": [
-            "conf",
-            "conf file",
-            "config",
-            "config file",
-            "configuration",
-            "configuration file",
-            "create",
-            "creator",
-            "manager",
-            "nginx",
-            "parser",
-            "php",
-            "processor"
+            "asset",
+            "awesome",
+            "bundle",
+            "font",
+            "yii"
           ],
-          "time": "2016-01-31T19:44:23+00:00"
+          "time": "2018-09-17T10:48:42+00:00"
+        },
+      {
+        "name": "romanpitak/nginx-config-processor",
+        "version": "v0.2.1",
+        "source": {
+          "type": "git",
+          "url": "https://github.com/romanpitak/Nginx-Config-Processor.git",
+          "reference": "0dfcbbda696c7baeed8f955e4831696d90e56758"
+        },
+        "dist": {
+          "type": "zip",
+          "url": "https://api.github.com/repos/romanpitak/Nginx-Config-Processor/zipball/0dfcbbda696c7baeed8f955e4831696d90e56758",
+          "reference": "0dfcbbda696c7baeed8f955e4831696d90e56758",
+          "shasum": ""
+        },
+        "require": {
+          "php": ">=5.3.3"
+        },
+        "require-dev": {
+          "codacy/coverage": "dev-master",
+          "codeclimate/php-test-reporter": "dev-master"
+        },
+        "type": "library",
+        "autoload": {
+          "psr-4": {
+            "RomanPitak\\Nginx\\Config\\": "src/"
+          }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+          "MIT"
+        ],
+        "authors": [
+          {
+            "name": "Roman Piták",
+            "email": "roman@pitak.net",
+            "homepage": "http://pitak.net",
+            "role": "Developer"
+          }
+        ],
+        "description": "Nginx configuration files processor.",
+        "homepage": "https://github.com/romanpitak/Nginx-Config-Processor",
+        "keywords": [
+          "conf",
+          "conf file",
+          "config",
+          "config file",
+          "configuration",
+          "configuration file",
+          "create",
+          "creator",
+          "manager",
+          "nginx",
+          "parser",
+          "php",
+          "processor"
+        ],
+        "time": "2016-01-31T19:44:23+00:00"
         },
       {
             "name": "swiftmailer/swiftmailer",
