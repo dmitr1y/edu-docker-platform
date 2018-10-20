@@ -29,7 +29,14 @@ class AppsController extends Controller
 {
     private const domain = "app";
 
-    public function actionIndex($id = null, $logFlag = null)
+    public function actionIndex()
+    {
+        $this->view->title = " Discover apps";
+
+        return $this->render('index');
+    }
+
+    public function actionManage($id = null, $logFlag = null)
     {
         if (empty($id))
             return $this->redirect(['apps/create']);
@@ -114,7 +121,13 @@ class AppsController extends Controller
 
     public function actionCreate()
     {
-        Yii::$app->view->title = 'Create';
+        $this->view->title = "Create your app";
+        return $this->render('create');
+    }
+
+    public function actionCreateDynamic()
+    {
+        Yii::$app->view->title = 'Create dynamic app';
         $model = new Apps();
         $modelUpload = new DockerfileUploadForm();
 
@@ -130,9 +143,9 @@ class AppsController extends Controller
             }
             $model->save();
             $this->createCompose($model);
-            return $this->redirect(['apps/index', 'id' => $model->id]);
+            return $this->redirect(['apps/manage', 'id' => $model->id]);
         }
-        return $this->render('create', ['model' => $model, 'modelUpload' => $modelUpload]);
+        return $this->render('createDynamic', ['model' => $model, 'modelUpload' => $modelUpload]);
     }
 
     public function actionCreateStatic()
@@ -150,7 +163,7 @@ class AppsController extends Controller
             }
             $model->save();
             $this->createStatic($model);
-            return $this->redirect(['apps/index', 'id' => $model->id]);
+            return $this->redirect(['apps/manage', 'id' => $model->id]);
         }
         return $this->render('createStatic', ['model' => $model]);
     }
