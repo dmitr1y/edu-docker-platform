@@ -44,8 +44,8 @@ BootboxAsset::overrideSystemConfirm();
         ['label' => 'Contact', 'url' => ['/site/contact']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/user/registration']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/user/login']];
+        $menuItems[] = ['label' => 'Signup', 'url' => ['/user/registration/register']];
+        $menuItems[] = ['label' => 'Login', 'url' => ['/user/security/login']];
     } else {
         $menuItems[] = [
             'label' => 'Apps',
@@ -55,7 +55,7 @@ BootboxAsset::overrideSystemConfirm();
             ]
         ];
         $menuItems[] = '<li>'
-            . Html::beginForm(['/user/logout'], 'post')
+            . Html::beginForm(['/user/security/logout'], 'post')
             . Html::submitButton(
                 'Logout (' . Yii::$app->user->identity->username . ')',
                 ['class' => 'btn btn-link logout']
