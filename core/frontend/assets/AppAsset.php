@@ -20,6 +20,6 @@ class AppAsset extends AssetBundle
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
         'frontend\assets\BootboxAsset',
-        'rmrevin\yii\fontawesome\CdnFreeAssetBundle'
+        'rmrevin\yii\fontawesome\cdn\AssetBundle'
     ];
 }
