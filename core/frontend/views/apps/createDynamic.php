@@ -17,14 +17,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
-    <?= $form->field($model, 'name') ?>
-    <?= $form->field($model, 'description') ?>
     <?= $form->field($model, 'port') ?>
     <?= $form->field($model, 'image') ?>
-    <?= $form->field($model, 'file')->fileInput() ?>
+    <?= $form->field($model, 'dockerfile')->fileInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton('Create', ['class' => 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

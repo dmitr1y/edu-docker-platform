@@ -8,8 +8,8 @@
 
 namespace common\models\docker;
 
-use common\models\app\Apps;
 use common\models\app\AppsLog;
+use common\models\app\DockerApps;
 use yii\base\BaseObject;
 use yii\queue\Queue;
 
@@ -20,7 +20,7 @@ class StopDockerService extends BaseObject implements \yii\queue\JobInterface
      */
     public $serviceName;
     /**
-     * @var Apps $appModel
+     * @var DockerApps $appModel
      */
     public $appModel;
 
@@ -31,10 +31,10 @@ class StopDockerService extends BaseObject implements \yii\queue\JobInterface
     {
         $this->appModel->status = '3';
         $this->appModel->save();
-        $log = AppsLog::findOne(['appId' => $this->appModel->id]);
+        $log = AppsLog::findOne(['appId' => $this->appModel->app_id]);
         if (empty($log)) {
             $log = new AppsLog();
-            $log->appId = $this->appModel->id;
+            $log->appId = $this->appModel->app_id;
         }
         $manager = new DockerComposeManager();
         $log->log = $manager->stop($this->serviceName);

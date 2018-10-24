@@ -10,6 +10,7 @@ namespace common\models\docker;
 
 use common\models\app\Apps;
 use common\models\app\AppsLog;
+use common\models\app\DockerApps;
 use yii\base\BaseObject;
 use yii\db\StaleObjectException;
 use yii\queue\Queue;
@@ -21,13 +22,9 @@ class RemoveDockerService extends BaseObject implements \yii\queue\JobInterface
      */
     public $serviceName;
     /**
-     * @var Apps $appModel
+     * @var DockerApps $appModel
      */
     public $appModel;
-    /**
-     * @var integer $userId
-     */
-    public $userId;
     /**
      * @param Queue $queue which pushed and is handling the job
      */
@@ -35,8 +32,8 @@ class RemoveDockerService extends BaseObject implements \yii\queue\JobInterface
     {
         $this->appModel->status = '3';
         $this->appModel->save();
-
-        $log = AppsLog::findOne(['appId' => $this->appModel->id]);
+        $app = Apps::findOne(['id' => $this->appModel->app_id]);
+        $log = AppsLog::findOne(['appId' => $this->appModel->app_id]);
         if (!empty($log)) {
             try {
                 $log->delete();
@@ -46,11 +43,7 @@ class RemoveDockerService extends BaseObject implements \yii\queue\JobInterface
         }
         $manager = new DockerComposeManager();
         $manager->down($this->serviceName);
-        $this->appModel->removeFile($this->userId);
-        try {
-            $this->appModel->delete();
-        } catch (StaleObjectException $e) {
-        } catch (\Throwable $e) {
-        }
+        $this->appModel->remove();
+        $app->delete();
     }
 }

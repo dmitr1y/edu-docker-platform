@@ -51,12 +51,17 @@ return [
                 ],
             ],
         ],
-        'authManager' => [
-            'class' => 'yii\rbac\DbManager',
-        ],
+//        'authManager' => [
+//            'class' => 'yii\rbac\DbManager',
+//        ],
     ],
     'modules' => [
-        'rbac' => ['class' => 'dektrium\rbac\RbacWebModule'],
+        'user' => [
+            'class' => 'dektrium\user\Module',
+            'enableRegistration' => false,
+            'enableConfirmation' => false,
+        ],
+        'rbac' => ['class' => 'dektrium\rbac\RbacConsoleModule'],
     ],
     'params' => $params,
 ];

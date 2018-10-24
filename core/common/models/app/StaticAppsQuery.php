@@ -1,13 +1,13 @@
 <?php
 
-namespace common\models\mysql;
+namespace common\models\app;
 
 /**
- * This is the ActiveQuery class for [[AppsDbUsers]].
+ * This is the ActiveQuery class for [[StaticApps]].
  *
- * @see AppsDbUsers
+ * @see StaticApps
  */
-class AppsDbUsersQuery extends \yii\db\ActiveQuery
+class StaticAppsQuery extends \yii\db\ActiveQuery
 {
     /*public function active()
     {
@@ -16,7 +16,7 @@ class AppsDbUsersQuery extends \yii\db\ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @return AppsDbUsers[]|array
+     * @return StaticApps[]|array
      */
     public function all($db = null)
     {
@@ -25,7 +25,7 @@ class AppsDbUsersQuery extends \yii\db\ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @return AppsDbUsers|array|null
+     * @return StaticApps|array|null
      */
     public function one($db = null)
     {

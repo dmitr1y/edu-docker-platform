@@ -23,11 +23,13 @@ class m181009_200835_create_apps_table extends Migration
             'name' => $this->string(32)->notNull(),
             'owner_id' => $this->integer(32)->notNull(),
             'description' => $this->text(),
-            'file' => $this->text(),
-            'image' => $this->string(255),
+            'category' => $this->integer(),
+            'type' => $this->integer(),
+//            'file' => $this->text(),
+//            'image' => $this->string(255),
             'url' => $this->text(),
-            'port' => $this->integer(),
-            'status' => $this->integer(),
+//            'port' => $this->integer(),
+//            'status' => $this->integer(),
             'timestamp' => 'timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP'
         ], $tableOptions);
     }

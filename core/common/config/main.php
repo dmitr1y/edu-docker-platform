@@ -12,9 +12,9 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-        'authManager' => [
-            'class' => 'yii\rbac\DbManager',
-        ],
+//        'authManager' => [
+//            'class' => 'yii\rbac\DbManager',
+//        ],
         'queue' => [
             'as log' => \yii\queue\LogBehavior::class,
             'class' => \yii\queue\db\Queue::class,

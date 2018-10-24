@@ -95,7 +95,7 @@ class DockerCompose
 //        exit;
         unset($this->file['pathToFile'], $this->file['file']);
         $yaml = Yaml::dump($this->file);
-        file_put_contents($this->pathToFile, $yaml);
+        return file_put_contents($this->pathToFile, $yaml);
     }
 
     public function load()

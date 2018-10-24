@@ -10,6 +10,8 @@ namespace frontend\controllers;
 
 use common\models\app\Apps;
 use common\models\app\AppsLog;
+use common\models\app\DockerApps;
+use common\models\app\StaticApps;
 use common\models\docker\DockerCompose;
 use common\models\docker\DockerService;
 use common\models\docker\RemoveDockerService;
@@ -20,9 +22,12 @@ use common\models\nginx\CreateNginxConf;
 use common\models\nginx\NginxConf;
 use common\models\nginx\RemoveNginxConf;
 use common\models\StaticAppUploadForm;
+use PHPUnit\Framework\MockObject\BadMethodCallException;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
+use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 
 class AppsController extends Controller
@@ -63,7 +68,9 @@ class AppsController extends Controller
             throw  new \yii\web\NotFoundHttpException();
 
         $app = Apps::findOne(['id' => $id]);
-//        $appName=DockerService::prepareServiceName($app->name);
+        $dockerApp = DockerApps::findOne(['app_id' => $app->id]);
+        $staticApp = StaticApps::findOne(['app_id' => $app->id]);
+        $appName = DockerService::prepareServiceName($app->name);
 
         $log = null;
 
@@ -71,13 +78,16 @@ class AppsController extends Controller
 
         switch ($action) {
             case 'Run':
+                if (empty($dockerApp))
+                    throw new NotFoundHttpException();
+
                 Yii::$app->queue->push(new RunDockerService([
                     'serviceName' => $appName,
-                    'appModel' => $app
+                    'appModel' => $dockerApp
                 ]));
                 Yii::$app->queue->push(new CreateNginxConf([
                     'serviceName' => $appName,
-                    'servicePort' => $app->port,
+                    'servicePort' => $dockerApp->port,
                 ]));
                 break;
             case 'Stop':
@@ -91,11 +101,16 @@ class AppsController extends Controller
                 break;
             case 'Remove':
 //                todo Удаление образа (автоочистка каждый день), Dockerfile, БД
-                Yii::$app->queue->push(new RemoveDockerService([
-                    'serviceName' => $appName,
-                    'appModel' => $app,
-                    'userId' => Yii::$app->user->id
-                ]));
+                if (!empty($dockerApp))
+                    Yii::$app->queue->push(new RemoveDockerService([
+                        'serviceName' => $appName,
+                        'appModel' => $dockerApp
+                    ]));
+                else {
+                    if (empty($staticApp))
+                        throw new NotFoundHttpException();
+                    $staticApp->remove();
+                }
                 Yii::$app->queue->push(new RemoveNginxConf([
                     'serviceName' => $appName
                 ]));
@@ -122,56 +137,95 @@ class AppsController extends Controller
     public function actionCreate()
     {
         $this->view->title = "Create your app";
-        return $this->render('create');
+        $model = new Apps();
+
+        if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
+            $model->owner_id = Yii::$app->user->id;
+            $model->save();
+
+            $url = null;
+
+            switch ($model->type) {
+                case 0:
+                    $url = 'apps/create-static';
+                    break;
+                case 1:
+                    $url = 'apps/create-dynamic';
+                    break;
+                default:
+                    return $this->redirect(['apps/create']);
+                    break;
+            }
+            return $this->redirect([$url, 'id' => $model->id]);
+        }
+        return $this->render('create', ['model' => $model]);
     }
 
-    public function actionCreateDynamic()
+    public function actionCreateDynamic($id = null)
     {
+        if (empty($id))
+            throw new NotFoundHttpException();
+
+
         Yii::$app->view->title = 'Create dynamic app';
-        $model = new Apps();
+        $model = new DockerApps();
+        $app = Apps::findOne(['id' => $id]);
+        if (!empty($app->url) || DockerApps::findOne(['app_id' => $id]))
+            throw new ForbiddenHttpException();
         $modelUpload = new DockerfileUploadForm();
 
-
-        if ($model->load(\Yii::$app->request->post()) && $model->validate() && $model->isUnique()) {
-            $modelUpload->dockerfile = UploadedFile::getInstance($model, 'file');
-            $model->owner_id = Yii::$app->user->id;
+        if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
+            $modelUpload->dockerfile = UploadedFile::getInstance($model, 'dockerfile');
+            $model->app_id = $id;
+            $model->service_name = $app->name;
             $model->save();
             $dockerfilePath = $modelUpload->upload(Yii::$app->user->id, $model->id);
             if (!empty($dockerfilePath)) {
-                $model->file = $dockerfilePath;
-                if (!empty($model->image))
-                    $model->image = null;
+                $model->dockerfile = $dockerfilePath;
+                $model->save();
             }
-            $model->save();
-            $this->createCompose($model);
+            if (!$url = $this->createCompose($model))
+                throw new BadMethodCallException();
+
+            $app->url = $url;
+            $app->save();
             return $this->redirect(['apps/manage', 'id' => $model->id]);
         }
         return $this->render('createDynamic', ['model' => $model, 'modelUpload' => $modelUpload]);
     }
 
-    public function actionCreateStatic()
+    public function actionCreateStatic($id = null)
     {
         Yii::$app->view->title = 'Create static app';
-        $model = new Apps();
+        $model = new StaticApps();
         $modelUpload = new StaticAppUploadForm();
 
-        if ($model->load(\Yii::$app->request->post()) && $model->validate() && $model->isUnique()) {
-            $modelUpload->app = UploadedFile::getInstance($model, 'file');
-            $model->owner_id = Yii::$app->user->id;
-            $model->save();
-            $appPath = $modelUpload->upload(Yii::$app->user->id, DockerService::prepareServiceName($model->name));
+        if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
+            if (empty($id))
+                throw new ForbiddenHttpException();
+
+            $app = Apps::findOne(['id' => $id]);
+
+            if (empty($app))
+                throw new NotFoundHttpException();
+
+            $modelUpload->app = UploadedFile::getInstance($model, 'path_to_index');
+            $model->app_id = $app->id;
+
+            $appPath = $modelUpload->upload(Yii::$app->user->id, DockerService::prepareServiceName($app->name));
             if (!empty($appPath)) {
-                $model->file = $appPath;
+                $model->path_to_index = $appPath;
             }
+
             $model->save();
-            $this->createStatic($model);
-            return $this->redirect(['apps/manage', 'id' => $model->id]);
+            $this->createStatic($app);
+            return $this->redirect(['apps/manage', 'id' => $app->id]);
         }
         return $this->render('createStatic', ['model' => $model]);
     }
 
     /**
-     * @param $appModel Apps
+     * @param $appModel DockerApps
      * @return bool
      */
     private function createCompose($appModel)
@@ -179,7 +233,7 @@ class AppsController extends Controller
         $compose = new DockerCompose();
         $service = new DockerService();
 
-        $service->name = strtolower(preg_replace('/\s+/', '-', $appModel->name));
+        $service->name = strtolower(preg_replace('/\s+/', '-', $appModel->service_name));
 //        todo Добавление пути к Dockerfile
         if (!empty($appModel->image))
             $service->image = $appModel->image;
@@ -190,10 +244,9 @@ class AppsController extends Controller
                 return false;
 
         $compose->setService($service->getService());
-        $compose->save();
-
-        $appModel->url = '/' . $this::domain . '/' . DockerService::prepareServiceName($appModel->name);
-        return $appModel->save();
+        if ($compose->save())
+            return '/' . $this::domain . '/' . DockerService::prepareServiceName($appModel->service_name);
+        return null;
     }
 
     /**
@@ -205,7 +258,7 @@ class AppsController extends Controller
         $conf->serviceName = DockerService::prepareServiceName($appModel->name);
         $conf->createStatic(Yii::$app->user->id);
         $appModel->url = '/' . $this::domain . '/' . DockerService::prepareServiceName($appModel->name);
-        $appModel->status = 2;
+//        $appModel->status = 2;
         $appModel->save();
     }
 

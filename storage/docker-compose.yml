@@ -3,5 +3,6 @@ services:
     nginx: { build: ./nginx/docker/, volumes: ['/storage/nginx/dind:/etc/nginx/conf.d', '/storage/user_apps:/usr/share/nginx/html'], ports: ['80:80'], restart: always }
     mysql: { image: mysql, environment: [MYSQL_ROOT_PASSWORD=password, MYSQL_DATABASE=apps], volumes: ['/db/mysql_apps:/var/lib/mysql'], ports: ['3307:3306'] }
     portainer: { image: portainer/portainer, command: '-H unix:///var/run/docker.sock', volumes: ['/var/run/docker.sock:/var/run/docker.sock', 'portainer_data:/data'] }
+    imposible: { image: crccheck/hello-world }
 volumes:
     portainer_data: null
