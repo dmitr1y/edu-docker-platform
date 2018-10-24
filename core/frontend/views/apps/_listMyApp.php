@@ -4,7 +4,6 @@
  * @var \common\models\app\Apps $model
  */
 
-use rmrevin\yii\fontawesome\FAS;
 
 ?>
 <a href="<?= '/apps/manage?id=' . $model->id ?>"
@@ -14,16 +13,16 @@ use rmrevin\yii\fontawesome\FAS;
         <?php
         switch ($model->status) {
             case 0:
-                echo FAS::i('stop-circle');
+                echo '<i class="fa fa-stop-circle"></i>';
                 break;
             case 1:
-                echo FAS::i('spinner');
+                echo '<i class="fa fa-spinner"></i>';
                 break;
             case 2:
-                echo FAS::i('check-circle');
+                echo '<i class="fa fa-check-circle"></i>';
                 break;
             default:
-                echo FAS::i('exclamation-circle');
+                echo '<i class="fa fa-exclamation-circle"></i>';
                 break;
         }
         ?>
