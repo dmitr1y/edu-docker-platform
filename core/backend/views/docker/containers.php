@@ -5,7 +5,7 @@
 $this->title = 'Docker containers';
 ?>
 <div class="docker">
-    <table class="table table-striped">
+    <table class="table table-hover table-striped">
         <thead>
         <tr>
             <th scope="col">name</th>
@@ -17,10 +17,20 @@ $this->title = 'Docker containers';
         <?php
         if (!empty($ps))
             foreach ($ps as $key => $value) {
+                $state = '';
+                switch ($ps[$key]['state']) {
+                    case 'Up':
+                        $state = '<i class="fas fa-check-square"></i>';
+                        break;
+                    default:
+                        $state = '<i class="fas fa-stop"></i> ' . $ps[$key]['state'];
+                        break;
+                }
+
                 $line = '<tr>
 <td>' . $ps[$key]['name'] . '</td>
 <td>' . $ps[$key]['command'] . '</td>
-<td>' . $ps[$key]['state'] . '</td>
+<td>' . $state . '</td>
 <td>' . $ps[$key]['ports'] . '</td>
 </tr>';
                 echo $line;
