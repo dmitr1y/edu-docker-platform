@@ -29,9 +29,9 @@
     "dektrium/yii2-user": "^0.9.14",
     "bower-asset/bootbox": "~4.3.0",
     "yiisoft/yii2-queue": "^2.1",
-    "rmrevin/yii2-fontawesome": "~2.9",
-    "dmstr/yii2-adminlte-asset": "^2.1",
-    "dektrium/yii2-rbac": "^1.0"
+    "rmrevin/yii2-fontawesome": "^3.2.0",
+    "dektrium/yii2-rbac": "^1.0",
+    "dmstr/yii2-adminlte-asset": "^3.0.0-alpha1"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.0.0",

@@ -11,18 +11,15 @@
 
     <h4 class="list-group-item-heading">
         <?php
-        switch ($model->status) {
+        switch ($model->type) {
             case 0:
-                echo '<i class="fa fa-stop-circle"></i>';
+                echo '<i class="fab fa-html5"></i>';
                 break;
             case 1:
-                echo '<i class="fa fa-spinner"></i>';
-                break;
-            case 2:
-                echo '<i class="fa fa-check-circle"></i>';
+                echo '<i class="fab fa-docker"></i>';
                 break;
             default:
-                echo '<i class="fa fa-exclamation-circle"></i>';
+                echo '<i class="fab fa-question"></i>';
                 break;
         }
         ?>

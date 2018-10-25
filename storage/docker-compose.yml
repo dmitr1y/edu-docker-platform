@@ -4,5 +4,6 @@ services:
     mysql: { image: mysql, environment: [MYSQL_ROOT_PASSWORD=password, MYSQL_DATABASE=apps], volumes: ['/db/mysql_apps:/var/lib/mysql'], ports: ['3307:3306'] }
     portainer: { image: portainer/portainer, command: '-H unix:///var/run/docker.sock', volumes: ['/var/run/docker.sock:/var/run/docker.sock', 'portainer_data:/data'] }
     imposible: { image: crccheck/hello-world }
+    hello-world: { image: crccheck/hello-world }
 volumes:
     portainer_data: null

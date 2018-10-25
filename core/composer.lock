@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-  "content-hash": "3de7f13c027d3d41b18f6b94a08733ab",
+  "content-hash": "be63d0fdf17074d6f381b5c211b391c3",
     "packages": [
         {
           "name": "almasaeed2010/adminlte",
@@ -231,27 +231,40 @@
             "time": "2017-07-16T21:13:23+00:00"
         },
         {
-          "name": "cebe/yii2-gravatar",
-          "version": "1.1",
-          "target-dir": "cebe/gravatar",
+          "name": "composer/installers",
+          "version": "v1.6.0",
           "source": {
             "type": "git",
-            "url": "https://github.com/cebe/yii2-gravatar.git",
-            "reference": "c9c01bd14c9bdee9e5ae1ef1aad23f80c182c057"
+            "url": "https://github.com/composer/installers.git",
+            "reference": "cfcca6b1b60bc4974324efb5783c13dca6932b5b"
           },
           "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/cebe/yii2-gravatar/zipball/c9c01bd14c9bdee9e5ae1ef1aad23f80c182c057",
-            "reference": "c9c01bd14c9bdee9e5ae1ef1aad23f80c182c057",
+            "url": "https://api.github.com/repos/composer/installers/zipball/cfcca6b1b60bc4974324efb5783c13dca6932b5b",
+            "reference": "cfcca6b1b60bc4974324efb5783c13dca6932b5b",
             "shasum": ""
           },
           "require": {
-            "yiisoft/yii2": "*"
+            "composer-plugin-api": "^1.0"
           },
-          "type": "yii2-extension",
+          "replace": {
+            "roundcube/plugin-installer": "*",
+            "shama/baton": "*"
+          },
+          "require-dev": {
+            "composer/composer": "1.0.*@dev",
+            "phpunit/phpunit": "^4.8.36"
+          },
+          "type": "composer-plugin",
+          "extra": {
+            "class": "Composer\\Installers\\Plugin",
+            "branch-alias": {
+              "dev-master": "1.0-dev"
+            }
+          },
           "autoload": {
-            "psr-0": {
-              "cebe\\gravatar\\": ""
+            "psr-4": {
+              "Composer\\Installers\\": "src/Composer/Installers"
             }
           },
           "notification-url": "https://packagist.org/downloads/",
@@ -260,139 +273,83 @@
           ],
           "authors": [
             {
-              "name": "Carsten Brandt",
-              "email": "mail@cebe.cc",
-              "homepage": "http://cebe.cc/",
-              "role": "Core framework development"
+              "name": "Kyle Robinson Young",
+              "email": "kyle@dontkry.com",
+              "homepage": "https://github.com/shama"
             }
           ],
-          "description": "Gravatar Widget for Yii 2",
+          "description": "A multi-framework Composer library installer",
+          "homepage": "https://composer.github.io/installers/",
           "keywords": [
-            "gravatar",
-            "yii"
+            "Craft",
+            "Dolibarr",
+            "Eliasis",
+            "Hurad",
+            "ImageCMS",
+            "Kanboard",
+            "Lan Management System",
+            "MODX Evo",
+            "Mautic",
+            "Maya",
+            "OXID",
+            "Plentymarkets",
+            "Porto",
+            "RadPHP",
+            "SMF",
+            "Thelia",
+            "WolfCMS",
+            "agl",
+            "aimeos",
+            "annotatecms",
+            "attogram",
+            "bitrix",
+            "cakephp",
+            "chef",
+            "cockpit",
+            "codeigniter",
+            "concrete5",
+            "croogo",
+            "dokuwiki",
+            "drupal",
+            "eZ Platform",
+            "elgg",
+            "expressionengine",
+            "fuelphp",
+            "grav",
+            "installer",
+            "itop",
+            "joomla",
+            "kohana",
+            "laravel",
+            "lavalite",
+            "lithium",
+            "magento",
+            "majima",
+            "mako",
+            "mediawiki",
+            "modulework",
+            "modx",
+            "moodle",
+            "osclass",
+            "phpbb",
+            "piwik",
+            "ppi",
+            "puppet",
+            "pxcms",
+            "reindex",
+            "roundcube",
+            "shopware",
+            "silverstripe",
+            "sydes",
+            "symfony",
+            "typo3",
+            "wordpress",
+            "yawik",
+            "zend",
+            "zikula"
           ],
-          "time": "2013-12-10T17:49:58+00:00"
+          "time": "2018-08-27T06:10:37+00:00"
         },
-      {
-        "name": "composer/installers",
-        "version": "v1.6.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/composer/installers.git",
-          "reference": "cfcca6b1b60bc4974324efb5783c13dca6932b5b"
-        },
-        "dist": {
-          "type": "zip",
-          "url": "https://api.github.com/repos/composer/installers/zipball/cfcca6b1b60bc4974324efb5783c13dca6932b5b",
-          "reference": "cfcca6b1b60bc4974324efb5783c13dca6932b5b",
-          "shasum": ""
-        },
-        "require": {
-          "composer-plugin-api": "^1.0"
-        },
-        "replace": {
-          "roundcube/plugin-installer": "*",
-          "shama/baton": "*"
-        },
-        "require-dev": {
-          "composer/composer": "1.0.*@dev",
-          "phpunit/phpunit": "^4.8.36"
-        },
-        "type": "composer-plugin",
-        "extra": {
-          "class": "Composer\\Installers\\Plugin",
-          "branch-alias": {
-            "dev-master": "1.0-dev"
-          }
-        },
-        "autoload": {
-          "psr-4": {
-            "Composer\\Installers\\": "src/Composer/Installers"
-          }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-          "MIT"
-        ],
-        "authors": [
-          {
-            "name": "Kyle Robinson Young",
-            "email": "kyle@dontkry.com",
-            "homepage": "https://github.com/shama"
-          }
-        ],
-        "description": "A multi-framework Composer library installer",
-        "homepage": "https://composer.github.io/installers/",
-        "keywords": [
-          "Craft",
-          "Dolibarr",
-          "Eliasis",
-          "Hurad",
-          "ImageCMS",
-          "Kanboard",
-          "Lan Management System",
-          "MODX Evo",
-          "Mautic",
-          "Maya",
-          "OXID",
-          "Plentymarkets",
-          "Porto",
-          "RadPHP",
-          "SMF",
-          "Thelia",
-          "WolfCMS",
-          "agl",
-          "aimeos",
-          "annotatecms",
-          "attogram",
-          "bitrix",
-          "cakephp",
-          "chef",
-          "cockpit",
-          "codeigniter",
-          "concrete5",
-          "croogo",
-          "dokuwiki",
-          "drupal",
-          "eZ Platform",
-          "elgg",
-          "expressionengine",
-          "fuelphp",
-          "grav",
-          "installer",
-          "itop",
-          "joomla",
-          "kohana",
-          "laravel",
-          "lavalite",
-          "lithium",
-          "magento",
-          "majima",
-          "mako",
-          "mediawiki",
-          "modulework",
-          "modx",
-          "moodle",
-          "osclass",
-          "phpbb",
-          "piwik",
-          "ppi",
-          "puppet",
-          "pxcms",
-          "reindex",
-          "roundcube",
-          "shopware",
-          "silverstripe",
-          "sydes",
-          "symfony",
-          "typo3",
-          "wordpress",
-          "yawik",
-          "zend",
-          "zikula"
-        ],
-        "time": "2018-08-27T06:10:37+00:00"
-      },
       {
         "name": "dektrium/yii2-rbac",
         "version": "1.0.1",
@@ -507,29 +464,31 @@
         },
       {
         "name": "dmstr/yii2-adminlte-asset",
-        "version": "2.6.2",
+        "version": "3.0.0-alpha1",
         "source": {
           "type": "git",
           "url": "https://github.com/dmstr/yii2-adminlte-asset.git",
-          "reference": "c96336e1960ebc6c1e72487a7c6ca1a1589519fe"
+          "reference": "7cdb8870c98126cca6832804ee82fa34631bdd63"
         },
         "dist": {
           "type": "zip",
-          "url": "https://api.github.com/repos/dmstr/yii2-adminlte-asset/zipball/c96336e1960ebc6c1e72487a7c6ca1a1589519fe",
-          "reference": "c96336e1960ebc6c1e72487a7c6ca1a1589519fe",
+          "url": "https://api.github.com/repos/dmstr/yii2-adminlte-asset/zipball/7cdb8870c98126cca6832804ee82fa34631bdd63",
+          "reference": "7cdb8870c98126cca6832804ee82fa34631bdd63",
           "shasum": ""
         },
         "require": {
           "almasaeed2010/adminlte": "^2.4.0",
-          "cebe/yii2-gravatar": "1.*",
-          "rmrevin/yii2-fontawesome": "~2.9",
           "yiisoft/yii2": "2.*",
           "yiisoft/yii2-bootstrap": "~2.0.0"
+        },
+        "suggest": {
+          "cebe/yii2-gravatar": "Display user icons",
+          "rmrevin/yii2-fontawesome": "Font icons"
         },
         "type": "yii2-extension",
         "extra": {
           "branch-alias": {
-            "dev-master": "2.0.x-dev"
+            "dev-master": "3.x-dev"
           }
         },
         "autoload": {
@@ -563,7 +522,7 @@
           "theme",
           "yii2"
         ],
-        "time": "2018-07-24T14:47:13+00:00"
+        "time": "2018-09-03T05:16:07+00:00"
       },
       {
             "name": "doctrine/lexer",
@@ -724,101 +683,53 @@
             "time": "2018-02-23T01:58:20+00:00"
         },
         {
-          "name": "fortawesome/font-awesome",
-          "version": "v4.7.0",
+          "name": "kartik-v/yii2-krajee-base",
+          "version": "v2.0.0",
           "source": {
             "type": "git",
-            "url": "https://github.com/FortAwesome/Font-Awesome.git",
-            "reference": "a8386aae19e200ddb0f6845b5feeee5eb7013687"
+            "url": "https://github.com/kartik-v/yii2-krajee-base.git",
+            "reference": "71bfaf2450d0b338a35d2818039e1c7637e75481"
           },
           "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/a8386aae19e200ddb0f6845b5feeee5eb7013687",
-            "reference": "a8386aae19e200ddb0f6845b5feeee5eb7013687",
+            "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/71bfaf2450d0b338a35d2818039e1c7637e75481",
+            "reference": "71bfaf2450d0b338a35d2818039e1c7637e75481",
             "shasum": ""
           },
-          "require-dev": {
-            "jekyll": "1.0.2",
-            "lessc": "1.4.2"
-          },
-          "type": "library",
+          "type": "yii2-extension",
           "extra": {
             "branch-alias": {
-              "dev-master": "4.6.x-dev"
+              "dev-master": "2.0.x-dev"
+            }
+          },
+          "autoload": {
+            "psr-4": {
+              "kartik\\base\\": "src"
             }
           },
           "notification-url": "https://packagist.org/downloads/",
           "license": [
-            "OFL-1.1",
-            "MIT"
+            "BSD-3-Clause"
           ],
           "authors": [
             {
-              "name": "Dave Gandy",
-              "email": "dave@fontawesome.io",
-              "homepage": "http://twitter.com/davegandy",
-              "role": "Developer"
+              "name": "Kartik Visweswaran",
+              "email": "kartikv2@gmail.com",
+              "homepage": "http://www.krajee.com/"
             }
           ],
-          "description": "The iconic font and CSS framework",
-          "homepage": "http://fontawesome.io/",
+          "description": "Base library and foundation components for all Yii2 Krajee extensions.",
+          "homepage": "https://github.com/kartik-v/yii2-krajee-base",
           "keywords": [
-            "FontAwesome",
-            "awesome",
-            "bootstrap",
-            "font",
-            "icon"
+            "base",
+            "extension",
+            "foundation",
+            "krajee",
+            "widget",
+            "yii2"
           ],
-          "time": "2016-10-24T15:52:54+00:00"
+          "time": "2018-10-09T07:54:35+00:00"
         },
-      {
-        "name": "kartik-v/yii2-krajee-base",
-        "version": "v2.0.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/kartik-v/yii2-krajee-base.git",
-          "reference": "71bfaf2450d0b338a35d2818039e1c7637e75481"
-        },
-        "dist": {
-          "type": "zip",
-          "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/71bfaf2450d0b338a35d2818039e1c7637e75481",
-          "reference": "71bfaf2450d0b338a35d2818039e1c7637e75481",
-          "shasum": ""
-        },
-        "type": "yii2-extension",
-        "extra": {
-          "branch-alias": {
-            "dev-master": "2.0.x-dev"
-          }
-        },
-        "autoload": {
-          "psr-4": {
-            "kartik\\base\\": "src"
-          }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-          "BSD-3-Clause"
-        ],
-        "authors": [
-          {
-            "name": "Kartik Visweswaran",
-            "email": "kartikv2@gmail.com",
-            "homepage": "http://www.krajee.com/"
-          }
-        ],
-        "description": "Base library and foundation components for all Yii2 Krajee extensions.",
-        "homepage": "https://github.com/kartik-v/yii2-krajee-base",
-        "keywords": [
-          "base",
-          "extension",
-          "foundation",
-          "krajee",
-          "widget",
-          "yii2"
-        ],
-        "time": "2018-10-09T07:54:35+00:00"
-      },
       {
         "name": "kartik-v/yii2-widget-select2",
         "version": "v2.1.3",
@@ -874,22 +785,26 @@
       },
       {
         "name": "rmrevin/yii2-fontawesome",
-        "version": "2.17.1",
+        "version": "3.2.0",
         "source": {
           "type": "git",
           "url": "https://github.com/rmrevin/yii2-fontawesome.git",
-          "reference": "65ce306da864f4d558348aeba040ed7876878090"
+          "reference": "0b05ae6ddaed96490a195057e11f9a3dc5952cb9"
         },
         "dist": {
           "type": "zip",
-          "url": "https://api.github.com/repos/rmrevin/yii2-fontawesome/zipball/65ce306da864f4d558348aeba040ed7876878090",
-          "reference": "65ce306da864f4d558348aeba040ed7876878090",
+          "url": "https://api.github.com/repos/rmrevin/yii2-fontawesome/zipball/0b05ae6ddaed96490a195057e11f9a3dc5952cb9",
+          "reference": "0b05ae6ddaed96490a195057e11f9a3dc5952cb9",
           "shasum": ""
         },
         "require": {
-          "fortawesome/font-awesome": "~4.7",
           "php": ">=5.4.0",
-          "yiisoft/yii2": "2.0.*"
+          "yiisoft/yii2": "^2.0.0"
+        },
+        "require-dev": {
+          "doctrine/instantiator": "1.0.*",
+          "phpdocumentor/reflection-docblock": "~3.1.0",
+          "phpunit/phpunit": "^4.8"
         },
         "type": "yii2-extension",
         "extra": {
@@ -922,7 +837,7 @@
           "font",
           "yii"
         ],
-        "time": "2017-01-11T14:05:47+00:00"
+        "time": "2018-09-17T10:48:42+00:00"
         },
       {
         "name": "romanpitak/nginx-config-processor",
@@ -4100,7 +4015,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-  "stability-flags": [],
+  "stability-flags": {
+    "dmstr/yii2-adminlte-asset": 15
+  },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

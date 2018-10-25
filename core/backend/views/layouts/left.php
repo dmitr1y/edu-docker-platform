@@ -32,7 +32,7 @@
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget' => 'tree'],
                 'items' => [
                     ['label' => 'Menu', 'options' => ['class' => 'header']],
-                    ['label' => 'Docker', 'icon' => 'cloud', 'url' => ['/docker'],
+                    ['label' => 'Docker', 'icon' => 'docker', 'url' => ['/docker'],
                         'items' => [
                             ['label' => 'Containers', 'icon' => 'file-code-o', 'url' => ['/docker/containers']],
                             ['label' => 'Images', 'icon' => 'file-code-o', 'url' => ['/docker/images']],

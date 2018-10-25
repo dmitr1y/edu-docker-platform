@@ -189,7 +189,7 @@ class AppsController extends Controller
 
             $app->url = $url;
             $app->save();
-            return $this->redirect(['apps/manage', 'id' => $model->id]);
+            return $this->redirect(['apps/manage', 'id' => $app->id]);
         }
         return $this->render('createDynamic', ['model' => $model, 'modelUpload' => $modelUpload]);
     }
@@ -265,7 +265,7 @@ class AppsController extends Controller
     public function actionList()
     {
         $this->view->title = "Apps catalog";
-        $appsQuery = Apps::find()->where(['status' => 2]);
+        $appsQuery = Apps::find();
         $dataProvider = new ActiveDataProvider([
             'query' => $appsQuery,
             'pagination' => [
