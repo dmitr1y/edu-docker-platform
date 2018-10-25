@@ -43,7 +43,7 @@ class DockerController extends Controller
     {
         $stat = $this->getStats();
         $ps = DockerHealth::getStatus();
-        return $this->render('index', ['stats' => $stat, 'ps' => $ps]);
+        return $this->render('containers', ['ps' => $ps]);
     }
 
 }

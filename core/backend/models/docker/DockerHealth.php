@@ -19,7 +19,7 @@ class DockerHealth extends Model
     {
         $manager = new DockerComposeManager();
 //        return  $manager->ps();
-        return [$manager->ps(), DockerHealth::parseComposeOut($manager->ps())];
+        return DockerHealth::parseComposeOut($manager->ps());
     }
 
     public static function parseComposeOut($input)
@@ -30,10 +30,16 @@ class DockerHealth extends Model
         $arr = null;
 
         foreach ($words as $value) {
-            $out = preg_split("/[\t,]/", $value);
-//            $out = explode("\t ", $value);
-//            unset($out[1]);
-            $arr[] = $out;
+            if (!empty($value)) {
+                $out = preg_split("/   +/", $value, -1, PREG_SPLIT_NO_EMPTY);
+
+                $arr[] = [
+                    'name' => $out[0],
+                    'command' => $out[1],
+                    'state' => $out[2],
+                    'ports' => $out[3]
+                ];
+            }
         }
 
         return $arr;

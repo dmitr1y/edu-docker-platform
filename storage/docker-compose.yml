@@ -5,5 +5,6 @@ services:
     portainer: { image: portainer/portainer, command: '-H unix:///var/run/docker.sock', volumes: ['/var/run/docker.sock:/var/run/docker.sock', 'portainer_data:/data'] }
     imposible: { image: crccheck/hello-world }
     hello-world: { image: crccheck/hello-world }
+    very-long-app-name-for-test: { image: crccheck/hello-world }
 volumes:
     portainer_data: null
