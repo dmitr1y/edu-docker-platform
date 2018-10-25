@@ -9,7 +9,6 @@
 namespace common\models\docker;
 
 use Symfony\Component\Process\Process;
-use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class DockerComposeManager
 {
@@ -46,6 +45,14 @@ class DockerComposeManager
     public function stop($services = null)
     {
         $cmd = "stop";
+        if (!empty($services))
+            $cmd .= ' ' . $services;
+        return $this->exec($cmd);
+    }
+
+    public function ps($services = null)
+    {
+        $cmd = "ps";
         if (!empty($services))
             $cmd .= ' ' . $services;
         return $this->exec($cmd);

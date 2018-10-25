@@ -2,8 +2,7 @@
 
 namespace backend\controllers;
 
-use backend\models\app;
-use backend\models\AppsCategorySearch;
+use backend\models\app\AppsCategorySearch;
 use common\models\app\AppsCategory;
 use Yii;
 use yii\filters\VerbFilter;

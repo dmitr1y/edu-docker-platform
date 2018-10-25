@@ -2,7 +2,7 @@
 
 namespace backend\controllers;
 
-use backend\models\AppsDbUsersSearch;
+use backend\models\app\AppsDbUsersSearch;
 use common\models\mysql\AppsDbUsers;
 use Yii;
 use yii\filters\VerbFilter;

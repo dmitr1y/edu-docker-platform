@@ -1,15 +1,15 @@
 <?php
 
-namespace backend\models;
+namespace backend\models\app;
 
-use common\models\app\AppsCategory;
+use common\models\app\Apps;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * app represents the model behind the search form of `common\models\app\AppsCategory`.
+ * AppsSearch represents the model behind the search form of `common\models\app\Apps`.
  */
-class AppsCategorySearch extends AppsCategory
+class AppsSearch extends Apps
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class AppsCategorySearch extends AppsCategory
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['name', 'description', 'timestamp'], 'safe'],
+            [['id', 'owner_id', 'category', 'type'], 'integer'],
+            [['name', 'description', 'url', 'timestamp'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class AppsCategorySearch extends AppsCategory
      */
     public function search($params)
     {
-        $query = AppsCategory::find();
+        $query = Apps::find();
 
         // add conditions that should always apply here
 
@@ -59,11 +59,15 @@ class AppsCategorySearch extends AppsCategory
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'owner_id' => $this->owner_id,
+            'category' => $this->category,
+            'type' => $this->type,
             'timestamp' => $this->timestamp,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'description', $this->description]);
+            ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['like', 'url', $this->url]);
 
         return $dataProvider;
     }

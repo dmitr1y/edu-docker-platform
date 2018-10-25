@@ -1,15 +1,15 @@
 <?php
 
-namespace backend\models;
+namespace backend\models\app;
 
-use common\models\app\Apps;
+use common\models\mysql\AppsDbUsers;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * AppsSearch represents the model behind the search form of `common\models\app\Apps`.
+ * AppsDbUsersSearch represents the model behind the search form of `common\models\mysql\AppsDbUsers`.
  */
-class AppsSearch extends Apps
+class AppsDbUsersSearch extends AppsDbUsers
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class AppsSearch extends Apps
     public function rules()
     {
         return [
-            [['id', 'owner_id', 'category', 'type'], 'integer'],
-            [['name', 'description', 'url', 'timestamp'], 'safe'],
+            [['id', 'owner_id'], 'integer'],
+            [['username', 'user_password', 'permissions', 'database', 'timestamp'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class AppsSearch extends Apps
      */
     public function search($params)
     {
-        $query = Apps::find();
+        $query = AppsDbUsers::find();
 
         // add conditions that should always apply here
 
@@ -60,14 +60,13 @@ class AppsSearch extends Apps
         $query->andFilterWhere([
             'id' => $this->id,
             'owner_id' => $this->owner_id,
-            'category' => $this->category,
-            'type' => $this->type,
             'timestamp' => $this->timestamp,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'url', $this->url]);
+        $query->andFilterWhere(['like', 'username', $this->username])
+            ->andFilterWhere(['like', 'user_password', $this->user_password])
+            ->andFilterWhere(['like', 'permissions', $this->permissions])
+            ->andFilterWhere(['like', 'database', $this->database]);
 
         return $dataProvider;
     }

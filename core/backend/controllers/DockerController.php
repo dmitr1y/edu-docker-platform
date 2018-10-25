@@ -2,7 +2,8 @@
 
 namespace backend\controllers;
 
-use common\models\app\Apps;
+use backend\models\docker\DockerHealth;
+use common\models\app\DockerApps;
 use common\models\LoginForm;
 use common\models\mysql\AppsDbUsers;
 use yii\web\Controller;
@@ -26,9 +27,9 @@ class DockerController extends Controller
     private function getStats()
     {
         return [
-            'online' => Apps::find()->where(['status' => 2])->count(),
-            'offline' => Apps::find()->where(['status' => 0])->count(),
-            'error' => Apps::find()->where(['status' => -1])->count(),
+            'online' => DockerApps::find()->where(['status' => 2])->count(),
+            'offline' => DockerApps::find()->where(['status' => 0])->count(),
+            'error' => DockerApps::find()->where(['status' => -1])->count(),
             'db_count' => AppsDbUsers::find()->count(),
         ];
     }
@@ -37,4 +38,12 @@ class DockerController extends Controller
     {
 
     }
+
+    public function actionContainers()
+    {
+        $stat = $this->getStats();
+        $ps = DockerHealth::getStatus();
+        return $this->render('index', ['stats' => $stat, 'ps' => $ps]);
+    }
+
 }

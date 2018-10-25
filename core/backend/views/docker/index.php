@@ -20,4 +20,10 @@ $this->title = 'Docker manager';
             <span class="fa fa-database"></span> <?= $stats['db_count'] ?> apps databases
         </div>
     </div>
+
+    <pre>
+        <?php
+        print_r($ps);
+        ?>
+    </pre>
 </div>
