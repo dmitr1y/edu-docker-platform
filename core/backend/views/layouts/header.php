@@ -23,7 +23,7 @@ use yii\helpers\Html;
                 <!-- Messages: style can be found in dropdown.less-->
                 <li class="dropdown messages-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-envelope-o"></i>
+                        <i class="fas fa-comments"></i>
                         <span class="label label-success">4</span>
                     </a>
                     <ul class="dropdown-menu">
@@ -104,7 +104,7 @@ use yii\helpers\Html;
                 </li>
                 <li class="dropdown notifications-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-bell-o"></i>
+                        <i class="fas fa-bell-o"></i>
                         <span class="label label-warning">10</span>
                     </a>
                     <ul class="dropdown-menu">
@@ -114,18 +114,18 @@ use yii\helpers\Html;
                             <ul class="menu">
                                 <li>
                                     <a href="#">
-                                        <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                                        <i class="fas fa-users text-aqua"></i> 5 new members joined today
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#">
-                                        <i class="fa fa-warning text-yellow"></i> Very long description here that may
+                                        <i class="fas fa-warning text-yellow"></i> Very long description here that may
                                         not fit into the page and may cause design problems
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#">
-                                        <i class="fa fa-users text-red"></i> 5 new members joined
+                                        <i class="fas fa-users text-red"></i> 5 new members joined
                                     </a>
                                 </li>
 
@@ -147,7 +147,7 @@ use yii\helpers\Html;
                 <!-- Tasks: style can be found in dropdown.less -->
                 <li class="dropdown tasks-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-flag-o"></i>
+                        <i class="fas fa-flag-o"></i>
                         <span class="label label-danger">9</span>
                     </a>
                     <ul class="dropdown-menu">
@@ -230,41 +230,41 @@ use yii\helpers\Html;
 
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
-                        <span class="hidden-xs">Alexander Pierce</span>
+                        <img src="<?= \Yii::$app->user->identity->profile->getAvatarUrl(150); ?>" class="user-image"
+                             alt="User Image"/>
+                        <span class="hidden-xs"><?= Yii::$app->user->identity->username ?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle"
+                            <img src="<?= \Yii::$app->user->identity->profile->getAvatarUrl(160); ?>" class="img-circle"
                                  alt="User Image"/>
 
                             <p>
-                                Alexander Pierce - Web Developer
-                                <small>Member since Nov. 2012</small>
+                                <?= Yii::$app->user->identity->username ?>
                             </p>
                         </li>
                         <!-- Menu Body -->
-                        <li class="user-body">
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Followers</a>
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Sales</a>
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Friends</a>
-                            </div>
-                        </li>
+                        <!--                        <li class="user-body">-->
+                        <!--                            <div class="col-xs-4 text-center">-->
+                        <!--                                <a href="/user/settings/profile" target="_blank">Settings</a>-->
+                        <!--                            </div>-->
+                        <!--                            <div class="col-xs-4 text-center">-->
+                        <!--                                <a href="#">Sales</a>-->
+                        <!--                            </div>-->
+                        <!--                            <div class="col-xs-4 text-center">-->
+                        <!--                                <a href="#">Friends</a>-->
+                        <!--                            </div>-->
+                        <!--                        </li>-->
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <a href="/user/settings/profile" class="btn btn-default btn-flat" target="_blank">Profile</a>
                             </div>
                             <div class="pull-right">
                                 <?= Html::a(
                                     'Sign out',
-                                    ['/site/logout'],
+                                    ['/user/security/logout'],
                                     ['data-method' => 'post', 'class' => 'btn btn-default btn-flat']
                                 ) ?>
                             </div>
