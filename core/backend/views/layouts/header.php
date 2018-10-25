@@ -104,7 +104,7 @@ use yii\helpers\Html;
                 </li>
                 <li class="dropdown notifications-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fas fa-bell-o"></i>
+                        <i class="fas fa-bell"></i>
                         <span class="label label-warning">10</span>
                     </a>
                     <ul class="dropdown-menu">
@@ -147,7 +147,7 @@ use yii\helpers\Html;
                 <!-- Tasks: style can be found in dropdown.less -->
                 <li class="dropdown tasks-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fas fa-flag-o"></i>
+                        <i class="fas fa-flag"></i>
                         <span class="label label-danger">9</span>
                     </a>
                     <ul class="dropdown-menu">

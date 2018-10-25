@@ -31,7 +31,8 @@
     "yiisoft/yii2-queue": "^2.1",
     "rmrevin/yii2-fontawesome": "^3.2.0",
     "dektrium/yii2-rbac": "^1.0",
-    "dmstr/yii2-adminlte-asset": "^3.0.0-alpha1"
+    "dmstr/yii2-adminlte-asset": "^3.0.0-alpha1",
+    "2amigos/yii2-ckeditor-widget": "^2.1"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.0.0",

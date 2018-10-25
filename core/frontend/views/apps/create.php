@@ -6,8 +6,10 @@
  * Time: 22:06
  */
 
+use dosamigos\ckeditor\CKEditor;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+
 
 $this->params['breadcrumbs'][] = ['label' => 'Apps', 'url' => ['/apps/list']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -17,7 +19,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'name') ?>
-    <?= $form->field($model, 'description') ?>
+    <?= $form->field($model, 'description')->widget(CKEditor::className(), [
+        'options' => ['rows' => 6],
+        'preset' => 'basic'
+    ]) ?>
     <?= $form->field($model, 'type')->dropDownList([
         '0' => 'Static app',
         '1' => 'Dynamic app',
