@@ -12,6 +12,7 @@ $this->title = 'Docker containers';
             <th scope="col">command</th>
             <th scope="col">state</th>
             <th scope="col">ports</th>
+            <th scope="col">manage</th>
         </tr>
         </thead>
         <?php
@@ -21,6 +22,15 @@ $this->title = 'Docker containers';
                 $name = preg_replace("/storage_/", '', $ps[$key]['name']);
                 $name = substr($name, 0, strlen($name) - 2);
                 $tr_class = '';
+                $manager = '<form method="post" class="form-inline">
+<span class="input-group-btn">
+    <button type="submit" name="manager" value="start" class="btn btn-primary"><i class="fas fa-play"></i></button>
+    <button type="submit" name="manager" value="stop" class="btn btn-danger"><i class="fas fa-stop"></i></button>
+    <button type="submit" name="manager" value="log" class="btn btn-primary"><i class="fas fa-history"></i></button>
+    </span>
+    <input type="hidden" name="service" value="' . $name . '">
+    <input id="form-token" type="hidden" name="' . Yii::$app->request->csrfParam . '" value="' . Yii::$app->request->csrfToken . '"/>
+</form>';
                 switch ($ps[$key]['state']) {
                     case 'Up':
                         $state = '<i class="fas fa-check-square"></i>';
@@ -36,6 +46,7 @@ $this->title = 'Docker containers';
 <td>' . $ps[$key]['command'] . '</td>
 <td>' . $state . '</td>
 <td>' . $ps[$key]['ports'] . '</td>
+<td>' . $manager . '</td>
 </tr>';
                 echo $line;
             }
