@@ -28,7 +28,19 @@ return [
         'user' => [
             'class' => 'dektrium\user\Module',
             'enableConfirmation' => false,
-            'enableUnconfirmedLogin' => true
+            'enableUnconfirmedLogin' => true,
+//            'controllerMap' => [
+//                'security' => [
+//                    'class' => \dektrium\user\controllers\SecurityController::className(),
+//                    'on ' . \dektrium\user\controllers\SecurityController::EVENT_AFTER_LOGIN => function ($e) {
+//                        if (!\Yii::$app->session->has("backURL")) {
+//                            Yii::$app->response->redirect(array(preg_split("/" . \Yii::$app->request->getHostName() . "/", \Yii::$app->request->referrer)))->send();
+//                        } else
+//                            Yii::$app->response->redirect(array('/site/index'))->send();
+//                        Yii::$app->end();
+//                    }
+//                ],
+//            ],
         ],
         'rbac' => ['class' => 'dektrium\rbac\RbacWebModule'],
     ],

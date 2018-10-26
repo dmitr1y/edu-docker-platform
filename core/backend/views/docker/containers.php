@@ -26,7 +26,7 @@ $this->title = 'Docker containers';
 <span class="input-group-btn">
     <button type="submit" name="manager" value="start" class="btn btn-primary"><i class="fas fa-play"></i></button>
     <button type="submit" name="manager" value="stop" class="btn btn-danger"><i class="fas fa-stop"></i></button>
-    <button type="submit" name="manager" value="log" class="btn btn-primary"><i class="fas fa-history"></i></button>
+    <button type="submit" name="manager" value="log" class="btn btn-primary" disabled><i class="fas fa-history"></i></button>
     </span>
     <input type="hidden" name="service" value="' . $name . '">
     <input id="form-token" type="hidden" name="' . Yii::$app->request->csrfParam . '" value="' . Yii::$app->request->csrfToken . '"/>
@@ -42,7 +42,7 @@ $this->title = 'Docker containers';
                 }
 
                 $line = '<tr ' . $tr_class . '>
-<td>' . $name . '</td>
+<td><a href="https://localhost/app/' . $name . '" target="_blank">' . $name . '</a> </td>
 <td>' . $ps[$key]['command'] . '</td>
 <td>' . $state . '</td>
 <td>' . $ps[$key]['ports'] . '</td>
