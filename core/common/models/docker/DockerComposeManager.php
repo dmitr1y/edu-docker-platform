@@ -8,6 +8,7 @@
 
 namespace common\models\docker;
 
+use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
 class DockerComposeManager
@@ -75,17 +76,14 @@ class DockerComposeManager
         if (empty($cmd))
             return null;
 
+
         $process = new Process('docker-compose -f ' . $this->storagePath . '/docker-compose.yml ' . $cmd);
         $process->run();
 
         // executes after the command finishes
-        $log = $process->getOutput() . ' ' . $process->getErrorOutput();
-        if ($process->isSuccessful()) {
-            $log = "[SUCCESS] " . $log;
-        } else {
-            //            throw new ProcessFailedException($process);
-            $log = "[ERROR " . $process->getExitCodeText() . "] " . $log;
-        }
+        $log = $process->getOutput();
+        if (!$process->isSuccessful())
+            throw new ProcessFailedException($process);
 
         return $log;
     }

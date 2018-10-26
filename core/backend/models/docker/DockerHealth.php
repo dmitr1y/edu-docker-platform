@@ -27,12 +27,11 @@ class DockerHealth extends Model
         $words = explode("\n", $input);
 //        removing headers
         unset($words[0], $words[1]);
-        $arr = null;
 
+        $arr = null;
         foreach ($words as $value) {
             if (!empty($value)) {
                 $out = preg_split("/   +/", $value, -1, PREG_SPLIT_NO_EMPTY);
-
                 $arr[] = [
                     'name' => $out[0],
                     'command' => $out[1],

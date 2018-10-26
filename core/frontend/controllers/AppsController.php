@@ -96,7 +96,7 @@ class AppsController extends Controller
                 ]));
                 Yii::$app->queue->push(new StopDockerService([
                     'serviceName' => $appName,
-                    'appModel' => $app
+                    'appModel' => $dockerApp
                 ]));
                 break;
             case 'Remove':
