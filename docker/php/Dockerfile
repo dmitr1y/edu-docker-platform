@@ -96,7 +96,8 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # docker-compose
 RUN apt-get install -y python python-pip python-requests
-RUN apt-get install -y docker-compose
+#RUN apt-get install -y docker-compose
+RUN pip install docker-compose
 
 # supervisor
 RUN apt-get install -y supervisor

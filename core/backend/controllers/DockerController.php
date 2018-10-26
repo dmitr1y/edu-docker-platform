@@ -47,7 +47,7 @@ class DockerController extends Controller
 
     public function actionContainers()
     {
-        $ps = DockerHealth::getStatus();
+        $ps = DockerHealth::getContainersList();
 
         $form_manager = Yii::$app->request->post('manager');
         $form_service = Yii::$app->request->post('service');
@@ -87,6 +87,13 @@ class DockerController extends Controller
         }
 
         return $this->render('containers', ['ps' => $ps]);
+    }
+
+    public function actionImages()
+    {
+        $ps = DockerHealth::getImagesList();
+
+        return $this->render('images', ['ps' => $ps]);
     }
 
 }

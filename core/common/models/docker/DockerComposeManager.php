@@ -59,6 +59,14 @@ class DockerComposeManager
         return $this->exec($cmd);
     }
 
+    public function images($services = null)
+    {
+        $cmd = "images";
+        if (!empty($services))
+            $cmd .= ' ' . $services;
+        return $this->exec($cmd);
+    }
+
     public function down($service = null)
     {
 //        todo окончательное удаление - вместе с томом данных или удаление только контейнера
@@ -76,8 +84,8 @@ class DockerComposeManager
         if (empty($cmd))
             return null;
 
-
         $process = new Process('docker-compose -f ' . $this->storagePath . '/docker-compose.yml ' . $cmd);
+
         $process->run();
 
         // executes after the command finishes
