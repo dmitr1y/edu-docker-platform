@@ -4,7 +4,9 @@ namespace backend\controllers;
 
 use backend\models\app\AppsDbUsersSearch;
 use common\models\mysql\AppsDbUsers;
+use dektrium\user\filters\AccessRule;
 use Yii;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -14,6 +16,7 @@ use yii\web\NotFoundHttpException;
  */
 class DatabaseController extends Controller
 {
+
     /**
      * {@inheritdoc}
      */
@@ -25,6 +28,27 @@ class DatabaseController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                 ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'ruleConfig' => [
+                    'class' => AccessRule::className(),
+                ],
+                'rules' => [
+                    [
+                        'actions' => ['index', 'view', 'create', 'update', 'delete'],
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+                    [
+                        'allow' => false,
+                        'roles' => ['?', '@'],
+                    ],
+                ],
+                'denyCallback' => function () {
+                    Yii::$app->user->setReturnUrl(Yii::$app->request->url);
+                    return Yii::$app->response->redirect(['site/login']);
+                },
             ],
         ];
     }

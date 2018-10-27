@@ -41,6 +41,9 @@ return [
                 'dektrium\user\migrations\Migration',
             ],
         ],
+        'rbac' => [
+            'class' => 'console\controllers\RbacController',
+        ],
     ],
     'components' => [
         'log' => [

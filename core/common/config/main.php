@@ -39,6 +39,9 @@ return [
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
 //            'viewPath' => '@common/mail',
+            // send all mails to a file by default. You have to set
+            // 'useFileTransport' to false and configure a transport
+            // for the mailer to send real emails.
             'useFileTransport' => false,
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
@@ -52,10 +55,6 @@ return [
                 'charset' => 'UTF-8',
                 'from' => [$params['noreplyEmail'] => $params['noreplyEmailTitle']],
             ],
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
-//            'useFileTransport' => true,
         ],
     ],
     'modules' => [
@@ -66,19 +65,6 @@ return [
             'mailer' => [
                 'sender' => [$params['noreplyEmail'] => $params['noreplyEmailTitle']],
             ]
-
-//            'controllerMap' => [
-//                'security' => [
-//                    'class' => \dektrium\user\controllers\SecurityController::className(),
-//                    'on ' . \dektrium\user\controllers\SecurityController::EVENT_AFTER_LOGIN => function ($e) {
-//                        if (!\$session->has("backURL")) {
-//                           $response->redirect(array(preg_split("/" .$request->getHostName() . "/",$request->referrer)))->send();
-//                        } else
-//                           $response->redirect(array('/site/index'))->send();
-//                       $end();
-//                    }
-//                ],
-//            ],
         ],
         'rbac' => ['class' => 'dektrium\rbac\RbacWebModule'],
     ],

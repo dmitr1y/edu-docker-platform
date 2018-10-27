@@ -6,11 +6,12 @@ use backend\models\docker\DockerHealth;
 use common\models\app\DockerApps;
 use common\models\docker\RunDockerService;
 use common\models\docker\StopDockerService;
-use common\models\LoginForm;
 use common\models\mysql\AppsDbUsers;
 use common\models\nginx\CreateNginxConf;
 use common\models\nginx\RemoveNginxConf;
+use dektrium\user\filters\AccessRule;
 use Yii;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -19,6 +20,39 @@ use yii\web\NotFoundHttpException;
  */
 class DockerController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'ruleConfig' => [
+                    'class' => AccessRule::className(),
+                ],
+                'rules' => [
+                    [
+                        'actions' => [
+                            'index',
+                            'containers',
+                            'images',
+                            'volumes',
+                            'index',
+                        ],
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+                    [
+                        'allow' => false,
+                        'roles' => ['?', '@'],
+                    ],
+                ],
+                'denyCallback' => function () {
+                    Yii::$app->user->setReturnUrl(Yii::$app->request->url);
+                    return Yii::$app->response->redirect(['site/login']);
+                },
+            ],
+        ];
+    }
+
     /**
      * Displays homepage.
      *

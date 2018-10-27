@@ -19,11 +19,21 @@ return [
             'as backend' => 'dektrium\user\filters\BackendFilter',
             'admins' => [
                 'admin',
-            ]
+            ],
+            'adminPermission' => 'admin',
         ],
         'gii' => [
             'class' => 'yii\gii\Module',
             'allowedIPs' => ['127.0.0.1', '::1', '192.168.0.*', '192.168.178.20'],
+//            'allowedIPs' => ['*'],
+            'generators' => [ //here
+                'crud' => [
+                    'class' => 'yii\gii\generators\crud\Generator',
+                    'templates' => [
+                        'adminlte' => '@vendor/dmstr/yii2-adminlte-asset/gii/templates/crud/simple',
+                    ]
+                ]
+            ],
         ]
     ],
     'components' => [
