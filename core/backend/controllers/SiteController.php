@@ -33,7 +33,7 @@ class SiteController extends Controller
                     [
                         'actions' => ['login'],
                         'allow' => true,
-                        'roles' => ['?', '@'],
+                        'roles' => ['?', '@', 'admin'],
                     ],
                     [
                         'allow' => false,

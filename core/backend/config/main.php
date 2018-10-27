@@ -17,9 +17,7 @@ return [
         'user' => [
             // following line will restrict access to profile, recovery, registration and settings controllers from backend
             'as backend' => 'dektrium\user\filters\BackendFilter',
-            'admins' => [
-                'admin',
-            ],
+            'admins' => ['admin'],
             'adminPermission' => 'admin',
         ],
         'gii' => [
@@ -41,11 +39,6 @@ return [
             'csrfParam' => '_csrf-backend',
             'baseUrl' => '/admin',
         ],
-//        'user' => [
-//            'identityClass' => 'common\models\User',
-//            'enableAutoLogin' => true,
-//            'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
-//        ],
         'user' => [
             'identityCookie' => [
                 'name' => '_backendIdentity',
