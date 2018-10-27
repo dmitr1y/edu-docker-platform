@@ -11,7 +11,7 @@ return [
     'homeUrl' => '/admin',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log', 'gii'],
     'modules' => [
         'user' => [
             // following line will restrict access to profile, recovery, registration and settings controllers from backend
@@ -20,6 +20,10 @@ return [
                 'admin',
             ]
         ],
+        'gii' => [
+            'class' => 'yii\gii\Module',
+            'allowedIPs' => ['127.0.0.1', '::1', '192.168.0.*', '192.168.178.20'],
+        ]
     ],
     'components' => [
         'request' => [

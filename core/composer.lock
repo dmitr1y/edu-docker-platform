@@ -4,129 +4,129 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-  "content-hash": "a0ec728cf68e94190a2adafcf850b9a0",
+    "content-hash": "a0ec728cf68e94190a2adafcf850b9a0",
     "packages": [
         {
-          "name": "2amigos/yii2-ckeditor-widget",
-          "version": "2.1.0",
-          "source": {
-            "type": "git",
-            "url": "https://github.com/2amigos/yii2-ckeditor-widget.git",
-            "reference": "2ba96ec670d0745b5616d2aa94d720cc7288bc08"
-          },
-          "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/2amigos/yii2-ckeditor-widget/zipball/2ba96ec670d0745b5616d2aa94d720cc7288bc08",
-            "reference": "2ba96ec670d0745b5616d2aa94d720cc7288bc08",
-            "shasum": ""
-          },
-          "require": {
-            "ckeditor/ckeditor": "~4.7.0+full",
-            "yiisoft/yii2": "^2.0"
-          },
-          "require-dev": {
-            "phpunit/phpunit": "4.*"
-          },
-          "type": "yii2-extension",
-          "extra": {
-            "branch-alias": {
-              "dev-master": "1.0-dev"
-            }
-          },
-          "autoload": {
-            "psr-4": {
-              "dosamigos\\ckeditor\\": "src"
-            }
-          },
-          "notification-url": "https://packagist.org/downloads/",
-          "license": [
-            "BSD-3-Clause"
-          ],
-          "authors": [
-            {
-              "name": "2amigOS! Consulting Group",
-              "email": "hola@2amigos.us",
-              "homepage": "http://2amigos.us",
-              "role": "Developer"
-            }
-          ],
-          "description": "CKEditor widget for Yii2.",
-          "homepage": "http://yiiwheels.com/extension/ckeditor-widget",
-          "keywords": [
-            "2amigos",
-            "CKEditor",
-            "extension",
-            "widget",
-            "yii",
-            "yii 2",
-            "yii2"
-          ],
-          "time": "2017-06-12T18:51:26+00:00"
+            "name": "2amigos/yii2-ckeditor-widget",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/2amigos/yii2-ckeditor-widget.git",
+                "reference": "2ba96ec670d0745b5616d2aa94d720cc7288bc08"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/2amigos/yii2-ckeditor-widget/zipball/2ba96ec670d0745b5616d2aa94d720cc7288bc08",
+                "reference": "2ba96ec670d0745b5616d2aa94d720cc7288bc08",
+                "shasum": ""
+            },
+            "require": {
+                "ckeditor/ckeditor": "~4.7.0+full",
+                "yiisoft/yii2": "^2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "dosamigos\\ckeditor\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "2amigOS! Consulting Group",
+                    "email": "hola@2amigos.us",
+                    "homepage": "http://2amigos.us",
+                    "role": "Developer"
+                }
+            ],
+            "description": "CKEditor widget for Yii2.",
+            "homepage": "http://yiiwheels.com/extension/ckeditor-widget",
+            "keywords": [
+                "2amigos",
+                "CKEditor",
+                "extension",
+                "widget",
+                "yii",
+                "yii 2",
+                "yii2"
+            ],
+            "time": "2017-06-12T18:51:26+00:00"
         },
-      {
-        "name": "almasaeed2010/adminlte",
-        "version": "v2.4.8",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/almasaeed2010/AdminLTE.git",
-          "reference": "d9e68301848a95dff2e2dbef6569e617a9b3fa30"
+        {
+            "name": "almasaeed2010/adminlte",
+            "version": "v2.4.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/almasaeed2010/AdminLTE.git",
+                "reference": "d9e68301848a95dff2e2dbef6569e617a9b3fa30"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/almasaeed2010/AdminLTE/zipball/d9e68301848a95dff2e2dbef6569e617a9b3fa30",
+                "reference": "d9e68301848a95dff2e2dbef6569e617a9b3fa30",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.9.0 <4.0.0",
+                "composer/installers": "1.*"
+            },
+            "type": "template",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Abdullah Almsaeed",
+                    "email": "abdullah@almsaeedstudio.com"
+                }
+            ],
+            "description": "AdminLTE - admin control panel and dashboard that's based on Bootstrap 3",
+            "homepage": "https://adminlte.io/",
+            "keywords": [
+                "JS",
+                "admin",
+                "back-end",
+                "css",
+                "less",
+                "responsive",
+                "template",
+                "theme",
+                "web"
+            ],
+            "time": "2018-07-15T18:48:11+00:00"
         },
-        "dist": {
-          "type": "zip",
-          "url": "https://api.github.com/repos/almasaeed2010/AdminLTE/zipball/d9e68301848a95dff2e2dbef6569e617a9b3fa30",
-          "reference": "d9e68301848a95dff2e2dbef6569e617a9b3fa30",
-          "shasum": ""
+        {
+            "name": "bower-asset/bootbox",
+            "version": "v4.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/makeusabrew/bootbox.git",
+                "reference": "ed5c62a02ab1eb512c38f4be1d0f6774c51a85c6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/makeusabrew/bootbox/zipball/ed5c62a02ab1eb512c38f4be1d0f6774c51a85c6",
+                "reference": "ed5c62a02ab1eb512c38f4be1d0f6774c51a85c6",
+                "shasum": null
+            },
+            "require": {
+                "bower-asset/bootstrap": ">=3.0.0"
+            },
+            "type": "bower-asset"
         },
-        "require": {
-          "bower-asset/jquery": ">=1.9.0 <4.0.0",
-          "composer/installers": "1.*"
-        },
-        "type": "template",
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-          "MIT"
-        ],
-        "authors": [
-          {
-            "name": "Abdullah Almsaeed",
-            "email": "abdullah@almsaeedstudio.com"
-          }
-        ],
-        "description": "AdminLTE - admin control panel and dashboard that's based on Bootstrap 3",
-        "homepage": "https://adminlte.io/",
-        "keywords": [
-          "JS",
-          "admin",
-          "back-end",
-          "css",
-          "less",
-          "responsive",
-          "template",
-          "theme",
-          "web"
-        ],
-        "time": "2018-07-15T18:48:11+00:00"
-        },
-      {
-        "name": "bower-asset/bootbox",
-        "version": "v4.3.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/makeusabrew/bootbox.git",
-          "reference": "ed5c62a02ab1eb512c38f4be1d0f6774c51a85c6"
-        },
-        "dist": {
-          "type": "zip",
-          "url": "https://api.github.com/repos/makeusabrew/bootbox/zipball/ed5c62a02ab1eb512c38f4be1d0f6774c51a85c6",
-          "reference": "ed5c62a02ab1eb512c38f4be1d0f6774c51a85c6",
-          "shasum": null
-        },
-        "require": {
-          "bower-asset/bootstrap": ">=3.0.0"
-        },
-        "type": "bower-asset"
-        },
-      {
+        {
             "name": "bower-asset/bootstrap",
             "version": "v3.3.7",
             "source": {
@@ -288,341 +288,341 @@
             "time": "2017-07-16T21:13:23+00:00"
         },
         {
-          "name": "ckeditor/ckeditor",
-          "version": "4.7.3",
-          "source": {
-            "type": "git",
-            "url": "https://github.com/ckeditor/ckeditor-releases.git",
-            "reference": "97b8f412f6b36985c734daf0717e81009a885dba"
-          },
-          "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/ckeditor/ckeditor-releases/zipball/97b8f412f6b36985c734daf0717e81009a885dba",
-            "reference": "97b8f412f6b36985c734daf0717e81009a885dba",
-            "shasum": ""
-          },
-          "type": "library",
-          "notification-url": "https://packagist.org/downloads/",
-          "license": [
-            "GPL-2.0+",
-            "LGPL-2.1+",
-            "MPL-1.1+"
-          ],
-          "authors": [
-            {
-              "name": "CKSource",
-              "homepage": "http://cksource.com"
-            }
-          ],
-          "description": "JavaScript WYSIWYG web text editor.",
-          "homepage": "http://ckeditor.com",
-          "keywords": [
-            "CKEditor",
-            "editor",
-            "fckeditor",
-            "html",
-            "javascript",
-            "richtext",
-            "text",
-            "wysiwyg"
-          ],
-          "time": "2017-09-13T13:09:47+00:00"
+            "name": "ckeditor/ckeditor",
+            "version": "4.7.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ckeditor/ckeditor-releases.git",
+                "reference": "97b8f412f6b36985c734daf0717e81009a885dba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ckeditor/ckeditor-releases/zipball/97b8f412f6b36985c734daf0717e81009a885dba",
+                "reference": "97b8f412f6b36985c734daf0717e81009a885dba",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+",
+                "LGPL-2.1+",
+                "MPL-1.1+"
+            ],
+            "authors": [
+                {
+                    "name": "CKSource",
+                    "homepage": "http://cksource.com"
+                }
+            ],
+            "description": "JavaScript WYSIWYG web text editor.",
+            "homepage": "http://ckeditor.com",
+            "keywords": [
+                "CKEditor",
+                "editor",
+                "fckeditor",
+                "html",
+                "javascript",
+                "richtext",
+                "text",
+                "wysiwyg"
+            ],
+            "time": "2017-09-13T13:09:47+00:00"
         },
-      {
-        "name": "composer/installers",
-        "version": "v1.6.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/composer/installers.git",
-          "reference": "cfcca6b1b60bc4974324efb5783c13dca6932b5b"
+        {
+            "name": "composer/installers",
+            "version": "v1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/composer/installers.git",
+                "reference": "cfcca6b1b60bc4974324efb5783c13dca6932b5b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/composer/installers/zipball/cfcca6b1b60bc4974324efb5783c13dca6932b5b",
+                "reference": "cfcca6b1b60bc4974324efb5783c13dca6932b5b",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0"
+            },
+            "replace": {
+                "roundcube/plugin-installer": "*",
+                "shama/baton": "*"
+            },
+            "require-dev": {
+                "composer/composer": "1.0.*@dev",
+                "phpunit/phpunit": "^4.8.36"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Composer\\Installers\\Plugin",
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Composer\\Installers\\": "src/Composer/Installers"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kyle Robinson Young",
+                    "email": "kyle@dontkry.com",
+                    "homepage": "https://github.com/shama"
+                }
+            ],
+            "description": "A multi-framework Composer library installer",
+            "homepage": "https://composer.github.io/installers/",
+            "keywords": [
+                "Craft",
+                "Dolibarr",
+                "Eliasis",
+                "Hurad",
+                "ImageCMS",
+                "Kanboard",
+                "Lan Management System",
+                "MODX Evo",
+                "Mautic",
+                "Maya",
+                "OXID",
+                "Plentymarkets",
+                "Porto",
+                "RadPHP",
+                "SMF",
+                "Thelia",
+                "WolfCMS",
+                "agl",
+                "aimeos",
+                "annotatecms",
+                "attogram",
+                "bitrix",
+                "cakephp",
+                "chef",
+                "cockpit",
+                "codeigniter",
+                "concrete5",
+                "croogo",
+                "dokuwiki",
+                "drupal",
+                "eZ Platform",
+                "elgg",
+                "expressionengine",
+                "fuelphp",
+                "grav",
+                "installer",
+                "itop",
+                "joomla",
+                "kohana",
+                "laravel",
+                "lavalite",
+                "lithium",
+                "magento",
+                "majima",
+                "mako",
+                "mediawiki",
+                "modulework",
+                "modx",
+                "moodle",
+                "osclass",
+                "phpbb",
+                "piwik",
+                "ppi",
+                "puppet",
+                "pxcms",
+                "reindex",
+                "roundcube",
+                "shopware",
+                "silverstripe",
+                "sydes",
+                "symfony",
+                "typo3",
+                "wordpress",
+                "yawik",
+                "zend",
+                "zikula"
+            ],
+            "time": "2018-08-27T06:10:37+00:00"
         },
-        "dist": {
-          "type": "zip",
-          "url": "https://api.github.com/repos/composer/installers/zipball/cfcca6b1b60bc4974324efb5783c13dca6932b5b",
-          "reference": "cfcca6b1b60bc4974324efb5783c13dca6932b5b",
-          "shasum": ""
+        {
+            "name": "dektrium/yii2-rbac",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dektrium/yii2-rbac.git",
+                "reference": "2dac3918af17178f2ba944d4338c3fcfa732d08c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dektrium/yii2-rbac/zipball/2dac3918af17178f2ba944d4338c3fcfa732d08c",
+                "reference": "2dac3918af17178f2ba944d4338c3fcfa732d08c",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/yii2-widget-select2": "^2.0",
+                "yiisoft/yii2": "^2.0.8"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "bootstrap": "dektrium\\rbac\\Bootstrap",
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "dektrium\\rbac\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dmitry Erofeev",
+                    "email": "dmeroff@gmail.com",
+                    "homepage": "http://dmeroff.ru"
+                }
+            ],
+            "description": "RBAC management module for Yii2",
+            "keywords": [
+                "dektrium",
+                "rbac gui",
+                "rbac management",
+                "rbac module",
+                "yii rbac",
+                "yii2",
+                "yii2-rbac"
+            ],
+            "time": "2018-03-26T12:33:41+00:00"
         },
-        "require": {
-          "composer-plugin-api": "^1.0"
+        {
+            "name": "dektrium/yii2-user",
+            "version": "0.9.14",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dektrium/yii2-user.git",
+                "reference": "8f2daea532f7efefc3f808e50d74a91c0de71ff4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dektrium/yii2-user/zipball/8f2daea532f7efefc3f808e50d74a91c0de71ff4",
+                "reference": "8f2daea532f7efefc3f808e50d74a91c0de71ff4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "^2.0.13",
+                "yiisoft/yii2-authclient": "^2.1.0",
+                "yiisoft/yii2-bootstrap": "^2.0.0",
+                "yiisoft/yii2-swiftmailer": "^2.0.0"
+            },
+            "require-dev": {
+                "codeception/specify": "^0.4.3",
+                "codeception/verify": "^0.3.1",
+                "yiisoft/yii2-codeception": "^2.0.0"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "bootstrap": "dektrium\\user\\Bootstrap",
+                "branch-alias": {
+                    "dev-master": "0.9.x-dev",
+                    "dev-develop": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "dektrium\\user\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dmitry Erofeev",
+                    "email": "dmeroff@gmail.com",
+                    "homepage": "http://dmeroff.ru"
+                }
+            ],
+            "description": "Flexible user registration and authentication module for Yii2",
+            "keywords": [
+                "User management",
+                "dektrium",
+                "yii2",
+                "yii2-user"
+            ],
+            "time": "2018-04-03T12:24:41+00:00"
         },
-        "replace": {
-          "roundcube/plugin-installer": "*",
-          "shama/baton": "*"
+        {
+            "name": "dmstr/yii2-adminlte-asset",
+            "version": "3.0.0-alpha1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dmstr/yii2-adminlte-asset.git",
+                "reference": "7cdb8870c98126cca6832804ee82fa34631bdd63"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dmstr/yii2-adminlte-asset/zipball/7cdb8870c98126cca6832804ee82fa34631bdd63",
+                "reference": "7cdb8870c98126cca6832804ee82fa34631bdd63",
+                "shasum": ""
+            },
+            "require": {
+                "almasaeed2010/adminlte": "^2.4.0",
+                "yiisoft/yii2": "2.*",
+                "yiisoft/yii2-bootstrap": "~2.0.0"
+            },
+            "suggest": {
+                "cebe/yii2-gravatar": "Display user icons",
+                "rmrevin/yii2-fontawesome": "Font icons"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "dmstr\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Tobias Munk",
+                    "email": "tobias@diemeisterei.de"
+                },
+                {
+                    "name": "Evgeniy Tkachenko",
+                    "email": "et.coder@gmail.com"
+                }
+            ],
+            "description": "AdminLTE backend theme asset bundle for Yii 2.0 Framework",
+            "keywords": [
+                "AdminLTE",
+                "admin",
+                "asset",
+                "backend",
+                "css",
+                "extension",
+                "less",
+                "theme",
+                "yii2"
+            ],
+            "time": "2018-09-03T05:16:07+00:00"
         },
-        "require-dev": {
-          "composer/composer": "1.0.*@dev",
-          "phpunit/phpunit": "^4.8.36"
-        },
-        "type": "composer-plugin",
-        "extra": {
-          "class": "Composer\\Installers\\Plugin",
-          "branch-alias": {
-            "dev-master": "1.0-dev"
-          }
-        },
-        "autoload": {
-          "psr-4": {
-            "Composer\\Installers\\": "src/Composer/Installers"
-          }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-          "MIT"
-        ],
-        "authors": [
-          {
-            "name": "Kyle Robinson Young",
-            "email": "kyle@dontkry.com",
-            "homepage": "https://github.com/shama"
-          }
-        ],
-        "description": "A multi-framework Composer library installer",
-        "homepage": "https://composer.github.io/installers/",
-        "keywords": [
-          "Craft",
-          "Dolibarr",
-          "Eliasis",
-          "Hurad",
-          "ImageCMS",
-          "Kanboard",
-          "Lan Management System",
-          "MODX Evo",
-          "Mautic",
-          "Maya",
-          "OXID",
-          "Plentymarkets",
-          "Porto",
-          "RadPHP",
-          "SMF",
-          "Thelia",
-          "WolfCMS",
-          "agl",
-          "aimeos",
-          "annotatecms",
-          "attogram",
-          "bitrix",
-          "cakephp",
-          "chef",
-          "cockpit",
-          "codeigniter",
-          "concrete5",
-          "croogo",
-          "dokuwiki",
-          "drupal",
-          "eZ Platform",
-          "elgg",
-          "expressionengine",
-          "fuelphp",
-          "grav",
-          "installer",
-          "itop",
-          "joomla",
-          "kohana",
-          "laravel",
-          "lavalite",
-          "lithium",
-          "magento",
-          "majima",
-          "mako",
-          "mediawiki",
-          "modulework",
-          "modx",
-          "moodle",
-          "osclass",
-          "phpbb",
-          "piwik",
-          "ppi",
-          "puppet",
-          "pxcms",
-          "reindex",
-          "roundcube",
-          "shopware",
-          "silverstripe",
-          "sydes",
-          "symfony",
-          "typo3",
-          "wordpress",
-          "yawik",
-          "zend",
-          "zikula"
-        ],
-        "time": "2018-08-27T06:10:37+00:00"
-        },
-      {
-        "name": "dektrium/yii2-rbac",
-        "version": "1.0.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/dektrium/yii2-rbac.git",
-          "reference": "2dac3918af17178f2ba944d4338c3fcfa732d08c"
-        },
-        "dist": {
-          "type": "zip",
-          "url": "https://api.github.com/repos/dektrium/yii2-rbac/zipball/2dac3918af17178f2ba944d4338c3fcfa732d08c",
-          "reference": "2dac3918af17178f2ba944d4338c3fcfa732d08c",
-          "shasum": ""
-        },
-        "require": {
-          "kartik-v/yii2-widget-select2": "^2.0",
-          "yiisoft/yii2": "^2.0.8"
-        },
-        "type": "yii2-extension",
-        "extra": {
-          "bootstrap": "dektrium\\rbac\\Bootstrap",
-          "branch-alias": {
-            "dev-master": "1.0.x-dev"
-          }
-        },
-        "autoload": {
-          "psr-4": {
-            "dektrium\\rbac\\": ""
-          }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-          "MIT"
-        ],
-        "authors": [
-          {
-            "name": "Dmitry Erofeev",
-            "email": "dmeroff@gmail.com",
-            "homepage": "http://dmeroff.ru"
-          }
-        ],
-        "description": "RBAC management module for Yii2",
-        "keywords": [
-          "dektrium",
-          "rbac gui",
-          "rbac management",
-          "rbac module",
-          "yii rbac",
-          "yii2",
-          "yii2-rbac"
-        ],
-        "time": "2018-03-26T12:33:41+00:00"
-      },
-      {
-        "name": "dektrium/yii2-user",
-        "version": "0.9.14",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/dektrium/yii2-user.git",
-          "reference": "8f2daea532f7efefc3f808e50d74a91c0de71ff4"
-        },
-        "dist": {
-          "type": "zip",
-          "url": "https://api.github.com/repos/dektrium/yii2-user/zipball/8f2daea532f7efefc3f808e50d74a91c0de71ff4",
-          "reference": "8f2daea532f7efefc3f808e50d74a91c0de71ff4",
-          "shasum": ""
-        },
-        "require": {
-          "php": ">=5.4.0",
-          "yiisoft/yii2": "^2.0.13",
-          "yiisoft/yii2-authclient": "^2.1.0",
-          "yiisoft/yii2-bootstrap": "^2.0.0",
-          "yiisoft/yii2-swiftmailer": "^2.0.0"
-        },
-        "require-dev": {
-          "codeception/specify": "^0.4.3",
-          "codeception/verify": "^0.3.1",
-          "yiisoft/yii2-codeception": "^2.0.0"
-        },
-        "type": "yii2-extension",
-        "extra": {
-          "bootstrap": "dektrium\\user\\Bootstrap",
-          "branch-alias": {
-            "dev-master": "0.9.x-dev",
-            "dev-develop": "1.0.x-dev"
-          }
-        },
-        "autoload": {
-          "psr-4": {
-            "dektrium\\user\\": ""
-          }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-          "MIT"
-        ],
-        "authors": [
-          {
-            "name": "Dmitry Erofeev",
-            "email": "dmeroff@gmail.com",
-            "homepage": "http://dmeroff.ru"
-          }
-        ],
-        "description": "Flexible user registration and authentication module for Yii2",
-        "keywords": [
-          "User management",
-          "dektrium",
-          "yii2",
-          "yii2-user"
-        ],
-        "time": "2018-04-03T12:24:41+00:00"
-        },
-      {
-        "name": "dmstr/yii2-adminlte-asset",
-        "version": "3.0.0-alpha1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/dmstr/yii2-adminlte-asset.git",
-          "reference": "7cdb8870c98126cca6832804ee82fa34631bdd63"
-        },
-        "dist": {
-          "type": "zip",
-          "url": "https://api.github.com/repos/dmstr/yii2-adminlte-asset/zipball/7cdb8870c98126cca6832804ee82fa34631bdd63",
-          "reference": "7cdb8870c98126cca6832804ee82fa34631bdd63",
-          "shasum": ""
-        },
-        "require": {
-          "almasaeed2010/adminlte": "^2.4.0",
-          "yiisoft/yii2": "2.*",
-          "yiisoft/yii2-bootstrap": "~2.0.0"
-        },
-        "suggest": {
-          "cebe/yii2-gravatar": "Display user icons",
-          "rmrevin/yii2-fontawesome": "Font icons"
-        },
-        "type": "yii2-extension",
-        "extra": {
-          "branch-alias": {
-            "dev-master": "3.x-dev"
-          }
-        },
-        "autoload": {
-          "psr-4": {
-            "dmstr\\": ""
-          }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-          "BSD-3-Clause"
-        ],
-        "authors": [
-          {
-            "name": "Tobias Munk",
-            "email": "tobias@diemeisterei.de"
-          },
-          {
-            "name": "Evgeniy Tkachenko",
-            "email": "et.coder@gmail.com"
-          }
-        ],
-        "description": "AdminLTE backend theme asset bundle for Yii 2.0 Framework",
-        "keywords": [
-          "AdminLTE",
-          "admin",
-          "asset",
-          "backend",
-          "css",
-          "extension",
-          "less",
-          "theme",
-          "yii2"
-        ],
-        "time": "2018-09-03T05:16:07+00:00"
-      },
-      {
+        {
             "name": "doctrine/lexer",
             "version": "v1.0.1",
             "source": {
@@ -781,221 +781,221 @@
             "time": "2018-02-23T01:58:20+00:00"
         },
         {
-          "name": "kartik-v/yii2-krajee-base",
-          "version": "v2.0.0",
-          "source": {
-            "type": "git",
-            "url": "https://github.com/kartik-v/yii2-krajee-base.git",
-            "reference": "71bfaf2450d0b338a35d2818039e1c7637e75481"
-          },
-          "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/71bfaf2450d0b338a35d2818039e1c7637e75481",
-            "reference": "71bfaf2450d0b338a35d2818039e1c7637e75481",
-            "shasum": ""
-          },
-          "type": "yii2-extension",
-          "extra": {
-            "branch-alias": {
-              "dev-master": "2.0.x-dev"
-            }
-          },
-          "autoload": {
-            "psr-4": {
-              "kartik\\base\\": "src"
-            }
-          },
-          "notification-url": "https://packagist.org/downloads/",
-          "license": [
-            "BSD-3-Clause"
-          ],
-          "authors": [
-            {
-              "name": "Kartik Visweswaran",
-              "email": "kartikv2@gmail.com",
-              "homepage": "http://www.krajee.com/"
-            }
-          ],
-          "description": "Base library and foundation components for all Yii2 Krajee extensions.",
-          "homepage": "https://github.com/kartik-v/yii2-krajee-base",
-          "keywords": [
-            "base",
-            "extension",
-            "foundation",
-            "krajee",
-            "widget",
-            "yii2"
-          ],
-          "time": "2018-10-09T07:54:35+00:00"
+            "name": "kartik-v/yii2-krajee-base",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-krajee-base.git",
+                "reference": "71bfaf2450d0b338a35d2818039e1c7637e75481"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/71bfaf2450d0b338a35d2818039e1c7637e75481",
+                "reference": "71bfaf2450d0b338a35d2818039e1c7637e75481",
+                "shasum": ""
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "kartik\\base\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "Base library and foundation components for all Yii2 Krajee extensions.",
+            "homepage": "https://github.com/kartik-v/yii2-krajee-base",
+            "keywords": [
+                "base",
+                "extension",
+                "foundation",
+                "krajee",
+                "widget",
+                "yii2"
+            ],
+            "time": "2018-10-09T07:54:35+00:00"
         },
-      {
-        "name": "kartik-v/yii2-widget-select2",
-        "version": "v2.1.3",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/kartik-v/yii2-widget-select2.git",
-          "reference": "f1ae98b7ec3e46ba0193471647ce15d07aa67f58"
+        {
+            "name": "kartik-v/yii2-widget-select2",
+            "version": "v2.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-widget-select2.git",
+                "reference": "f1ae98b7ec3e46ba0193471647ce15d07aa67f58"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-select2/zipball/f1ae98b7ec3e46ba0193471647ce15d07aa67f58",
+                "reference": "f1ae98b7ec3e46ba0193471647ce15d07aa67f58",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/yii2-krajee-base": ">=1.9"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "kartik\\select2\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "Enhanced Yii2 wrapper for the Select2 jQuery plugin (sub repo split from yii2-widgets).",
+            "homepage": "https://github.com/kartik-v/yii2-widget-select2",
+            "keywords": [
+                "dropdown",
+                "extension",
+                "form",
+                "jquery",
+                "plugin",
+                "select2",
+                "widget",
+                "yii2"
+            ],
+            "time": "2018-09-07T08:11:16+00:00"
         },
-        "dist": {
-          "type": "zip",
-          "url": "https://api.github.com/repos/kartik-v/yii2-widget-select2/zipball/f1ae98b7ec3e46ba0193471647ce15d07aa67f58",
-          "reference": "f1ae98b7ec3e46ba0193471647ce15d07aa67f58",
-          "shasum": ""
+        {
+            "name": "rmrevin/yii2-fontawesome",
+            "version": "3.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rmrevin/yii2-fontawesome.git",
+                "reference": "0b05ae6ddaed96490a195057e11f9a3dc5952cb9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rmrevin/yii2-fontawesome/zipball/0b05ae6ddaed96490a195057e11f9a3dc5952cb9",
+                "reference": "0b05ae6ddaed96490a195057e11f9a3dc5952cb9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "^2.0.0"
+            },
+            "require-dev": {
+                "doctrine/instantiator": "1.0.*",
+                "phpdocumentor/reflection-docblock": "~3.1.0",
+                "phpunit/phpunit": "^4.8"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "asset-installer-paths": {
+                    "npm-asset-library": "vendor/npm",
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "rmrevin\\yii\\fontawesome\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Revin Roman",
+                    "email": "roman@rmrevin.com",
+                    "homepage": "https://rmrevin.com/"
+                }
+            ],
+            "description": "Asset Bundle for Yii2 with Font Awesome",
+            "keywords": [
+                "asset",
+                "awesome",
+                "bundle",
+                "font",
+                "yii"
+            ],
+            "time": "2018-09-17T10:48:42+00:00"
         },
-        "require": {
-          "kartik-v/yii2-krajee-base": ">=1.9"
+        {
+            "name": "romanpitak/nginx-config-processor",
+            "version": "v0.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/romanpitak/Nginx-Config-Processor.git",
+                "reference": "0dfcbbda696c7baeed8f955e4831696d90e56758"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/romanpitak/Nginx-Config-Processor/zipball/0dfcbbda696c7baeed8f955e4831696d90e56758",
+                "reference": "0dfcbbda696c7baeed8f955e4831696d90e56758",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "codacy/coverage": "dev-master",
+                "codeclimate/php-test-reporter": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "RomanPitak\\Nginx\\Config\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roman Piták",
+                    "email": "roman@pitak.net",
+                    "homepage": "http://pitak.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Nginx configuration files processor.",
+            "homepage": "https://github.com/romanpitak/Nginx-Config-Processor",
+            "keywords": [
+                "conf",
+                "conf file",
+                "config",
+                "config file",
+                "configuration",
+                "configuration file",
+                "create",
+                "creator",
+                "manager",
+                "nginx",
+                "parser",
+                "php",
+                "processor"
+            ],
+            "time": "2016-01-31T19:44:23+00:00"
         },
-        "type": "yii2-extension",
-        "extra": {
-          "branch-alias": {
-            "dev-master": "2.1.x-dev"
-          }
-        },
-        "autoload": {
-          "psr-4": {
-            "kartik\\select2\\": "src"
-          }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-          "BSD-3-Clause"
-        ],
-        "authors": [
-          {
-            "name": "Kartik Visweswaran",
-            "email": "kartikv2@gmail.com",
-            "homepage": "http://www.krajee.com/"
-          }
-        ],
-        "description": "Enhanced Yii2 wrapper for the Select2 jQuery plugin (sub repo split from yii2-widgets).",
-        "homepage": "https://github.com/kartik-v/yii2-widget-select2",
-        "keywords": [
-          "dropdown",
-          "extension",
-          "form",
-          "jquery",
-          "plugin",
-          "select2",
-          "widget",
-          "yii2"
-        ],
-        "time": "2018-09-07T08:11:16+00:00"
-      },
-      {
-        "name": "rmrevin/yii2-fontawesome",
-        "version": "3.2.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/rmrevin/yii2-fontawesome.git",
-          "reference": "0b05ae6ddaed96490a195057e11f9a3dc5952cb9"
-        },
-        "dist": {
-          "type": "zip",
-          "url": "https://api.github.com/repos/rmrevin/yii2-fontawesome/zipball/0b05ae6ddaed96490a195057e11f9a3dc5952cb9",
-          "reference": "0b05ae6ddaed96490a195057e11f9a3dc5952cb9",
-          "shasum": ""
-        },
-        "require": {
-          "php": ">=5.4.0",
-          "yiisoft/yii2": "^2.0.0"
-        },
-        "require-dev": {
-          "doctrine/instantiator": "1.0.*",
-          "phpdocumentor/reflection-docblock": "~3.1.0",
-          "phpunit/phpunit": "^4.8"
-        },
-        "type": "yii2-extension",
-        "extra": {
-          "asset-installer-paths": {
-            "npm-asset-library": "vendor/npm",
-            "bower-asset-library": "vendor/bower"
-          }
-        },
-        "autoload": {
-          "psr-4": {
-            "rmrevin\\yii\\fontawesome\\": ""
-          }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-          "MIT"
-        ],
-        "authors": [
-          {
-            "name": "Revin Roman",
-            "email": "roman@rmrevin.com",
-            "homepage": "https://rmrevin.com/"
-          }
-        ],
-        "description": "Asset Bundle for Yii2 with Font Awesome",
-        "keywords": [
-          "asset",
-          "awesome",
-          "bundle",
-          "font",
-          "yii"
-        ],
-        "time": "2018-09-17T10:48:42+00:00"
-        },
-      {
-        "name": "romanpitak/nginx-config-processor",
-        "version": "v0.2.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/romanpitak/Nginx-Config-Processor.git",
-          "reference": "0dfcbbda696c7baeed8f955e4831696d90e56758"
-        },
-        "dist": {
-          "type": "zip",
-          "url": "https://api.github.com/repos/romanpitak/Nginx-Config-Processor/zipball/0dfcbbda696c7baeed8f955e4831696d90e56758",
-          "reference": "0dfcbbda696c7baeed8f955e4831696d90e56758",
-          "shasum": ""
-        },
-        "require": {
-          "php": ">=5.3.3"
-        },
-        "require-dev": {
-          "codacy/coverage": "dev-master",
-          "codeclimate/php-test-reporter": "dev-master"
-        },
-        "type": "library",
-        "autoload": {
-          "psr-4": {
-            "RomanPitak\\Nginx\\Config\\": "src/"
-          }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-          "MIT"
-        ],
-        "authors": [
-          {
-            "name": "Roman Piták",
-            "email": "roman@pitak.net",
-            "homepage": "http://pitak.net",
-            "role": "Developer"
-          }
-        ],
-        "description": "Nginx configuration files processor.",
-        "homepage": "https://github.com/romanpitak/Nginx-Config-Processor",
-        "keywords": [
-          "conf",
-          "conf file",
-          "config",
-          "config file",
-          "configuration",
-          "configuration file",
-          "create",
-          "creator",
-          "manager",
-          "nginx",
-          "parser",
-          "php",
-          "processor"
-        ],
-        "time": "2016-01-31T19:44:23+00:00"
-        },
-      {
+        {
             "name": "swiftmailer/swiftmailer",
             "version": "v6.1.3",
             "source": {
@@ -1055,172 +1055,172 @@
             "time": "2018-09-11T07:12:52+00:00"
         },
         {
-          "name": "symfony/polyfill-ctype",
-          "version": "v1.9.0",
-          "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/polyfill-ctype.git",
-            "reference": "e3d826245268269cd66f8326bd8bc066687b4a19"
-          },
-          "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/e3d826245268269cd66f8326bd8bc066687b4a19",
-            "reference": "e3d826245268269cd66f8326bd8bc066687b4a19",
-            "shasum": ""
-          },
-          "require": {
-            "php": ">=5.3.3"
-          },
-          "suggest": {
-            "ext-ctype": "For best performance"
-          },
-          "type": "library",
-          "extra": {
-            "branch-alias": {
-              "dev-master": "1.9-dev"
-            }
-          },
-          "autoload": {
-            "psr-4": {
-              "Symfony\\Polyfill\\Ctype\\": ""
+            "name": "symfony/polyfill-ctype",
+            "version": "v1.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-ctype.git",
+                "reference": "e3d826245268269cd66f8326bd8bc066687b4a19"
             },
-            "files": [
-              "bootstrap.php"
-            ]
-          },
-          "notification-url": "https://packagist.org/downloads/",
-          "license": [
-            "MIT"
-          ],
-          "authors": [
-            {
-              "name": "Symfony Community",
-              "homepage": "https://symfony.com/contributors"
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/e3d826245268269cd66f8326bd8bc066687b4a19",
+                "reference": "e3d826245268269cd66f8326bd8bc066687b4a19",
+                "shasum": ""
             },
-            {
-              "name": "Gert de Pagter",
-              "email": "BackEndTea@gmail.com"
-            }
-          ],
-          "description": "Symfony polyfill for ctype functions",
-          "homepage": "https://symfony.com",
-          "keywords": [
-            "compatibility",
-            "ctype",
-            "polyfill",
-            "portable"
-          ],
-          "time": "2018-08-06T14:22:27+00:00"
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "suggest": {
+                "ext-ctype": "For best performance"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.9-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Ctype\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                },
+                {
+                    "name": "Gert de Pagter",
+                    "email": "BackEndTea@gmail.com"
+                }
+            ],
+            "description": "Symfony polyfill for ctype functions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "ctype",
+                "polyfill",
+                "portable"
+            ],
+            "time": "2018-08-06T14:22:27+00:00"
         },
-      {
-        "name": "symfony/process",
-        "version": "v4.1.6",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/symfony/process.git",
-          "reference": "ee33c0322a8fee0855afcc11fff81e6b1011b529"
+        {
+            "name": "symfony/process",
+            "version": "v4.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/process.git",
+                "reference": "ee33c0322a8fee0855afcc11fff81e6b1011b529"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/process/zipball/ee33c0322a8fee0855afcc11fff81e6b1011b529",
+                "reference": "ee33c0322a8fee0855afcc11fff81e6b1011b529",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Process\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Process Component",
+            "homepage": "https://symfony.com",
+            "time": "2018-10-02T12:40:59+00:00"
         },
-        "dist": {
-          "type": "zip",
-          "url": "https://api.github.com/repos/symfony/process/zipball/ee33c0322a8fee0855afcc11fff81e6b1011b529",
-          "reference": "ee33c0322a8fee0855afcc11fff81e6b1011b529",
-          "shasum": ""
+        {
+            "name": "symfony/yaml",
+            "version": "v4.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/yaml.git",
+                "reference": "367e689b2fdc19965be435337b50bc8adf2746c9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/367e689b2fdc19965be435337b50bc8adf2746c9",
+                "reference": "367e689b2fdc19965be435337b50bc8adf2746c9",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3",
+                "symfony/polyfill-ctype": "~1.8"
+            },
+            "conflict": {
+                "symfony/console": "<3.4"
+            },
+            "require-dev": {
+                "symfony/console": "~3.4|~4.0"
+            },
+            "suggest": {
+                "symfony/console": "For validating YAML files using the lint command"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Yaml\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Yaml Component",
+            "homepage": "https://symfony.com",
+            "time": "2018-10-02T16:36:10+00:00"
         },
-        "require": {
-          "php": "^7.1.3"
-        },
-        "type": "library",
-        "extra": {
-          "branch-alias": {
-            "dev-master": "4.1-dev"
-          }
-        },
-        "autoload": {
-          "psr-4": {
-            "Symfony\\Component\\Process\\": ""
-          },
-          "exclude-from-classmap": [
-            "/Tests/"
-          ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-          "MIT"
-        ],
-        "authors": [
-          {
-            "name": "Fabien Potencier",
-            "email": "fabien@symfony.com"
-          },
-          {
-            "name": "Symfony Community",
-            "homepage": "https://symfony.com/contributors"
-          }
-        ],
-        "description": "Symfony Process Component",
-        "homepage": "https://symfony.com",
-        "time": "2018-10-02T12:40:59+00:00"
-      },
-      {
-        "name": "symfony/yaml",
-        "version": "v4.1.6",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/symfony/yaml.git",
-          "reference": "367e689b2fdc19965be435337b50bc8adf2746c9"
-        },
-        "dist": {
-          "type": "zip",
-          "url": "https://api.github.com/repos/symfony/yaml/zipball/367e689b2fdc19965be435337b50bc8adf2746c9",
-          "reference": "367e689b2fdc19965be435337b50bc8adf2746c9",
-          "shasum": ""
-        },
-        "require": {
-          "php": "^7.1.3",
-          "symfony/polyfill-ctype": "~1.8"
-        },
-        "conflict": {
-          "symfony/console": "<3.4"
-        },
-        "require-dev": {
-          "symfony/console": "~3.4|~4.0"
-        },
-        "suggest": {
-          "symfony/console": "For validating YAML files using the lint command"
-        },
-        "type": "library",
-        "extra": {
-          "branch-alias": {
-            "dev-master": "4.1-dev"
-          }
-        },
-        "autoload": {
-          "psr-4": {
-            "Symfony\\Component\\Yaml\\": ""
-          },
-          "exclude-from-classmap": [
-            "/Tests/"
-          ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-          "MIT"
-        ],
-        "authors": [
-          {
-            "name": "Fabien Potencier",
-            "email": "fabien@symfony.com"
-          },
-          {
-            "name": "Symfony Community",
-            "homepage": "https://symfony.com/contributors"
-          }
-        ],
-        "description": "Symfony Yaml Component",
-        "homepage": "https://symfony.com",
-        "time": "2018-10-02T16:36:10+00:00"
-      },
-      {
+        {
             "name": "yiisoft/yii2",
             "version": "2.0.15.1",
             "source": {
@@ -1321,58 +1321,58 @@
             "time": "2018-03-21T18:36:53+00:00"
         },
         {
-          "name": "yiisoft/yii2-authclient",
-          "version": "2.1.7",
-          "source": {
-            "type": "git",
-            "url": "https://github.com/yiisoft/yii2-authclient.git",
-            "reference": "51ed208515a2d04c538b2c498c4f760481a431b5"
-          },
-          "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/yiisoft/yii2-authclient/zipball/51ed208515a2d04c538b2c498c4f760481a431b5",
-            "reference": "51ed208515a2d04c538b2c498c4f760481a431b5",
-            "shasum": ""
-          },
-          "require": {
-            "yiisoft/yii2-httpclient": "~2.0.5"
-          },
-          "suggest": {
-            "spomky-labs/jose": "required for JWS,JWT or JWK related flows like OpenIDConnect"
-          },
-          "type": "yii2-extension",
-          "extra": {
-            "branch-alias": {
-              "dev-master": "2.0.x-dev"
-            }
-          },
-          "autoload": {
-            "psr-4": {
-              "yii\\authclient\\": "src"
-            }
-          },
-          "notification-url": "https://packagist.org/downloads/",
-          "license": [
-            "BSD-3-Clause"
-          ],
-          "authors": [
-            {
-              "name": "Paul Klimov",
-              "email": "klimov.paul@gmail.com"
-            }
-          ],
-          "description": "External authentication via OAuth and OpenID for the Yii framework",
-          "keywords": [
-            "OpenID Connect",
-            "OpenId",
-            "api",
-            "auth",
-            "oauth",
-            "yii2"
-          ],
-          "time": "2018-09-20T07:23:55+00:00"
+            "name": "yiisoft/yii2-authclient",
+            "version": "2.1.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-authclient.git",
+                "reference": "51ed208515a2d04c538b2c498c4f760481a431b5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-authclient/zipball/51ed208515a2d04c538b2c498c4f760481a431b5",
+                "reference": "51ed208515a2d04c538b2c498c4f760481a431b5",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2-httpclient": "~2.0.5"
+            },
+            "suggest": {
+                "spomky-labs/jose": "required for JWS,JWT or JWK related flows like OpenIDConnect"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\authclient\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Paul Klimov",
+                    "email": "klimov.paul@gmail.com"
+                }
+            ],
+            "description": "External authentication via OAuth and OpenID for the Yii framework",
+            "keywords": [
+                "OpenID Connect",
+                "OpenId",
+                "api",
+                "auth",
+                "oauth",
+                "yii2"
+            ],
+            "time": "2018-09-20T07:23:55+00:00"
         },
-      {
+        {
             "name": "yiisoft/yii2-bootstrap",
             "version": "2.0.8",
             "source": {
@@ -1487,137 +1487,137 @@
             "time": "2018-07-05T15:44:47+00:00"
         },
         {
-          "name": "yiisoft/yii2-httpclient",
-          "version": "2.0.7",
-          "source": {
-            "type": "git",
-            "url": "https://github.com/yiisoft/yii2-httpclient.git",
-            "reference": "360b0f9c0855709b3370d486a4de435022fb3926"
-          },
-          "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/yiisoft/yii2-httpclient/zipball/360b0f9c0855709b3370d486a4de435022fb3926",
-            "reference": "360b0f9c0855709b3370d486a4de435022fb3926",
-            "shasum": ""
-          },
-          "require": {
-            "yiisoft/yii2": "~2.0.13"
-          },
-          "type": "yii2-extension",
-          "extra": {
-            "branch-alias": {
-              "dev-master": "2.0.x-dev"
-            }
-          },
-          "autoload": {
-            "psr-4": {
-              "yii\\httpclient\\": "src"
-            }
-          },
-          "notification-url": "https://packagist.org/downloads/",
-          "license": [
-            "BSD-3-Clause"
-          ],
-          "authors": [
-            {
-              "name": "Paul Klimov",
-              "email": "klimov.paul@gmail.com"
-            }
-          ],
-          "description": "HTTP client extension for the Yii framework",
-          "keywords": [
-            "curl",
-            "http",
-            "httpclient",
-            "yii2"
-          ],
-          "time": "2018-09-23T21:53:35+00:00"
+            "name": "yiisoft/yii2-httpclient",
+            "version": "2.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-httpclient.git",
+                "reference": "360b0f9c0855709b3370d486a4de435022fb3926"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-httpclient/zipball/360b0f9c0855709b3370d486a4de435022fb3926",
+                "reference": "360b0f9c0855709b3370d486a4de435022fb3926",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "~2.0.13"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\httpclient\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Paul Klimov",
+                    "email": "klimov.paul@gmail.com"
+                }
+            ],
+            "description": "HTTP client extension for the Yii framework",
+            "keywords": [
+                "curl",
+                "http",
+                "httpclient",
+                "yii2"
+            ],
+            "time": "2018-09-23T21:53:35+00:00"
         },
-      {
-        "name": "yiisoft/yii2-queue",
-        "version": "2.1.0",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/yiisoft/yii2-queue.git",
-          "reference": "d04b4b3c932081200876a351cc6c3502e89e11b8"
+        {
+            "name": "yiisoft/yii2-queue",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-queue.git",
+                "reference": "d04b4b3c932081200876a351cc6c3502e89e11b8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-queue/zipball/d04b4b3c932081200876a351cc6c3502e89e11b8",
+                "reference": "d04b4b3c932081200876a351cc6c3502e89e11b8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0",
+                "symfony/process": "*",
+                "yiisoft/yii2": "~2.0.14"
+            },
+            "require-dev": {
+                "aws/aws-sdk-php": ">=2.4",
+                "enqueue/amqp-lib": "^0.8",
+                "jeremeamia/superclosure": "*",
+                "pda/pheanstalk": "*",
+                "php-amqplib/php-amqplib": "*",
+                "phpunit/phpunit": "~4.4",
+                "yiisoft/yii2-debug": "*",
+                "yiisoft/yii2-gii": "*",
+                "yiisoft/yii2-redis": "*"
+            },
+            "suggest": {
+                "aws/aws-sdk-php": "Need for aws SQS.",
+                "enqueue/amqp-lib": "Need for AMQP interop queue.",
+                "ext-gearman": "Need for Gearman queue.",
+                "ext-pcntl": "Need for process signals.",
+                "pda/pheanstalk": "Need for Beanstalk queue.",
+                "php-amqplib/php-amqplib": "Need for AMQP queue.",
+                "yiisoft/yii2-redis": "Need for Redis queue."
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\queue\\": "src",
+                    "yii\\queue\\amqp\\": "src/drivers/amqp",
+                    "yii\\queue\\amqp_interop\\": "src/drivers/amqp_interop",
+                    "yii\\queue\\beanstalk\\": "src/drivers/beanstalk",
+                    "yii\\queue\\db\\": "src/drivers/db",
+                    "yii\\queue\\file\\": "src/drivers/file",
+                    "yii\\queue\\gearman\\": "src/drivers/gearman",
+                    "yii\\queue\\redis\\": "src/drivers/redis",
+                    "yii\\queue\\sync\\": "src/drivers/sync",
+                    "yii\\queue\\sqs\\": "src/drivers/sqs"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Roman Zhuravlev",
+                    "email": "zhuravljov@gmail.com"
+                }
+            ],
+            "description": "Yii2 Queue Extension which supported DB, Redis, RabbitMQ, Beanstalk, SQS and Gearman",
+            "keywords": [
+                "async",
+                "beanstalk",
+                "db",
+                "gearman",
+                "gii",
+                "queue",
+                "rabbitmq",
+                "redis",
+                "sqs",
+                "yii"
+            ],
+            "time": "2018-05-23T21:04:57+00:00"
         },
-        "dist": {
-          "type": "zip",
-          "url": "https://api.github.com/repos/yiisoft/yii2-queue/zipball/d04b4b3c932081200876a351cc6c3502e89e11b8",
-          "reference": "d04b4b3c932081200876a351cc6c3502e89e11b8",
-          "shasum": ""
-        },
-        "require": {
-          "php": ">=5.5.0",
-          "symfony/process": "*",
-          "yiisoft/yii2": "~2.0.14"
-        },
-        "require-dev": {
-          "aws/aws-sdk-php": ">=2.4",
-          "enqueue/amqp-lib": "^0.8",
-          "jeremeamia/superclosure": "*",
-          "pda/pheanstalk": "*",
-          "php-amqplib/php-amqplib": "*",
-          "phpunit/phpunit": "~4.4",
-          "yiisoft/yii2-debug": "*",
-          "yiisoft/yii2-gii": "*",
-          "yiisoft/yii2-redis": "*"
-        },
-        "suggest": {
-          "aws/aws-sdk-php": "Need for aws SQS.",
-          "enqueue/amqp-lib": "Need for AMQP interop queue.",
-          "ext-gearman": "Need for Gearman queue.",
-          "ext-pcntl": "Need for process signals.",
-          "pda/pheanstalk": "Need for Beanstalk queue.",
-          "php-amqplib/php-amqplib": "Need for AMQP queue.",
-          "yiisoft/yii2-redis": "Need for Redis queue."
-        },
-        "type": "yii2-extension",
-        "extra": {
-          "branch-alias": {
-            "dev-master": "2.0.x-dev"
-          }
-        },
-        "autoload": {
-          "psr-4": {
-            "yii\\queue\\": "src",
-            "yii\\queue\\amqp\\": "src/drivers/amqp",
-            "yii\\queue\\amqp_interop\\": "src/drivers/amqp_interop",
-            "yii\\queue\\beanstalk\\": "src/drivers/beanstalk",
-            "yii\\queue\\db\\": "src/drivers/db",
-            "yii\\queue\\file\\": "src/drivers/file",
-            "yii\\queue\\gearman\\": "src/drivers/gearman",
-            "yii\\queue\\redis\\": "src/drivers/redis",
-            "yii\\queue\\sync\\": "src/drivers/sync",
-            "yii\\queue\\sqs\\": "src/drivers/sqs"
-          }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-          "BSD-3-Clause"
-        ],
-        "authors": [
-          {
-            "name": "Roman Zhuravlev",
-            "email": "zhuravljov@gmail.com"
-          }
-        ],
-        "description": "Yii2 Queue Extension which supported DB, Redis, RabbitMQ, Beanstalk, SQS and Gearman",
-        "keywords": [
-          "async",
-          "beanstalk",
-          "db",
-          "gearman",
-          "gii",
-          "queue",
-          "rabbitmq",
-          "redis",
-          "sqs",
-          "yii"
-        ],
-        "time": "2018-05-23T21:04:57+00:00"
-      },
-      {
+        {
             "name": "yiisoft/yii2-swiftmailer",
             "version": "2.1.2",
             "source": {
@@ -1839,16 +1839,16 @@
         },
         {
             "name": "codeception/phpunit-wrapper",
-          "version": "7.3.2",
+            "version": "7.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/phpunit-wrapper.git",
-              "reference": "a5633c736e0e0022bc5065b27c63f2d1aa97b69f"
+                "reference": "a5633c736e0e0022bc5065b27c63f2d1aa97b69f"
             },
             "dist": {
                 "type": "zip",
-              "url": "https://api.github.com/repos/Codeception/phpunit-wrapper/zipball/a5633c736e0e0022bc5065b27c63f2d1aa97b69f",
-              "reference": "a5633c736e0e0022bc5065b27c63f2d1aa97b69f",
+                "url": "https://api.github.com/repos/Codeception/phpunit-wrapper/zipball/a5633c736e0e0022bc5065b27c63f2d1aa97b69f",
+                "reference": "a5633c736e0e0022bc5065b27c63f2d1aa97b69f",
                 "shasum": ""
             },
             "require": {
@@ -1878,7 +1878,7 @@
                 }
             ],
             "description": "PHPUnit classes used by Codeception",
-          "time": "2018-10-07T21:30:01+00:00"
+            "time": "2018-10-07T21:30:01+00:00"
         },
         {
             "name": "codeception/stub",
@@ -2051,71 +2051,71 @@
             "time": "2018-07-12T10:23:15+00:00"
         },
         {
-          "name": "guzzlehttp/psr7",
-          "version": "1.4.2",
-          "source": {
-            "type": "git",
-            "url": "https://github.com/guzzle/psr7.git",
-            "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c"
-          },
-          "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/guzzle/psr7/zipball/f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
-            "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
-            "shasum": ""
-          },
-          "require": {
-            "php": ">=5.4.0",
-            "psr/http-message": "~1.0"
-          },
-          "provide": {
-            "psr/http-message-implementation": "1.0"
-          },
-          "require-dev": {
-            "phpunit/phpunit": "~4.0"
-          },
-          "type": "library",
-          "extra": {
-            "branch-alias": {
-              "dev-master": "1.4-dev"
-            }
-          },
-          "autoload": {
-            "psr-4": {
-              "GuzzleHttp\\Psr7\\": "src/"
+            "name": "guzzlehttp/psr7",
+            "version": "1.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/psr7.git",
+                "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c"
             },
-            "files": [
-              "src/functions_include.php"
-            ]
-          },
-          "notification-url": "https://packagist.org/downloads/",
-          "license": [
-            "MIT"
-          ],
-          "authors": [
-            {
-              "name": "Michael Dowling",
-              "email": "mtdowling@gmail.com",
-              "homepage": "https://github.com/mtdowling"
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
+                "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
+                "shasum": ""
             },
-            {
-              "name": "Tobias Schultze",
-              "homepage": "https://github.com/Tobion"
-            }
-          ],
-          "description": "PSR-7 message implementation that also provides common utility methods",
-          "keywords": [
-            "http",
-            "message",
-            "request",
-            "response",
-            "stream",
-            "uri",
-            "url"
-          ],
-          "time": "2017-03-20T17:10:46+00:00"
+            "require": {
+                "php": ">=5.4.0",
+                "psr/http-message": "~1.0"
+            },
+            "provide": {
+                "psr/http-message-implementation": "1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Psr7\\": "src/"
+                },
+                "files": [
+                    "src/functions_include.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                },
+                {
+                    "name": "Tobias Schultze",
+                    "homepage": "https://github.com/Tobion"
+                }
+            ],
+            "description": "PSR-7 message implementation that also provides common utility methods",
+            "keywords": [
+                "http",
+                "message",
+                "request",
+                "response",
+                "stream",
+                "uri",
+                "url"
+            ],
+            "time": "2017-03-20T17:10:46+00:00"
         },
-      {
+        {
             "name": "myclabs/deep-copy",
             "version": "1.8.1",
             "source": {
@@ -2520,16 +2520,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-          "version": "6.1.3",
+            "version": "6.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-              "reference": "4d3ae9b21a7d7e440bd0cf65565533117976859f"
+                "reference": "4d3ae9b21a7d7e440bd0cf65565533117976859f"
             },
             "dist": {
                 "type": "zip",
-              "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/4d3ae9b21a7d7e440bd0cf65565533117976859f",
-              "reference": "4d3ae9b21a7d7e440bd0cf65565533117976859f",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/4d3ae9b21a7d7e440bd0cf65565533117976859f",
+                "reference": "4d3ae9b21a7d7e440bd0cf65565533117976859f",
                 "shasum": ""
             },
             "require": {
@@ -2540,7 +2540,7 @@
                 "phpunit/php-text-template": "^1.2.1",
                 "phpunit/php-token-stream": "^3.0",
                 "sebastian/code-unit-reverse-lookup": "^1.0.1",
-              "sebastian/environment": "^3.1 || ^4.0",
+                "sebastian/environment": "^3.1 || ^4.0",
                 "sebastian/version": "^2.0.1",
                 "theseer/tokenizer": "^1.1"
             },
@@ -2553,7 +2553,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                  "dev-master": "6.1-dev"
+                    "dev-master": "6.1-dev"
                 }
             },
             "autoload": {
@@ -2579,7 +2579,7 @@
                 "testing",
                 "xunit"
             ],
-          "time": "2018-10-23T05:59:32+00:00"
+            "time": "2018-10-23T05:59:32+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -2855,56 +2855,56 @@
             "time": "2018-09-08T15:14:29+00:00"
         },
         {
-          "name": "psr/http-message",
-          "version": "1.0.1",
-          "source": {
-            "type": "git",
-            "url": "https://github.com/php-fig/http-message.git",
-            "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363"
-          },
-          "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/php-fig/http-message/zipball/f6561bf28d520154e4b0ec72be95418abe6d9363",
-            "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363",
-            "shasum": ""
-          },
-          "require": {
-            "php": ">=5.3.0"
-          },
-          "type": "library",
-          "extra": {
-            "branch-alias": {
-              "dev-master": "1.0.x-dev"
-            }
-          },
-          "autoload": {
-            "psr-4": {
-              "Psr\\Http\\Message\\": "src/"
-            }
-          },
-          "notification-url": "https://packagist.org/downloads/",
-          "license": [
-            "MIT"
-          ],
-          "authors": [
-            {
-              "name": "PHP-FIG",
-              "homepage": "http://www.php-fig.org/"
-            }
-          ],
-          "description": "Common interface for HTTP messages",
-          "homepage": "https://github.com/php-fig/http-message",
-          "keywords": [
-            "http",
-            "http-message",
-            "psr",
-            "psr-7",
-            "request",
-            "response"
-          ],
-          "time": "2016-08-06T14:39:51+00:00"
+            "name": "psr/http-message",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/http-message.git",
+                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/f6561bf28d520154e4b0ec72be95418abe6d9363",
+                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Http\\Message\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for HTTP messages",
+            "homepage": "https://github.com/php-fig/http-message",
+            "keywords": [
+                "http",
+                "http-message",
+                "psr",
+                "psr-7",
+                "request",
+                "response"
+            ],
+            "time": "2016-08-06T14:39:51+00:00"
         },
-      {
+        {
             "name": "sebastian/code-unit-reverse-lookup",
             "version": "1.0.1",
             "source": {
@@ -3469,7 +3469,7 @@
         },
         {
             "name": "symfony/browser-kit",
-          "version": "v4.1.6",
+            "version": "v4.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/browser-kit.git",
@@ -3526,16 +3526,16 @@
         },
         {
             "name": "symfony/console",
-          "version": "v4.1.6",
+            "version": "v4.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-              "reference": "dc7122fe5f6113cfaba3b3de575d31112c9aa60b"
+                "reference": "dc7122fe5f6113cfaba3b3de575d31112c9aa60b"
             },
             "dist": {
                 "type": "zip",
-              "url": "https://api.github.com/repos/symfony/console/zipball/dc7122fe5f6113cfaba3b3de575d31112c9aa60b",
-              "reference": "dc7122fe5f6113cfaba3b3de575d31112c9aa60b",
+                "url": "https://api.github.com/repos/symfony/console/zipball/dc7122fe5f6113cfaba3b3de575d31112c9aa60b",
+                "reference": "dc7122fe5f6113cfaba3b3de575d31112c9aa60b",
                 "shasum": ""
             },
             "require": {
@@ -3590,20 +3590,20 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-          "time": "2018-10-03T08:15:46+00:00"
+            "time": "2018-10-03T08:15:46+00:00"
         },
         {
             "name": "symfony/css-selector",
-          "version": "v4.1.6",
+            "version": "v4.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-              "reference": "d67de79a70a27d93c92c47f37ece958bf8de4d8a"
+                "reference": "d67de79a70a27d93c92c47f37ece958bf8de4d8a"
             },
             "dist": {
                 "type": "zip",
-              "url": "https://api.github.com/repos/symfony/css-selector/zipball/d67de79a70a27d93c92c47f37ece958bf8de4d8a",
-              "reference": "d67de79a70a27d93c92c47f37ece958bf8de4d8a",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/d67de79a70a27d93c92c47f37ece958bf8de4d8a",
+                "reference": "d67de79a70a27d93c92c47f37ece958bf8de4d8a",
                 "shasum": ""
             },
             "require": {
@@ -3643,20 +3643,20 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
-          "time": "2018-10-02T16:36:10+00:00"
+            "time": "2018-10-02T16:36:10+00:00"
         },
         {
             "name": "symfony/dom-crawler",
-          "version": "v4.1.6",
+            "version": "v4.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
-              "reference": "80e60271bb288de2a2259662cff125cff4f93f95"
+                "reference": "80e60271bb288de2a2259662cff125cff4f93f95"
             },
             "dist": {
                 "type": "zip",
-              "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/80e60271bb288de2a2259662cff125cff4f93f95",
-              "reference": "80e60271bb288de2a2259662cff125cff4f93f95",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/80e60271bb288de2a2259662cff125cff4f93f95",
+                "reference": "80e60271bb288de2a2259662cff125cff4f93f95",
                 "shasum": ""
             },
             "require": {
@@ -3700,11 +3700,11 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-          "time": "2018-10-02T12:40:59+00:00"
+            "time": "2018-10-02T12:40:59+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
-          "version": "v4.1.6",
+            "version": "v4.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
@@ -3767,16 +3767,16 @@
         },
         {
             "name": "symfony/finder",
-          "version": "v4.1.6",
+            "version": "v4.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-              "reference": "1f17195b44543017a9c9b2d437c670627e96ad06"
+                "reference": "1f17195b44543017a9c9b2d437c670627e96ad06"
             },
             "dist": {
                 "type": "zip",
-              "url": "https://api.github.com/repos/symfony/finder/zipball/1f17195b44543017a9c9b2d437c670627e96ad06",
-              "reference": "1f17195b44543017a9c9b2d437c670627e96ad06",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/1f17195b44543017a9c9b2d437c670627e96ad06",
+                "reference": "1f17195b44543017a9c9b2d437c670627e96ad06",
                 "shasum": ""
             },
             "require": {
@@ -3812,7 +3812,7 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-          "time": "2018-10-03T08:47:56+00:00"
+            "time": "2018-10-03T08:47:56+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -4113,9 +4113,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-  "stability-flags": {
-    "dmstr/yii2-adminlte-asset": 15
-  },
+    "stability-flags": {
+        "dmstr/yii2-adminlte-asset": 15
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
