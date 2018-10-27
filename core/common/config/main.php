@@ -1,8 +1,10 @@
 <?php
+$params = require(__DIR__ . '/params-local.php');
+
 return [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
     ],
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'bootstrap' => [
@@ -12,9 +14,6 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-//        'authManager' => [
-//            'class' => 'yii\rbac\DbManager',
-//        ],
         'queue' => [
             'as log' => \yii\queue\LogBehavior::class,
             'class' => \yii\queue\db\Queue::class,
@@ -23,21 +22,60 @@ return [
             'channel' => 'default', // Выбранный для очереди канал
             'mutex' => \yii\mutex\MysqlMutex::class, // Мьютекс для синхронизации запросов
         ],
+        'db' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=' . $params['mainDbHost'] . ';dbname=' . $params['mainDbName'],
+            'username' => $params['mainDbUsername'],
+            'password' => $params['mainDbPassword'],
+            'charset' => 'utf8',
+        ],
+        'db2' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=' . $params['userDbHost'] . ';port=3307;dbname=' . $params['userDbName'],
+            'username' => $params['userDbUsername'],
+            'password' => $params['userDbPassword'],
+            'charset' => 'utf8',
+        ],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+//            'viewPath' => '@common/mail',
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => $params['mailHost'],
+                'username' => $params['noreplyEmail'],
+                'password' => $params['noreplyEmailPass'],
+                'port' => 587,
+                'encryption' => 'TLS',
+            ],
+            'messageConfig' => [
+                'charset' => 'UTF-8',
+                'from' => [$params['noreplyEmail'] => $params['noreplyEmailTitle']],
+            ],
+            // send all mails to a file by default. You have to set
+            // 'useFileTransport' to false and configure a transport
+            // for the mailer to send real emails.
+//            'useFileTransport' => true,
+        ],
     ],
     'modules' => [
         'user' => [
             'class' => 'dektrium\user\Module',
-            'enableConfirmation' => false,
-            'enableUnconfirmedLogin' => true,
+            'enableConfirmation' => true,
+            'enableUnconfirmedLogin' => false,
+            'mailer' => [
+                'sender' => [$params['noreplyEmail'] => $params['noreplyEmailTitle']],
+            ]
+
 //            'controllerMap' => [
 //                'security' => [
 //                    'class' => \dektrium\user\controllers\SecurityController::className(),
 //                    'on ' . \dektrium\user\controllers\SecurityController::EVENT_AFTER_LOGIN => function ($e) {
-//                        if (!\Yii::$app->session->has("backURL")) {
-//                            Yii::$app->response->redirect(array(preg_split("/" . \Yii::$app->request->getHostName() . "/", \Yii::$app->request->referrer)))->send();
+//                        if (!\$session->has("backURL")) {
+//                           $response->redirect(array(preg_split("/" .$request->getHostName() . "/",$request->referrer)))->send();
 //                        } else
-//                            Yii::$app->response->redirect(array('/site/index'))->send();
-//                        Yii::$app->end();
+//                           $response->redirect(array('/site/index'))->send();
+//                       $end();
 //                    }
 //                ],
 //            ],
