@@ -22,7 +22,7 @@ use common\models\nginx\CreateNginxConf;
 use common\models\nginx\NginxConf;
 use common\models\nginx\RemoveNginxConf;
 use common\models\StaticAppUploadForm;
-use PHPUnit\Framework\MockObject\BadMethodCallException;
+use Symfony\Component\CssSelector\Exception\InternalErrorException;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
@@ -170,8 +170,8 @@ class AppsController extends Controller
         Yii::$app->view->title = 'Create dynamic app';
         $model = new DockerApps();
         $app = Apps::findOne(['id' => $id]);
-        if (!empty($app->url) || DockerApps::findOne(['app_id' => $id]))
-            throw new ForbiddenHttpException();
+//        if (!empty($app->url) || DockerApps::findOne(['app_id' => $id]))
+//            throw new ForbiddenHttpException();
         $modelUpload = new DockerfileUploadForm();
 
         if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
@@ -179,13 +179,13 @@ class AppsController extends Controller
             $model->app_id = $id;
             $model->service_name = $app->name;
             $model->save();
-            $dockerfilePath = $modelUpload->upload(Yii::$app->user->id, $model->id);
+            $dockerfilePath = $modelUpload->upload(Yii::$app->user->id, $model->service_name);
             if (!empty($dockerfilePath)) {
                 $model->dockerfile = $dockerfilePath;
                 $model->save();
             }
-            if (!$url = $this->createCompose($model))
-                throw new BadMethodCallException();
+            if (!($url = $this->createCompose($model)))
+                throw new InternalErrorException();
 
             $app->url = $url;
             $app->save();
@@ -234,19 +234,20 @@ class AppsController extends Controller
         $service = new DockerService();
 
         $service->name = strtolower(preg_replace('/\s+/', '-', $appModel->service_name));
+
 //        todo Добавление пути к Dockerfile
         if (!empty($appModel->image))
             $service->image = $appModel->image;
-        else
-            if (!empty($appModel->file))
-                $service->build = str_replace('Dockerfile', '', $appModel->file);
-            else
+        else {
+            if (empty($appModel->dockerfile))
                 return false;
+            $service->build = str_replace('Dockerfile', '', $appModel->dockerfile);
+        }
 
         $compose->setService($service->getService());
         if ($compose->save())
-            return '/' . $this::domain . '/' . DockerService::prepareServiceName($appModel->service_name);
-        return null;
+            return '/' . $this::domain . '/' . DockerService::prepareServiceName($appModel->service_name) . '/';
+        return false;
     }
 
     /**
@@ -257,7 +258,7 @@ class AppsController extends Controller
         $conf = new NginxConf();
         $conf->serviceName = DockerService::prepareServiceName($appModel->name);
         $conf->createStatic(Yii::$app->user->id);
-        $appModel->url = '/' . $this::domain . '/' . DockerService::prepareServiceName($appModel->name);
+        $appModel->url = '/' . $this::domain . '/' . DockerService::prepareServiceName($appModel->name) . '/';
 //        $appModel->status = 2;
         $appModel->save();
     }
