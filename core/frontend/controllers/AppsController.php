@@ -22,9 +22,11 @@ use common\models\nginx\CreateNginxConf;
 use common\models\nginx\NginxConf;
 use common\models\nginx\RemoveNginxConf;
 use common\models\StaticAppUploadForm;
+use dektrium\user\filters\AccessRule;
 use Symfony\Component\CssSelector\Exception\InternalErrorException;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -33,6 +35,37 @@ use yii\web\UploadedFile;
 class AppsController extends Controller
 {
     private const domain = "app";
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'ruleConfig' => [
+                    'class' => AccessRule::className(),
+                ],
+                'rules' => [
+                    [
+                        'actions' => [
+                            'index', 'manage', 'manager', 'create',
+                            'create-static', 'create-dynamic', 'list',
+                            'detail', 'my-apps'
+                        ],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'allow' => false,
+                        'roles' => ['?'],
+                    ],
+                ],
+//                'denyCallback' => function () {
+//                    Yii::$app->user->setReturnUrl(Yii::$app->request->url);
+//                    return Yii::$app->response->redirect(['site/login']);
+//                },
+            ],
+        ];
+    }
 
     public function actionIndex()
     {

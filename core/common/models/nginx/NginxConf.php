@@ -21,7 +21,7 @@ class NginxConf
 
     public function __construct()
     {
-        $this->pathToFile = realpath(\Yii::$app->basePath . '/../../storage/nginx/dind/user_confs');
+        $this->pathToFile = realpath(\Yii::$app->basePath . '/../../storage/user_confs');
     }
 
 

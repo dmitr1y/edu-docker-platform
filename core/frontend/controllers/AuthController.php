@@ -2,18 +2,12 @@
 
 namespace frontend\controllers;
 
+use dektrium\user\filters\AccessRule;
 use Yii;
+use yii\filters\AccessControl;
 
 class AuthController extends \yii\web\Controller
 {
-//    public function beforeAction($action)
-//    {
-//        if (in_array($action->id, ['incoming'])) {
-//            $this->enableCsrfValidation = false;
-//        }
-//        return parent::beforeAction($action);
-//    }
-//
     public function behaviors()
     {
         return [
@@ -28,6 +22,19 @@ class AuthController extends \yii\web\Controller
                         'Access-Control-Allow-Credentials' => null,
                         'Access-Control-Max-Age' => 86400,
                         'Access-Control-Expose-Headers' => [],
+                    ],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'ruleConfig' => [
+                    'class' => AccessRule::className(),
+                ],
+                'rules' => [
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['?', '@'],
                     ],
                 ],
             ],

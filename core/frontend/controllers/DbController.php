@@ -16,6 +16,32 @@ use yii\web\Controller;
 
 class DbController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'ruleConfig' => [
+                    'class' => AccessRule::className(),
+                ],
+                'rules' => [
+                    [
+                        'actions' => ['create', 'view', 'remove'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'allow' => false,
+                        'roles' => ['?'],
+                    ],
+                ],
+//                'denyCallback' => function () {
+//                    Yii::$app->user->setReturnUrl(Yii::$app->request->url);
+//                    return Yii::$app->response->redirect(['site/login']);
+//                },
+            ],
+        ];
+    }
     public function actionCreate()
     {
         Yii::$app->view->title = 'Create database for your app';
