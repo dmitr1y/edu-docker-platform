@@ -27,13 +27,14 @@ services:
     - docker
   #    restart: always
   mysql:
-    image: mysql:5.7
+    image: mysql/mysql-server
     container_name: mysql_db
     environment:
     - MYSQL_ROOT_PASSWORD=password
     - MYSQL_DATABASE=edu
     volumes:
     - ~/db/mysql/core:/var/lib/mysql
+    - ./docker/mysql/my.cnf:/etc/my.cnf
     ports:
     - 3306:3306
     networks:
