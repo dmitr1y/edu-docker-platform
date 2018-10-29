@@ -27,7 +27,7 @@ class SiteController extends Controller
                     [
                         'actions' => ['index', 'about'],
                         'allow' => true,
-                        'roles' => ['?'],
+                        'roles' => ['?', '@'],
                     ],
                     [
                         'actions' => ['contact'],
