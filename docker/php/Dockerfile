@@ -103,6 +103,8 @@ RUN pip install docker-compose
 RUN apt-get install -y supervisor
 ADD yii2_queue.conf /etc/supervisor/conf.d/yii2_queue.conf
 
+ADD docker-compose /etc/init.d/
+RUN chmod 0755 /etc/init.d/docker-compose
 # test
 RUN apt-get install -y nano procps
 
@@ -113,4 +115,4 @@ WORKDIR /platform/core
 EXPOSE 9000
 
 #CMD /usr/bin/supervisord && docker-compose -f /platform/storage/docker-compose.yml up -d nginx portainer && php-fpm
-CMD /usr/bin/supervisord && php-fpm
+CMD /usr/bin/supervisord && /etc/init.d/docker-compose start && php-fpm
