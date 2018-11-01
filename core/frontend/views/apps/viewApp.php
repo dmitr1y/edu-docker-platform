@@ -29,8 +29,6 @@ $this->params['breadcrumbs'][] = $this->title;;
             foreach ($model as $key => $value) {
                 if (isset($model->{$key}) || $key === 'status') {
                     echo "<tr>";
-//                    echo "<td>" . $key . "</td><td>" . $value . "/apps/hello-wrold</td>";
-
                     if ($key === 'url')
                         echo "<td>" . $key . "</td><td><a href='" . $value . "'>" . $value . "</a></td>";
                     else {

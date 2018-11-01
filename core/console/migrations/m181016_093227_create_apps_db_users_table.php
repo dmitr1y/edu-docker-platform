@@ -25,6 +25,7 @@ class m181016_093227_create_apps_db_users_table extends Migration
             'permissions' => $this->text(),
             'database' => $this->string(255),
             'owner_id' => $this->integer(),
+            'app_id' => $this->integer(),
             'timestamp' => 'timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP'
         ], $tableOptions);
     }

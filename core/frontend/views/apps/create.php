@@ -27,9 +27,27 @@ $this->params['breadcrumbs'][] = $this->title;
         '0' => 'Static app',
         '1' => 'Dynamic app',
     ]) ?>
+    <div class="form-group" id="dbReqiure">
+        <?= Html::checkbox("database", false, ['label' => 'Database required']) ?>
+    </div>
     <div class="form-group">
         <?= Html::submitButton('Next', ['class' => 'btn btn-primary']) ?>
     </div>
-
+    <script language="JavaScript" type="text/javascript">
+        let appType = document.getElementById('apps-type');
+        document.getElementById('dbReqiure').style.display = 'none';
+        appType.onchange = function () {
+            let dbReqiure = document.getElementById('dbReqiure');
+            switch (appType.options[appType.selectedIndex].value) {
+                case "1":
+                    dbReqiure.style.display = 'block';
+                    break;
+                default:
+                    dbReqiure.style.display = 'none';
+                    break;
+            }
+            console.log('getted value: ' + appType.options[appType.selectedIndex].value);
+        };
+    </script>
     <?php ActiveForm::end(); ?>
 </div>

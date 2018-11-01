@@ -6,13 +6,23 @@
  * Time: 20:11
  */
 
+use yii\bootstrap\Alert;
 use yii\helpers\Html;
 
 /** @var \common\models\mysql\AppsDbUsers $model */
+/** @var \common\models\app\Apps $app */
 
 $this->params['breadcrumbs'][] = 'Apps';
+$this->params['breadcrumbs'][] = $app->name;
 $this->params['breadcrumbs'][] = $this->title;
-?>
+
+echo Alert::widget([
+    'options' => [
+        'class' => 'alert-warning',
+    ],
+    'body' => '<strong>Warning!</strong> Please write down the access data. They can no longer be seen.'
+]); ?>
+
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
     <table class="table">
@@ -29,12 +39,8 @@ $this->params['breadcrumbs'][] = $this->title;
             <td><?= $model->database ?></td>
         </tr>
     </table>
-    <form class="form-group" action="/db/remove" method="post">
-        <input class="btn btn-info" type="submit" name="action" value="Edit"/>
-        <input class="btn btn-danger" type="submit" name="action" value="Remove"/>
-        <input type="hidden" name="id" value="<?= $model->id ?>"/>
-        <input id="form-token" type="hidden" name="<?= Yii::$app->request->csrfParam ?>"
-               value="<?= Yii::$app->request->csrfToken ?>"/>
-    </form>
-    <code><?= __FILE__ ?></code>
+
+    <div class="form-group">
+        <a href="/apps/manage?<?= $app->id ?>" class="btn btn-info">Got to <?= $app->name ?></a>
+    </div>
 </div>

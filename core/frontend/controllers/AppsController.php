@@ -74,20 +74,18 @@ class AppsController extends Controller
         return $this->render('index');
     }
 
-    public function actionManage($id = null, $logFlag = null)
+    public function actionManage($id = null, $logFlag = null, $db_info = null)
     {
         if (empty($id))
             return $this->redirect(['apps/create']);
 
         $model = Apps::find()->where(['id' => $id])->one();
         $log = null;
-        if (!empty($logFlag)) {
-            if (!empty($id))
-                $log = AppsLog::findOne(['appId' => $model->id]);
-        }
+        if (!empty($logFlag))
+            $log = AppsLog::findOne(['appId' => $model->id]);
 
         Yii::$app->view->title = $model->name;
-        return $this->render('viewApp', ['model' => $model, 'log' => $log]);
+        return $this->render('viewApp', ['model' => $model, 'log' => $log, 'db_info' => $db_info]);
     }
 
     public function actionManager()
@@ -177,6 +175,8 @@ class AppsController extends Controller
             $model->save();
 
             $url = null;
+            $dbRequire = Yii::$app->request->post('database');
+
 
             switch ($model->type) {
                 case 0:
@@ -189,16 +189,15 @@ class AppsController extends Controller
                     return $this->redirect(['apps/create']);
                     break;
             }
-            return $this->redirect([$url, 'id' => $model->id]);
+            return $this->redirect([$url, 'id' => $model->id, 'dbRequire' => $dbRequire]);
         }
         return $this->render('create', ['model' => $model]);
     }
 
-    public function actionCreateDynamic($id = null)
+    public function actionCreateDynamic($id = null, $dbRequire = null)
     {
         if (empty($id))
             throw new NotFoundHttpException();
-
 
         Yii::$app->view->title = 'Create dynamic app';
         $model = new DockerApps();
@@ -222,6 +221,8 @@ class AppsController extends Controller
 
             $app->url = $url;
             $app->save();
+            if ($dbRequire)
+                return $this->redirect(['db/create', 'id' => $app->id]);
             return $this->redirect(['apps/manage', 'id' => $app->id]);
         }
         return $this->render('createDynamic', ['model' => $model, 'modelUpload' => $modelUpload]);
@@ -273,8 +274,7 @@ class AppsController extends Controller
             $service->image = $appModel->image;
 //            TODO saving container data to volumes
 //            $service->volumes=["'".$this->data_path."/".Yii::$app->user->id."/". DockerService::prepareServiceName($appModel->service_name).":/path/to_data/in_container"];
-        }
-        else {
+        } else {
             if (empty($appModel->dockerfile))
                 return false;
             $service->build = str_replace('Dockerfile', '', $appModel->dockerfile);
@@ -282,7 +282,7 @@ class AppsController extends Controller
 
         $compose->setService($service->getService());
         if ($compose->save())
-            return '/' . $this::domain . '/' . DockerService::prepareServiceName($appModel->service_name) . '/';
+            return '/app/' . DockerService::prepareServiceName($appModel->service_name) . '/';
         return false;
     }
 
