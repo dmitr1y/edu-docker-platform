@@ -34,7 +34,7 @@ use yii\web\UploadedFile;
 
 class AppsController extends Controller
 {
-    private const domain = "app";
+    private $data_path = "/storage/user_app_data";
 
     public function behaviors()
     {
@@ -269,8 +269,11 @@ class AppsController extends Controller
         $service->name = strtolower(preg_replace('/\s+/', '-', $appModel->service_name));
 
 //        todo Добавление пути к Dockerfile
-        if (!empty($appModel->image))
+        if (!empty($appModel->image)) {
             $service->image = $appModel->image;
+//            TODO saving container data to volumes
+//            $service->volumes=["'".$this->data_path."/".Yii::$app->user->id."/". DockerService::prepareServiceName($appModel->service_name).":/path/to_data/in_container"];
+        }
         else {
             if (empty($appModel->dockerfile))
                 return false;
