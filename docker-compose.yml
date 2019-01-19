@@ -27,13 +27,15 @@ services:
     - docker
   #    restart: always
   mysql:
-    image: mysql:5.7
+    image: mysql/mysql-server
     container_name: mysql_db
     environment:
     - MYSQL_ROOT_PASSWORD=password
     - MYSQL_DATABASE=edu
+    - MYSQL_ROOT_HOST=%
     volumes:
-    - ~/db/mysql:/var/lib/mysql
+    - ~/db/mysql/core:/var/lib/mysql
+    - ./docker/mysql/my.cnf:/etc/my.cnf
     ports:
     - 3306:3306
     networks:
@@ -46,6 +48,15 @@ services:
     volumes:
     - ./storage:/storage
     - ./dind:/dind
+    - ~/db/mysql/user_apps:/db/mysql_apps
+    ports:
+    - 3307:3307
+    networks:
+    - docker
+  cleaner:
+    build: ./docker/cleaner
+    environment:
+    - DOCKER_HOST=tcp://dind:2375
     networks:
     - docker
   # docker manager UI

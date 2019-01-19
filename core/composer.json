@@ -1,52 +1,63 @@
 {
-  "name": "yiisoft/yii2-app-advanced",
-  "description": "Yii 2 Advanced Project Template",
-  "keywords": [
-    "yii2",
-    "framework",
-    "advanced",
-    "project template"
-  ],
-  "homepage": "http://www.yiiframework.com/",
   "type": "project",
-  "license": "BSD-3-Clause",
-  "support": {
-    "issues": "https://github.com/yiisoft/yii2/issues?state=open",
-    "forum": "http://www.yiiframework.com/forum/",
-    "wiki": "http://www.yiiframework.com/wiki/",
-    "irc": "irc://irc.freenode.net/yii",
-    "source": "https://github.com/yiisoft/yii2"
-  },
-  "minimum-stability": "stable",
+  "license": "proprietary",
   "require": {
-    "php": ">=5.4.0",
-    "yiisoft/yii2": "~2.0.6",
-    "yiisoft/yii2-bootstrap": "~2.0.0",
-    "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
-    "docker-php/docker-php": "^2.0",
-    "omauger/docker-compose-php": "@dev",
-    "symfony/process": "^4.1",
-    "symfony/yaml": "^4.1",
-    "romanpitak/nginx-config-processor": "^0.2.1",
-    "dektrium/yii2-user": "^0.9.14"
-  },
-  "require-dev": {
-    "yiisoft/yii2-debug": "~2.0.0",
-    "yiisoft/yii2-gii": "~2.0.0",
-    "yiisoft/yii2-faker": "~2.0.0",
-    "codeception/base": "^2.2.3",
-    "codeception/verify": "~0.3.1"
+    "php": "^7.1.3",
+    "ext-ctype": "*",
+    "ext-iconv": "*",
+    "sensio/framework-extra-bundle": "^5.2",
+    "symfony/console": "4.2.*",
+    "symfony/dotenv": "4.2.*",
+    "symfony/flex": "^1.1",
+    "symfony/framework-bundle": "4.2.*",
+    "symfony/yaml": "4.2.*"
   },
   "config": {
-    "process-timeout": 1800,
-    "fxp-asset": {
-      "enabled": false
+    "preferred-install": {
+      "*": "dist"
+    },
+    "sort-packages": true
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
     }
   },
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://asset-packagist.org"
+  "autoload-dev": {
+    "psr-4": {
+      "App\\Tests\\": "tests/"
     }
-  ]
+  },
+  "replace": {
+    "paragonie/random_compat": "2.*",
+    "symfony/polyfill-ctype": "*",
+    "symfony/polyfill-iconv": "*",
+    "symfony/polyfill-php71": "*",
+    "symfony/polyfill-php70": "*",
+    "symfony/polyfill-php56": "*"
+  },
+  "scripts": {
+    "auto-scripts": {
+      "cache:clear": "symfony-cmd",
+      "assets:install %PUBLIC_DIR%": "symfony-cmd"
+    },
+    "post-install-cmd": [
+      "@auto-scripts"
+    ],
+    "post-update-cmd": [
+      "@auto-scripts"
+    ]
+  },
+  "conflict": {
+    "symfony/symfony": "*"
+  },
+  "extra": {
+    "symfony": {
+      "allow-contrib": false,
+      "require": "4.2.*"
+    }
+  },
+  "require-dev": {
+    "symfony/maker-bundle": "^1.11"
+  }
 }
