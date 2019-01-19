@@ -14,7 +14,40 @@ class UserAppsController extends AbstractController
     {
         return $this->json([
             'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/UserAppsController.php',
+        ]);
+    }
+
+    /**
+     * @Route("/user-apps/get-all")
+     * @return object|\Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function getAll()
+    {
+        $user = [
+            'id' => 1,
+            'firstName' => 'Admin',
+            'lastName' => 'Adminov',
+            'email' => 'admin@localhost',
+            'login' => 'admin',
+        ];
+
+        return $this->json([
+            [
+                'id' => 1,
+                'name' => 'Приложение 1',
+                'creator' => $user,
+                'url' => '/apps/view/1',
+                'type' => 1,
+                'status' => true,
+            ],
+            [
+                'id' => 1,
+                'name' => 'Приложение 2',
+                'creator' => $user,
+                'url' => '/apps/view/1',
+                'type' => 1,
+                'status' => true,
+            ]
         ]);
     }
 }
