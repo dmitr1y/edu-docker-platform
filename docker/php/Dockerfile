@@ -108,6 +108,12 @@ RUN chmod 0755 /etc/init.d/docker-compose
 # test
 RUN apt-get install -y nano procps
 
+# x-debug
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+RUN echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" >> /usr/local/etc/php/php.ini
+COPY ./xdebug.ini /usr/local/etc/php/conf.d/
+
 RUN rm -rf /var/lib/apt/lists/*
 
 WORKDIR /platform/core

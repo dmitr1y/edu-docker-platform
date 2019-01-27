@@ -294,7 +294,7 @@ class AppsController extends Controller
         $conf = new NginxConf();
         $conf->serviceName = DockerService::prepareServiceName($appModel->name);
         $conf->createStatic(Yii::$app->user->id);
-        $appModel->url = '/' . $this::domain . '/' . DockerService::prepareServiceName($appModel->name) . '/';
+        $appModel->url = '/' . Yii::$app->params['app_host'] . '/' . DockerService::prepareServiceName($appModel->name) . '/';
 //        $appModel->status = 2;
         $appModel->save();
     }

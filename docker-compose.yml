@@ -10,6 +10,7 @@ services:
     - ./docker/nginx/confs:/etc/nginx/conf.d
     - ./docker/nginx/certs/edu-selfsigned.crt:/etc/ssl/certs/edu-selfsigned.crt
     - ./docker/nginx/certs/edu-selfsigned.key:/etc/ssl/private/edu-selfsigned.key
+    - ./logs/core/core-error.log:/var/log/nginx/core-error.log
     networks:
     - frontend
     - backend
@@ -22,6 +23,9 @@ services:
     - ./:/platform
     environment:
     - DOCKER_HOST=tcp://dind:2375
+    - PHP_IDE_CONFIG=serverName=docker
+    - PHP_XDEBUG_ENABLED=1
+    - XDEBUG_CONFIG=remote_host=10.254.254.254
     networks:
     - backend
     - docker
@@ -67,7 +71,7 @@ services:
     - /var/run/docker.sock:/var/run/docker.sock
     - portainer_data:/data
     ports:
-    - '9000:9000'
+    - '9999:9000'
 networks:
   frontend:
   backend:
