@@ -109,7 +109,7 @@ class AppsController extends Controller
 
         switch ($action) {
             case 'Run':
-                if (empty($dockerApp))
+                if (empty($dockerApp) && empty($staticApp))
                     throw new NotFoundHttpException();
 
                 Yii::$app->queue->push(new RunDockerService([
