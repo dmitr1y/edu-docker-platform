@@ -19,6 +19,16 @@ use Yii;
 class Apps extends \yii\db\ActiveRecord
 {
     /**
+     * Статическое приложение (простой html+js, выполняется только на стороне клиента)
+     */
+    const STATIC_TYPE = 0;
+
+    /**
+     * Динамическое приложение (выполняется на сервере и работает в Docker)
+     */
+    const DYNAMIC_TYPE = 1;
+
+    /**
      * {@inheritdoc}
      */
     public static function tableName()

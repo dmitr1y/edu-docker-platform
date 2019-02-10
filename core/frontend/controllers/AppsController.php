@@ -34,7 +34,7 @@ use yii\web\UploadedFile;
 
 class AppsController extends Controller
 {
-    private $data_path = "/storage/user_app_data";
+//    private $data_path = "/storage/user_app_data";
 
     public function behaviors()
     {
@@ -74,29 +74,44 @@ class AppsController extends Controller
         return $this->render('index');
     }
 
+    /**
+     * @param null $id
+     * @param null $logFlag
+     * @param null $db_info
+     * @return string|\yii\web\Response
+     */
     public function actionManage($id = null, $logFlag = null, $db_info = null)
     {
-        if (empty($id))
+        if (empty($id)) {
             return $this->redirect(['apps/create']);
+        }
 
         $model = Apps::find()->where(['id' => $id])->one();
         $log = null;
-        if (!empty($logFlag))
+
+        if (!empty($logFlag)) {
             $log = AppsLog::findOne(['appId' => $model->id]);
+        }
 
         Yii::$app->view->title = $model->name;
         return $this->render('viewApp', ['model' => $model, 'log' => $log, 'db_info' => $db_info]);
     }
 
+    /**
+     * Управление приложением
+     *
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
+     */
     public function actionManager()
     {
         $appName = Yii::$app->request->post('app');
         $action = Yii::$app->request->post('action');
         $id = Yii::$app->request->post('id');
 
-//        todo Вывод ошибки "приложение не найдено"
-        if (!isset($appName) || empty($appName))
-            throw  new \yii\web\NotFoundHttpException();
+        if (!isset($appName) || empty($appName)) {
+            throw  new NotFoundHttpException("Приложение не найдено");
+        }
 
         $app = Apps::findOne(['id' => $id]);
         $dockerApp = DockerApps::findOne(['app_id' => $app->id]);
@@ -165,9 +180,14 @@ class AppsController extends Controller
         return $this->redirect(['apps/manage', 'logFlag' => true, 'id' => $id]);
     }
 
+    /**
+     * Отображение страницы создания приложения
+     *
+     * @return string|\yii\web\Response
+     */
     public function actionCreate()
     {
-        $this->view->title = "Create your app";
+        $this->view->title = "Создание своего приложения";
         $model = new Apps();
 
         if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
@@ -177,29 +197,38 @@ class AppsController extends Controller
             $url = null;
             $dbRequire = Yii::$app->request->post('database');
 
-
             switch ($model->type) {
-                case 0:
+                case Apps::STATIC_TYPE:
                     $url = 'apps/create-static';
                     break;
-                case 1:
+                case Apps::DYNAMIC_TYPE:
                     $url = 'apps/create-dynamic';
                     break;
                 default:
                     return $this->redirect(['apps/create']);
-                    break;
             }
+
             return $this->redirect([$url, 'id' => $model->id, 'dbRequire' => $dbRequire]);
         }
         return $this->render('create', ['model' => $model]);
     }
 
+    /**
+     * Отображение формы создания динамическог оприложения
+     *
+     * @param null $id
+     * @param null $dbRequire
+     * @return string|\yii\web\Response
+     * @throws InternalErrorException
+     * @throws NotFoundHttpException
+     */
     public function actionCreateDynamic($id = null, $dbRequire = null)
     {
-        if (empty($id))
+        if (empty($id)) {
             throw new NotFoundHttpException();
+        }
 
-        Yii::$app->view->title = 'Create dynamic app';
+        Yii::$app->view->title = 'Создание динамического приложения';
         $model = new DockerApps();
         $app = Apps::findOne(['id' => $id]);
 //        if (!empty($app->url) || DockerApps::findOne(['app_id' => $id]))
@@ -212,12 +241,17 @@ class AppsController extends Controller
             $model->service_name = $app->name;
             $model->save();
             $dockerfilePath = $modelUpload->upload(Yii::$app->user->id, $model->service_name);
+
+//            todo проверка содержимого файла через exec("file ")
+
             if (!empty($dockerfilePath)) {
                 $model->dockerfile = $dockerfilePath;
                 $model->save();
             }
-            if (!($url = $this->createCompose($model)))
+
+            if (!($url = $this->createCompose($model))) {
                 throw new InternalErrorException();
+            }
 
             $app->url = $url;
             $app->save();
@@ -228,20 +262,30 @@ class AppsController extends Controller
         return $this->render('createDynamic', ['model' => $model, 'modelUpload' => $modelUpload]);
     }
 
+    /**
+     * Отображение формы создания статического приложения
+     *
+     * @param null $id
+     * @return string|\yii\web\Response
+     * @throws ForbiddenHttpException
+     * @throws NotFoundHttpException
+     */
     public function actionCreateStatic($id = null)
     {
-        Yii::$app->view->title = 'Create static app';
+        Yii::$app->view->title = 'Создание статического приложения';
         $model = new StaticApps();
         $modelUpload = new StaticAppUploadForm();
 
         if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
-            if (empty($id))
+            if (empty($id)) {
                 throw new ForbiddenHttpException();
+            }
 
             $app = Apps::findOne(['id' => $id]);
 
-            if (empty($app))
+            if (empty($app)) {
                 throw new NotFoundHttpException();
+            }
 
             $modelUpload->app = UploadedFile::getInstance($model, 'path_to_index');
             $model->app_id = $app->id;
@@ -259,6 +303,62 @@ class AppsController extends Controller
     }
 
     /**
+     * Отображение списка приложений
+     *
+     * @return string
+     */
+    public function actionList()
+    {
+        $this->view->title = "Apps catalog";
+        $appsQuery = Apps::find();
+        $dataProvider = new ActiveDataProvider([
+            'query' => $appsQuery,
+            'pagination' => [
+                'pageSize' => 20,
+            ],
+        ]);
+        return $this->render('list', ['dataProvider' => $dataProvider]);
+    }
+
+    /**
+     * Отображение страницы с ифнормацией о приложении
+     *
+     * @param null $id
+     * @return string
+     * @throws NotFoundHttpException
+     */
+    public function actionDetail($id = null)
+    {
+        if (empty($id)) {
+            throw  new NotFoundHttpException("Приложение не найдено.");
+        }
+
+        $model = Apps::findOne(['id' => $id]);
+
+        return $this->render('_listViewAppDetail', ['model' => $model]);
+    }
+
+    /**
+     * Отображение приложений пользователя
+     *
+     * @return string
+     */
+    public function actionMyApps()
+    {
+        $this->view->title = "Мои приложения";
+        $appsQuery = Apps::find()->where(['owner_id' => Yii::$app->user->id]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $appsQuery,
+            'pagination' => [
+                'pageSize' => 20,
+            ],
+        ]);
+        return $this->render('myList', ['dataProvider' => $dataProvider]);
+    }
+
+    /**
+     * Создание сервиса в docker-compose
+     *
      * @param $appModel DockerApps
      * @return bool
      */
@@ -275,18 +375,24 @@ class AppsController extends Controller
 //            TODO saving container data to volumes
 //            $service->volumes=["'".$this->data_path."/".Yii::$app->user->id."/". DockerService::prepareServiceName($appModel->service_name).":/path/to_data/in_container"];
         } else {
-            if (empty($appModel->dockerfile))
+            if (empty($appModel->dockerfile)) {
                 return false;
+            }
+
             $service->build = str_replace('Dockerfile', '', $appModel->dockerfile);
         }
 
         $compose->setService($service->getService());
-        if ($compose->save())
+        if ($compose->save()) {
             return '/app/' . DockerService::prepareServiceName($appModel->service_name) . '/';
+        }
+
         return false;
     }
 
     /**
+     * Создание статического приложения
+     *
      * @param $appModel Apps
      */
     private function createStatic($appModel)
@@ -297,41 +403,5 @@ class AppsController extends Controller
         $appModel->url = '/' . Yii::$app->params['app_host'] . '/' . DockerService::prepareServiceName($appModel->name) . '/';
 //        $appModel->status = 2;
         $appModel->save();
-    }
-
-    public function actionList()
-    {
-        $this->view->title = "Apps catalog";
-        $appsQuery = Apps::find();
-        $dataProvider = new ActiveDataProvider([
-            'query' => $appsQuery,
-            'pagination' => [
-                'pageSize' => 20,
-            ],
-        ]);
-        return $this->render('list', ['dataProvider' => $dataProvider]);
-    }
-
-    public function actionDetail($id = null)
-    {
-        if (empty($id))
-            throw  new \yii\web\NotFoundHttpException();
-
-        $model = Apps::findOne(['id' => $id]);
-
-        return $this->render('_listViewAppDetail', ['model' => $model]);
-    }
-
-    public function actionMyApps()
-    {
-        $this->view->title = "My apps";
-        $appsQuery = Apps::find()->where(['owner_id' => Yii::$app->user->id]);
-        $dataProvider = new ActiveDataProvider([
-            'query' => $appsQuery,
-            'pagination' => [
-                'pageSize' => 20,
-            ],
-        ]);
-        return $this->render('myList', ['dataProvider' => $dataProvider]);
     }
 }

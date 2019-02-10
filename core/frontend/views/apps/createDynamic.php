@@ -10,7 +10,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 //$this->title = 'App';
-$this->params['breadcrumbs'][] = 'App';
+$this->params['breadcrumbs'][] = 'Приложения';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-about">
@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= $form->field($model, 'dockerfile')->fileInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Create', ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton('Создать', ['class' => 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

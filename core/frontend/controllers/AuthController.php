@@ -6,6 +6,12 @@ use dektrium\user\filters\AccessRule;
 use Yii;
 use yii\filters\AccessControl;
 
+/**
+ * Проверка авторизации пользователя
+ *
+ * Class AuthController
+ * @package frontend\controllers
+ */
 class AuthController extends \yii\web\Controller
 {
     public function behaviors()
@@ -41,15 +47,11 @@ class AuthController extends \yii\web\Controller
         ];
     }
 
+    /**
+     * Проверка авторизирован ли пользователь
+     */
     public function actionIndex()
     {
-//        $data = null;
-//        $data ['COOKIE'] = $_SERVER['HTTP_COOKIE'];
-//        $data ['user id'] = Yii::$app->user->id;
-//        $data['session'] = $session = Yii::$app->session->getId();
-//        $data ['guest check'] = Yii::$app->user->isGuest;
-//        file_put_contents(realpath(\Yii::$app->basePath . '/../../storage/user_apps') . '/auth.txt', json_encode($data, JSON_PRETTY_PRINT));
-
         $response_code = 403;
         if (!Yii::$app->user->isGuest) {
             $response_code = 200;

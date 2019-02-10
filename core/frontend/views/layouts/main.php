@@ -39,25 +39,25 @@ BootboxAsset::overrideSystemConfirm();
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
+        ['label' => 'Главная', 'url' => ['/site/index']],
+        ['label' => 'О нас', 'url' => ['/site/about']],
+        ['label' => 'Контакты', 'url' => ['/site/contact']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/user/registration/register']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/user/security/login']];
+        $menuItems[] = ['label' => 'Регистрация', 'url' => ['/user/registration/register']];
+        $menuItems[] = ['label' => 'Вход', 'url' => ['/user/security/login']];
     } else {
         $menuItems[] = [
-            'label' => 'Apps',
+            'label' => 'Приложения',
             'items' => [
-                ['label' => 'Catalog', 'url' => '/apps/list'],
-                ['label' => 'Create your app', 'url' => '/apps/create']
+                ['label' => 'Каталог', 'url' => '/apps/list'],
+                ['label' => 'Создать новое', 'url' => '/apps/create']
             ]
         ];
         $menuItems[] = '<li>'
             . Html::beginForm(['/user/security/logout'], 'post')
             . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
+                'Выход (' . Yii::$app->user->identity->username . ')',
                 ['class' => 'btn btn-link logout']
             )
             . Html::endForm()

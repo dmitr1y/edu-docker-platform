@@ -48,7 +48,8 @@ class DbController extends Controller
     }
 
     /**
-     * Create database for app
+     * Создание базы данных для приложения
+     *
      * @param integer $id - app id
      * @return string|\yii\web\Response
      * @throws ForbiddenHttpException
@@ -60,8 +61,12 @@ class DbController extends Controller
 
         $app = Apps::findOne(['id' => $id]);
 
-        if (empty($app) || !empty(AppsDbUsers::findOne(['app_id' => $id])) || $app->owner_id !== Yii::$app->user->id)
+        $db_user = AppsDbUsers::findOne(['app_id' => $id]);
+
+//        todo возвращать пользователя, если уже существует
+        if (empty($app) || !empty($db_user) || $app->owner_id !== Yii::$app->user->id) {
             throw new ForbiddenHttpException();
+        }
 
         $model->owner_id = Yii::$app->user->id;
         $model->app_id = $id;
@@ -71,6 +76,59 @@ class DbController extends Controller
         $model->save();
 
         return $this->render('view', ['model' => $model, 'app' => $app]);
+    }
+
+    public function actionView($id = null)
+    {
+        if (empty($id)) {
+            throw  new \yii\web\NotFoundHttpException();
+        }
+
+        $model = AppsDbUsers::findOne(['id' => $id]);
+
+        if (empty($model)) {
+            throw  new \yii\web\NotFoundHttpException();
+        }
+
+        if ($model->owner_id !== Yii::$app->user->id) {
+            throw new ForbiddenHttpException();
+        }
+
+//        todo security: enter user password for showing db pass
+
+        return $this->render('view', ['model' => $model]);
+    }
+
+    public function actionRemove()
+    {
+        $id = Yii::$app->request->post('id');
+        $action = Yii::$app->request->post('action');
+        if (empty($id) || empty($action)) {
+            throw  new \yii\web\NotFoundHttpException();
+        }
+
+        $model = AppsDbUsers::findOne(['id' => $id]);
+
+        if (empty($model)) {
+            throw  new \yii\web\NotFoundHttpException();
+        }
+
+        switch ($action) {
+            case 'Remove':
+                try {
+                    $model->delete();
+                } catch (StaleObjectException $e) {
+                } catch (\Throwable $e) {
+                }
+                return $this->redirect(['db/create']);
+                break;
+            case 'Edit':
+                break;
+            default:
+                throw  new \yii\web\NotFoundHttpException();
+        }
+
+        return $this->redirect(['db/create']);
     }
 
     /**
@@ -121,53 +179,5 @@ class DbController extends Controller
         }
         $dash_str .= $password;
         return $dash_str;
-    }
-
-    public function actionView($id = null)
-    {
-        if (empty($id))
-            throw  new \yii\web\NotFoundHttpException();
-
-        $model = AppsDbUsers::findOne(['id' => $id]);
-
-        if (empty($model))
-            throw  new \yii\web\NotFoundHttpException();
-
-        if ($model->owner_id !== Yii::$app->user->id)
-            throw new ForbiddenHttpException();
-
-//        todo security: enter user password for showing db pass
-
-        return $this->render('view', ['model' => $model]);
-    }
-
-    public function actionRemove()
-    {
-        $id = Yii::$app->request->post('id');
-        $action = Yii::$app->request->post('action');
-        if (empty($id) || empty($action))
-            throw  new \yii\web\NotFoundHttpException();
-
-        $model = AppsDbUsers::findOne(['id' => $id]);
-
-        if (empty($model))
-            throw  new \yii\web\NotFoundHttpException();
-
-        switch ($action) {
-            case 'Remove':
-                try {
-                    $model->delete();
-                } catch (StaleObjectException $e) {
-                } catch (\Throwable $e) {
-                }
-                return $this->redirect(['db/create']);
-                break;
-            case 'Edit':
-                break;
-            default:
-                throw  new \yii\web\NotFoundHttpException();
-                break;
-        }
-        return $this->redirect(['db/create']);
     }
 }

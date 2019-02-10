@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Choice app from <a href="/apps/list">catalog</a> or <a href="/apps/create">create your own</a>. </p>
+    <p>Выберите приложение из <a href="/apps/list">каталога</a> или <a href="/apps/create">создайте свое</a>. </p>
 
     <code><?= __FILE__ ?></code>
 </div>

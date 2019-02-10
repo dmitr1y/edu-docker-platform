@@ -64,7 +64,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays homepage.
+     * Отображение главной страницы
      *
      * @return mixed
      */
@@ -74,7 +74,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays contact page.
+     * Отображение страницы "Контакты"
      *
      * @return mixed
      */
@@ -97,7 +97,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays about page.
+     * Отображение страницы "О нас"
      *
      * @return mixed
      */
