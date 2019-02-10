@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model common\models\Post */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Записи', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Блог', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>

@@ -18,27 +18,15 @@ use yii\widgets\ActiveForm;
         ],
     ]); ?>
 
-    <?= $form->field($model, 'creator') ?>
-
-    <?= $form->field($model, 'category') ?>
-
     <?= $form->field($model, 'title') ?>
 
     <?= $form->field($model, 'annotation') ?>
 
-    <?php // echo $form->field($model, 'body') ?>
-
-    <?php // echo $form->field($model, 'slug') ?>
-
-    <?php // echo $form->field($model, 'deleted') ?>
-
-    <?php // echo $form->field($model, 'created') ?>
-
-    <?php // echo $form->field($model, 'updated') ?>
+    <?php echo $form->field($model, 'body') ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+        <?= Html::submitButton('Поиск', ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton('Очистить', ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

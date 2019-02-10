@@ -13,7 +13,7 @@
 
 use yii\helpers\Html;
 
-$this->params['breadcrumbs'][] = 'Apps';
+$this->params['breadcrumbs'][] = 'Приложения';
 $this->params['breadcrumbs'][] = $this->title;;
 ?>
 
@@ -97,5 +97,4 @@ $this->params['breadcrumbs'][] = $this->title;;
         }
         }
         ?>
-        <code><?= __FILE__ ?></code>
     </div>

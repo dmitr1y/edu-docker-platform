@@ -8,25 +8,18 @@ use yii\widgets\Pjax;
 /* @var $searchModel common\models\PostSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Posts';
+$this->title = 'Блог';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="post-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php Pjax::begin(); ?>
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a('Create Post', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
+    <!--    --><?php //echo $this->render('_search', ['model' => $searchModel]); ?>
     <?= ListView::widget([
         'dataProvider' => $dataProvider,
         'itemOptions' => ['class' => 'item'],
-        'itemView' => function ($model, $key, $index, $widget) {
-            return Html::a(Html::encode($model->title), ['view', 'id' => $model->id]);
-        },
+        'itemView' => '_listViewPost'
     ]) ?>
     <?php Pjax::end(); ?>
 </div>

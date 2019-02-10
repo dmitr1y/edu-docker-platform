@@ -105,7 +105,9 @@ class BlogController extends Controller
     {
         $model = new Post();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->creator = Yii::$app->user->getId();
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -140,6 +142,8 @@ class BlogController extends Controller
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {

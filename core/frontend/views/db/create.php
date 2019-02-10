@@ -26,5 +26,4 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php ActiveForm::end(); ?>
 
-    <code><?= __FILE__ ?></code>
 </div>
