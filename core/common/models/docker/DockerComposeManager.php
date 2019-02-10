@@ -81,8 +81,9 @@ class DockerComposeManager
 
     private function exec($cmd)
     {
-        if (empty($cmd))
+        if (empty($cmd)) {
             return null;
+        }
 
         $process = new Process('docker-compose -f ' . $this->storagePath . '/docker-compose.yml ' . $cmd);
 
@@ -90,8 +91,9 @@ class DockerComposeManager
 
         // executes after the command finishes
         $log = $process->getOutput();
-        if (!$process->isSuccessful())
+        if (!$process->isSuccessful()) {
             throw new ProcessFailedException($process);
+        }
 
         return $log;
     }

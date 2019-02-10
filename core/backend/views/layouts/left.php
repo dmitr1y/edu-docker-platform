@@ -31,7 +31,8 @@
             [
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget' => 'tree'],
                 'items' => [
-                    ['label' => 'Menu', 'options' => ['class' => 'header']],
+                    ['label' => 'Меню', 'options' => ['class' => 'header']],
+                    ['label' => 'Блог', 'icon' => 'fas fa-database', 'url' => ['/blog']],
                     ['label' => 'Docker', 'icon' => 'fab fa-docker', 'url' => ['/docker'],
                         'items' => [
                             ['label' => 'Containers', 'icon' => 'fas fa-toolbox', 'url' => ['/docker/containers']],
@@ -39,11 +40,11 @@
                             ['label' => 'Volumes', 'icon' => 'fas fa-database', 'url' => ['/docker/volumes']],
                         ]
                     ],
-                    ['label' => 'Database', 'icon' => 'fas fa-database', 'url' => ['/database']],
+                    ['label' => 'База данных', 'icon' => 'fas fa-database', 'url' => ['/database']],
                     ['label' => 'Gii', 'icon' => 'fas fa-code', 'url' => ['/gii']],
-                    ['label' => 'Apps category', 'icon' => 'fas fa-list', 'url' => ['/category']],
-                    ['label' => 'Apps', 'icon' => 'fas fa-desktop', 'url' => ['/apps']],
-                    ['label' => 'Users', 'icon' => 'fas fa-users', 'url' => ['/user/admin/index']],
+                    ['label' => 'Категории приложений', 'icon' => 'fas fa-list', 'url' => ['/category']],
+                    ['label' => 'Приложения', 'icon' => 'fas fa-desktop', 'url' => ['/apps']],
+                    ['label' => 'Пользователи', 'icon' => 'fas fa-users', 'url' => ['/user/admin/index']],
                 ],
             ]
         ) ?>

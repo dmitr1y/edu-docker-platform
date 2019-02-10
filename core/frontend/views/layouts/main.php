@@ -42,7 +42,10 @@ BootboxAsset::overrideSystemConfirm();
         ['label' => 'Главная', 'url' => ['/site/index']],
         ['label' => 'О нас', 'url' => ['/site/about']],
         ['label' => 'Контакты', 'url' => ['/site/contact']],
+        ['label' => 'Блог', 'url' => ['/blog']],
     ];
+
+
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Регистрация', 'url' => ['/user/registration/register']];
         $menuItems[] = ['label' => 'Вход', 'url' => ['/user/security/login']];
@@ -54,6 +57,11 @@ BootboxAsset::overrideSystemConfirm();
                 ['label' => 'Создать новое', 'url' => '/apps/create']
             ]
         ];
+
+        if (Yii::$app->user->can('admin')) {
+            $menuItems[] = ['label' => 'Панель управления', 'url' => ['/admin'],];
+        }
+
         $menuItems[] = '<li>'
             . Html::beginForm(['/user/security/logout'], 'post')
             . Html::submitButton(
@@ -63,6 +71,7 @@ BootboxAsset::overrideSystemConfirm();
             . Html::endForm()
             . '</li>';
     }
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $menuItems,

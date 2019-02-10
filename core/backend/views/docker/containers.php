@@ -4,6 +4,7 @@
 
 $this->title = 'Docker containers';
 ?>
+
 <div class="docker">
     <table class="table table-hover">
         <thead>
@@ -42,7 +43,7 @@ $this->title = 'Docker containers';
                 }
 
                 $line = '<tr ' . $tr_class . '>
-<td><a href="https://localhost/app/' . $name . '" target="_blank">' . $name . '</a> </td>
+<td><a href="/' . \Yii::$app->params['app_host'] . '/' . $name . '/" target="_blank">' . $name . '</a> </td>
 <td>' . $ps[$key]['command'] . '</td>
 <td>' . $state . '</td>
 <td>' . $ps[$key]['ports'] . '</td>

@@ -4,6 +4,8 @@
  * @var \common\models\app\Apps $model
  */
 
+use common\models\app\Apps;
+
 
 ?>
 <a href="<?= '/apps/manage?id=' . $model->id ?>"
@@ -12,10 +14,10 @@
     <h4 class="list-group-item-heading">
         <?php
         switch ($model->type) {
-            case 0:
+            case Apps::STATIC_TYPE:
                 echo '<i class="fab fa-html5"></i>';
                 break;
-            case 1:
+            case Apps::DYNAMIC_TYPE:
                 echo '<i class="fab fa-docker"></i>';
                 break;
             default:
@@ -30,10 +32,11 @@
         <?php
         $strLimit = 150;
         $description = strip_tags($model->description);
-        if (strlen($description) > $strLimit)
+        if (strlen($description) > $strLimit) {
             echo trim(substr($description, 0, $strLimit)) . '...';
-        else
+        } else {
             echo $description;
+        }
         ?>
     </p>
     <div>

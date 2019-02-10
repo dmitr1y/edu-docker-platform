@@ -2,8 +2,8 @@
 
 namespace backend\controllers;
 
-use backend\models\app\AppsSearch;
-use common\models\app\Apps;
+use common\models\Post;
+use common\models\PostSearch;
 use dektrium\user\filters\AccessRule;
 use Yii;
 use yii\filters\AccessControl;
@@ -12,9 +12,9 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 /**
- * AppsController implements the CRUD actions for Apps model.
+ * BlogController implements the CRUD actions for Post model.
  */
-class AppsController extends Controller
+class BlogController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -53,12 +53,12 @@ class AppsController extends Controller
     }
 
     /**
-     * Lists all Apps models.
+     * Lists all Post models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new AppsSearch();
+        $searchModel = new PostSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -68,7 +68,7 @@ class AppsController extends Controller
     }
 
     /**
-     * Displays a single Apps model.
+     * Displays a single Post model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -81,29 +81,29 @@ class AppsController extends Controller
     }
 
     /**
-     * Finds the Apps model based on its primary key value.
+     * Finds the Post model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Apps the loaded model
+     * @return Post the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Apps::findOne($id)) !== null) {
+        if (($model = Post::findOne($id)) !== null) {
             return $model;
         }
 
-        throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 
     /**
-     * Creates a new Apps model.
+     * Creates a new Post model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Apps();
+        $model = new Post();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -115,7 +115,7 @@ class AppsController extends Controller
     }
 
     /**
-     * Updates an existing Apps model.
+     * Updates an existing Post model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -135,13 +135,11 @@ class AppsController extends Controller
     }
 
     /**
-     * Deletes an existing Apps model.
+     * Deletes an existing Post model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
-     * @throws \Throwable
-     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {

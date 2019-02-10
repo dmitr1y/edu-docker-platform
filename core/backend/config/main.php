@@ -41,18 +41,18 @@ return [
         ],
         'user' => [
             'identityCookie' => [
-                'name' => '_backendIdentity',
+                'name' => '_frontendIdentity',
                 'path' => '/admin',
                 'httpOnly' => true,
             ],
         ],
-        'session' => [
-            'name' => 'BACKENDSESSID',
-            'cookieParams' => [
-                'httpOnly' => true,
-                'path' => '/admin',
-            ],
-        ],
+//        'session' => [
+//            'name' => 'BACKENDSESSID',
+//            'cookieParams' => [
+//                'httpOnly' => true,
+//                'path' => '/admin',
+//            ],
+//        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [

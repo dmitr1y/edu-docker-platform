@@ -20,6 +20,14 @@ use yii\web\NotFoundHttpException;
  */
 class DockerController extends Controller
 {
+    const STATUS_ERROR = -1;
+    const STATUS_STOP = 0;
+    const STATUS_UP = 2;
+
+    const ACTION_START = 'start';
+    const ACTION_STOP = 'stop';
+    const ACTION_LOG = 'log';
+
     public function behaviors()
     {
         return [
@@ -64,12 +72,17 @@ class DockerController extends Controller
         return $this->render('index', ['stats' => $stat]);
     }
 
+    /**
+     * Отображение статуса контейнеров
+     *
+     * @return array
+     */
     private function getStats()
     {
         return [
-            'online' => DockerApps::find()->where(['status' => 2])->count(),
-            'offline' => DockerApps::find()->where(['status' => 0])->count(),
-            'error' => DockerApps::find()->where(['status' => -1])->count(),
+            'online' => DockerApps::find()->where(['status' => DockerController::STATUS_UP])->count(),
+            'offline' => DockerApps::find()->where(['status' => DockerController::STATUS_STOP])->count(),
+            'error' => DockerApps::find()->where(['status' => DockerController::STATUS_ERROR])->count(),
             'db_count' => AppsDbUsers::find()->count(),
         ];
     }
@@ -79,6 +92,12 @@ class DockerController extends Controller
 
     }
 
+    /**
+     * Отображение списка контейнеров Docker
+     *
+     * @return string
+     * @throws NotFoundHttpException
+     */
     public function actionContainers()
     {
         $ps = DockerHealth::getContainersList();
@@ -89,11 +108,12 @@ class DockerController extends Controller
         if (isset($form_manager, $form_service)) {
             $dockerApp = DockerApps::findOne(['service_name' => $form_service]);
 
-            if (empty($dockerApp))
+            if (empty($dockerApp)) {
                 throw new NotFoundHttpException();
+            }
 
             switch ($form_manager) {
-                case 'start':
+                case DockerController::ACTION_START:
                     Yii::$app->queue->push(new RunDockerService([
                         'serviceName' => $form_service,
                         'appModel' => $dockerApp
@@ -103,7 +123,7 @@ class DockerController extends Controller
                         'servicePort' => $dockerApp->port,
                     ]));
                     break;
-                case 'stop':
+                case DockerController::ACTION_STOP:
                     Yii::$app->queue->push(new RemoveNginxConf([
                         'serviceName' => $form_service,
                     ]));
@@ -112,7 +132,7 @@ class DockerController extends Controller
                         'appModel' => $dockerApp,
                     ]));
                     break;
-                case 'log':
+                case DockerController::ACTION_LOG:
                     break;
                 default:
                     throw new NotFoundHttpException();
@@ -123,6 +143,11 @@ class DockerController extends Controller
         return $this->render('containers', ['ps' => $ps]);
     }
 
+    /**
+     * Отображение списка образов Docker
+     *
+     * @return string
+     */
     public function actionImages()
     {
         $ps = DockerHealth::getImagesList();

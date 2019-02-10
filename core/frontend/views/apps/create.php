@@ -46,7 +46,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     dbReqiure.style.display = 'none';
                     break;
             }
-            console.log('getted value: ' + appType.options[appType.selectedIndex].value);
         };
     </script>
     <?php ActiveForm::end(); ?>

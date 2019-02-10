@@ -50,14 +50,26 @@ class NginxConf
         return $conf;
     }
 
-    public function createStatic($userId = null)
+    /**
+     *
+     * @param null $userId
+     * @param string $index_path
+     * @return null|string
+     */
+    public function createStatic($userId = null, $index_path = 'index.html')
     {
-        if (empty($userId))
+        if (empty($userId)) {
             return null;
+        }
+
+        if (empty($index_path)) {
+            $index_path = ' index.html index.htm';
+        }
+
         $conf = Scope::create()
             ->addDirective(Directive::create('location', '/' . $this->serviceName, Scope::create()
                 ->addDirective(Directive::create('root', '/usr/share/nginx/html/' . $userId))//todo change root dir
-                ->addDirective(Directive::create('index', 'index.html index.htm'))
+                ->addDirective(Directive::create('index', $index_path))
             ))
             ->prettyPrint(0);
 

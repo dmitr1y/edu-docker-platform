@@ -36,6 +36,10 @@ class AppsController extends Controller
 {
 //    private $data_path = "/storage/user_app_data";
 
+    const ACTION_REMOVE = 'Remove';
+    const ACTION_START = 'Run';
+    const ACTION_STOP = 'Stop';
+
     public function behaviors()
     {
         return [
@@ -118,14 +122,13 @@ class AppsController extends Controller
         $staticApp = StaticApps::findOne(['app_id' => $app->id]);
         $appName = DockerService::prepareServiceName($app->name);
 
-        $log = null;
-
 //        todo Проверка запущен ли nginx и БД
 
         switch ($action) {
-            case 'Run':
-                if (empty($dockerApp) && empty($staticApp))
+            case AppsController::ACTION_START:
+                if (empty($dockerApp) && empty($staticApp)) {
                     throw new NotFoundHttpException();
+                }
 
                 Yii::$app->queue->push(new RunDockerService([
                     'serviceName' => $appName,
@@ -136,7 +139,7 @@ class AppsController extends Controller
                     'servicePort' => $dockerApp->port,
                 ]));
                 break;
-            case 'Stop':
+            case AppsController::ACTION_STOP:
                 Yii::$app->queue->push(new RemoveNginxConf([
                     'serviceName' => $appName
                 ]));
@@ -145,39 +148,33 @@ class AppsController extends Controller
                     'appModel' => $dockerApp
                 ]));
                 break;
-            case 'Remove':
+            case AppsController::ACTION_REMOVE:
 //                todo Удаление образа (автоочистка каждый день), Dockerfile, БД
-                if (!empty($dockerApp))
+                if (!empty($dockerApp)) {
                     Yii::$app->queue->push(new RemoveDockerService([
                         'serviceName' => $appName,
                         'appModel' => $dockerApp
                     ]));
-                else {
-                    if (empty($staticApp))
+                } else {
+                    if (empty($staticApp)) {
                         throw new NotFoundHttpException();
+                    }
                     $staticApp->remove();
                 }
                 Yii::$app->queue->push(new RemoveNginxConf([
                     'serviceName' => $appName
                 ]));
                 return $this->render('removed');
-                break;
             default:
-                throw  new \yii\web\NotFoundHttpException();
-                break;
+                throw  new NotFoundHttpException();
         }
 
 //       todo Вырезать из лога "storage_"
 //        todo Добавить перенос строк
         $appLog = AppsLog::findOne(['appId' => $id]);
-        if (empty($appLog)) {
-            $appLog = new AppsLog();
-            $appLog->appId = $id;
-        }
+        $log_flag = empty($appLog);
 
-        $appLog->log = $log;
-        $appLog->save();
-        return $this->redirect(['apps/manage', 'logFlag' => true, 'id' => $id]);
+        return $this->redirect(['apps/manage', 'logFlag' => $log_flag, 'id' => $id]);
     }
 
     /**
@@ -290,6 +287,7 @@ class AppsController extends Controller
             $modelUpload->app = UploadedFile::getInstance($model, 'path_to_index');
             $model->app_id = $app->id;
 
+
             $appPath = $modelUpload->upload(Yii::$app->user->id, DockerService::prepareServiceName($app->name));
             if (!empty($appPath)) {
                 $model->path_to_index = $appPath;
@@ -394,8 +392,9 @@ class AppsController extends Controller
      * Создание статического приложения
      *
      * @param $appModel Apps
+     * @param string $index_name
      */
-    private function createStatic($appModel)
+    private function createStatic($appModel, $index_name = "index.html")
     {
         $conf = new NginxConf();
         $conf->serviceName = DockerService::prepareServiceName($appModel->name);

@@ -9,7 +9,6 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-//$this->title = 'App';
 $this->params['breadcrumbs'][] = 'Приложения';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
