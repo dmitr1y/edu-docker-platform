@@ -20,6 +20,10 @@ class DockerComposeManager
         $this->storagePath = realpath(\Yii::$app->basePath . '/../../storage');
     }
 
+    /**
+     *
+     * @param $compose
+     */
     public function setDockerCompose($compose)
     {
         foreach ($compose as $key => $value) {
@@ -27,6 +31,12 @@ class DockerComposeManager
         }
     }
 
+    /**
+     * Сборка и запуск образов
+     *
+     * @param null $services
+     * @return string|null
+     */
     public function up($services = null)
     {
         $cmd = "up -d";
@@ -35,6 +45,12 @@ class DockerComposeManager
         return $this->exec($cmd);
     }
 
+    /**
+     * Сборка образов
+     *
+     * @param null $services
+     * @return string|null
+     */
     public function build($services = null)
     {
         $cmd = "build";
@@ -43,6 +59,12 @@ class DockerComposeManager
         return $this->exec($cmd);
     }
 
+    /**
+     * Остановка сервисов
+     *
+     * @param null $services
+     * @return string|null
+     */
     public function stop($services = null)
     {
         $cmd = "stop";
@@ -51,6 +73,12 @@ class DockerComposeManager
         return $this->exec($cmd);
     }
 
+    /**
+     * Отображение информации о статусе сервисов
+     *
+     * @param null $services
+     * @return string|null
+     */
     public function ps($services = null)
     {
         $cmd = "ps";
@@ -59,6 +87,12 @@ class DockerComposeManager
         return $this->exec($cmd);
     }
 
+    /**
+     * Отображение списка образов
+     *
+     * @param null $services
+     * @return string|null
+     */
     public function images($services = null)
     {
         $cmd = "images";
@@ -67,6 +101,12 @@ class DockerComposeManager
         return $this->exec($cmd);
     }
 
+    /**
+     * Остановка и удаление сервисов
+     *
+     * @param null $service
+     * @return bool|string
+     */
     public function down($service = null)
     {
 //        todo окончательное удаление - вместе с томом данных или удаление только контейнера
@@ -79,6 +119,12 @@ class DockerComposeManager
         return $log;
     }
 
+    /**
+     * Выполнение команды
+     *
+     * @param $cmd
+     * @return string|null
+     */
     private function exec($cmd)
     {
         if (empty($cmd)) {

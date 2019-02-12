@@ -21,6 +21,7 @@ class DockerCompose
 
     /**
      * DockerCompose constructor.
+     *
      * @param $pathToComposeFile - path to docker-compose.yml
      */
     public function __construct($pathToComposeFile = null)
@@ -32,6 +33,11 @@ class DockerCompose
         $this->load();
     }
 
+    /**
+     * Добавление сервиса
+     *
+     * @param $service
+     */
     public function setService($service)
     {
         $this->services[$service['name']] = $service;
@@ -39,6 +45,8 @@ class DockerCompose
     }
 
     /**
+     * Добавление сети
+     *
      * @param $network - DockerNetwork model
      */
     public function addNetwork($network)
@@ -52,7 +60,10 @@ class DockerCompose
     }
 
     /**
+     * Удаление сервиса
+     *
      * @param $service - DockerService model
+     * @return bool
      */
     public function removeService($service)
     {
@@ -62,14 +73,19 @@ class DockerCompose
     }
 
     /**
+     * Удаление сети
+     *
      * @param $network - DockerNetwork model
      */
     public function removeNetwork($network)
     {
-        unset($this->networks[$network['name']]);
+        if (!empty($network))
+            unset($this->networks[$network['name']]);
     }
 
     /**
+     * Добавление тома
+     *
      * @param $volume - volume name
      */
     public function addVolume($volume)
@@ -78,6 +94,8 @@ class DockerCompose
     }
 
     /**
+     * Удаление тома
+     *
      * @param $volume - volume name
      */
     public function removeVolume($volume)
@@ -85,6 +103,11 @@ class DockerCompose
         unset($this->volumes[array_search($volume, $this->volumes)]);
     }
 
+    /**
+     * Сохранение файла docker-compose.yml
+     *
+     * @return bool|int
+     */
     public function save()
     {
         foreach ($this as $key => $value) {

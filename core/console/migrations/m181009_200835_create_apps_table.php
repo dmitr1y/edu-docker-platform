@@ -28,6 +28,7 @@ class m181009_200835_create_apps_table extends Migration
 //            'file' => $this->text(),
 //            'image' => $this->string(255),
             'url' => $this->text(),
+            'deleted' => $this->tinyInteger(1),
 //            'port' => $this->integer(),
 //            'status' => $this->integer(),
             'timestamp' => 'timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP'

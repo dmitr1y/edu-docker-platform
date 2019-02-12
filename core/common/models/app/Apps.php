@@ -15,6 +15,7 @@ use Yii;
  * @property integer $type
  * @property integer $category
  * @property string $timestamp
+ * @property int $deleted
  */
 class Apps extends \yii\db\ActiveRecord
 {
@@ -46,7 +47,7 @@ class Apps extends \yii\db\ActiveRecord
             [['description', 'url'], 'string'],
             [['name'], 'string', 'max' => 32],
             [['timestamp'], 'safe'],
-            [['type', 'category', 'owner_id'], 'integer'],
+            [['type', 'category', 'owner_id', 'deleted'], 'integer'],
         ];
     }
 
@@ -64,6 +65,7 @@ class Apps extends \yii\db\ActiveRecord
             'type' => Yii::t('app', 'App type'),
             'category' => Yii::t('app', 'App category'),
             'timestamp' => Yii::t('app', 'App creating date'),
+            'deleted' => Yii::t('app', 'App is deleted'),
         ];
     }
 

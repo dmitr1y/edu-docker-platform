@@ -120,7 +120,9 @@ class AppsController extends Controller
         $app = Apps::findOne(['id' => $id]);
         $dockerApp = DockerApps::findOne(['app_id' => $app->id]);
         $staticApp = StaticApps::findOne(['app_id' => $app->id]);
-        $appName = DockerService::prepareServiceName($app->name);
+
+//        $appName = DockerService::prepareServiceName($app->name);
+        $appName = "app" . $app->id;
 
 //        todo Проверка запущен ли nginx и БД
 
@@ -150,6 +152,7 @@ class AppsController extends Controller
                 break;
             case AppsController::ACTION_REMOVE:
 //                todo Удаление образа (автоочистка каждый день), Dockerfile, БД
+
                 if (!empty($dockerApp)) {
                     Yii::$app->queue->push(new RemoveDockerService([
                         'serviceName' => $appName,
@@ -164,6 +167,9 @@ class AppsController extends Controller
                 Yii::$app->queue->push(new RemoveNginxConf([
                     'serviceName' => $appName
                 ]));
+
+                $app->deleted = 1;
+                $app->save();
                 return $this->render('removed');
             default:
                 throw  new NotFoundHttpException();
@@ -235,7 +241,7 @@ class AppsController extends Controller
         if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
             $modelUpload->dockerfile = UploadedFile::getInstance($model, 'dockerfile');
             $model->app_id = $id;
-            $model->service_name = $app->name;
+            $model->service_name = "app" . $app->id;
             $model->save();
             $dockerfilePath = $modelUpload->upload(Yii::$app->user->id, $model->service_name);
 
@@ -287,8 +293,9 @@ class AppsController extends Controller
             $modelUpload->app = UploadedFile::getInstance($model, 'path_to_index');
             $model->app_id = $app->id;
 
+            $appName = "app" . $app->id;
 
-            $appPath = $modelUpload->upload(Yii::$app->user->id, DockerService::prepareServiceName($app->name));
+            $appPath = $modelUpload->upload(Yii::$app->user->id, $appName);
             if (!empty($appPath)) {
                 $model->path_to_index = $appPath;
             }
@@ -308,7 +315,7 @@ class AppsController extends Controller
     public function actionList()
     {
         $this->view->title = "Apps catalog";
-        $appsQuery = Apps::find();
+        $appsQuery = Apps::find()->where(["deleted" => 0]);
         $dataProvider = new ActiveDataProvider([
             'query' => $appsQuery,
             'pagination' => [
