@@ -404,10 +404,9 @@ class AppsController extends Controller
     private function createStatic($appModel, $index_name = "index.html")
     {
         $conf = new NginxConf();
-        $conf->serviceName = DockerService::prepareServiceName($appModel->name);
-        $conf->createStatic(Yii::$app->user->id);
-        $appModel->url = '/' . Yii::$app->params['app_host'] . '/' . DockerService::prepareServiceName($appModel->name) . '/';
-//        $appModel->status = 2;
+        $conf->serviceName = "app" . $appModel->id;
+        $conf->createStatic(Yii::$app->user->id, $index_name);
+        $appModel->url = '/' . Yii::$app->params['app_host'] . '/app' . $appModel->id . '/';
         $appModel->save();
     }
 }
