@@ -7,16 +7,21 @@ services:
     - '443:443'
     volumes:
     - ./:/platform
-    - ./docker/nginx/confs:/etc/nginx/conf.d
-    - ./docker/nginx/certs/edu-selfsigned.crt:/etc/ssl/certs/edu-selfsigned.crt
-    - ./docker/nginx/certs/edu-selfsigned.key:/etc/ssl/private/edu-selfsigned.key
+    - ./docker/nginx/confs:/etc/nginx/conf.d:ro
+    - ./docker/nginx/certs/edu-selfsigned.crt:/etc/ssl/certs/edu-selfsigned.crt:ro
+    - ./docker/nginx/certs/edu-selfsigned.key:/etc/ssl/private/edu-selfsigned.key:ro
     - ./logs/core/core-error.log:/var/log/nginx/core-error.log
+    - ./logs/evklid-error.log:/var/log/nginx/evklid-error.log
     networks:
     - frontend
     - backend
     - user_apps_net
     - docker
     restart: always
+    depends_on:
+      - core
+      - evklid
+      - dind
   core:
     build: ./docker/php/
     volumes:
@@ -63,19 +68,28 @@ services:
     - DOCKER_HOST=tcp://dind:2375
     networks:
     - docker
-  # docker manager UI
-  portainer:
-    image: portainer/portainer
-    command: -H unix:///var/run/docker.sock
+  # Evklid trainer
+  evklid:
+    build: ./docker/default_apps/evklid-trainer/
+    depends_on:
+      - mongo
+    networks:
+      - user_apps_net
+      - docker
+  mongo:
+    container_name: mongo
+    image: mongo:3.2
+    environment:
+      # provide your credentials here
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    networks:
+      - user_apps_net
+      - docker
     volumes:
-    - /var/run/docker.sock:/var/run/docker.sock
-    - portainer_data:/data
-    ports:
-    - '9999:9000'
+      - ~/db/mongo/default_apps:/data/db
 networks:
   frontend:
   backend:
   docker:
   user_apps_net:
-volumes:
-  portainer_data:

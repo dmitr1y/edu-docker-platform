@@ -2,9 +2,7 @@
 
 namespace frontend\controllers;
 
-use dektrium\user\filters\AccessRule;
 use Yii;
-use yii\filters\AccessControl;
 
 /**
  * Проверка авторизации пользователя
@@ -31,19 +29,6 @@ class AuthController extends \yii\web\Controller
                     ],
                 ],
             ],
-            'access' => [
-                'class' => AccessControl::className(),
-                'ruleConfig' => [
-                    'class' => AccessRule::className(),
-                ],
-                'rules' => [
-                    [
-                        'actions' => ['index'],
-                        'allow' => true,
-                        'roles' => ['?', '@'],
-                    ],
-                ],
-            ],
         ];
     }
 
@@ -52,6 +37,7 @@ class AuthController extends \yii\web\Controller
      */
     public function actionIndex()
     {
+
         $response_code = 403;
         if (!Yii::$app->user->isGuest) {
             $response_code = 200;
