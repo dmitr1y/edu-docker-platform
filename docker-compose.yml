@@ -44,7 +44,7 @@ services:
     - MYSQL_ROOT_HOST=%
     volumes:
       - ~/db/mysql/core:/var/lib/mysql # Данные платформы
-    - ./docker/mysql/my.cnf:/etc/my.cnf
+      - ./docker/mysql/my.cnf:/etc/my.cnf
     ports:
     - 3306:3306
     networks:

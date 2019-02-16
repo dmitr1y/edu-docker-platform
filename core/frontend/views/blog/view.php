@@ -23,9 +23,5 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="content">
             <?= $model->body ?>
         </div>
-
-        <div>
-            <button role="button"> Перейти к модулю</button>
-        </div>
     </div>
 </div>

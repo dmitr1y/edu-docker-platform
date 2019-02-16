@@ -21,9 +21,9 @@
         }
         ?>
     </p>
-    <div>
-        <small>Категория: <?= $model->category ?></small>
-    </div>
+    <!--    <div>-->
+    <!--        <small>Категория: --><? //= $model->category ?><!--</small>-->
+    <!--    </div>-->
     <div>
         <small><?= \dektrium\user\models\User::findOne(['id' => $model->creator])->username ?></small>
         <small><?= $model->created ?></small>

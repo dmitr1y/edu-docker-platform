@@ -35,8 +35,6 @@ use yii\web\UploadedFile;
 
 class AppsController extends Controller
 {
-//    private $data_path = "/storage/user_app_data";
-
     const ACTION_REMOVE = 'Удалить';
     const ACTION_START = 'Запустить';
     const ACTION_STOP = 'Остановить';
@@ -52,12 +50,18 @@ class AppsController extends Controller
                 'rules' => [
                     [
                         'actions' => [
-                            'index', 'manage', 'manager', 'create',
-                            'create-static', 'create-dynamic', 'list',
-                            'detail', 'my-apps'
+                            'index', 'list', 'detail'
                         ],
                         'allow' => true,
                         'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => [
+                            'manage', 'manager', 'create',
+                            'create-static', 'create-dynamic', 'my-apps'
+                        ],
+                        'allow' => true,
+                        'roles' => ['admin'],
                     ],
                     [
                         'allow' => false,
@@ -91,7 +95,7 @@ class AppsController extends Controller
             return $this->redirect(['apps/create']);
         }
 
-        $model = Apps::find()->where(['id' => $id])->one();
+        $model = Apps::find()->where(['id' => $id, 'deleted' => 0])->one();
         $log = null;
 
         if (!empty($logFlag)) {
@@ -421,5 +425,22 @@ class AppsController extends Controller
         $conf->createStatic(Yii::$app->user->id, $index_name);
         $appModel->url = '/' . Yii::$app->params['app_host'] . '/app' . $appModel->id . '/';
         $appModel->save();
+    }
+
+    /**
+     * Checks access.
+     *
+     * @return bool
+     */
+    public function checkAccess()
+    {
+        $user = \Yii::$app->user->identity;
+        if (method_exists($user, 'getIsAdmin')) {
+            return $user->getIsAdmin();
+        } else if ($this->adminPermission) {
+            return \Yii::$app->user->can($this->adminPermission);
+        } else {
+            return isset($user->username) ? in_array($user->username, $this->admins) : false;
+        }
     }
 }

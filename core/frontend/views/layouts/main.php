@@ -50,19 +50,24 @@ BootboxAsset::overrideSystemConfirm();
         $menuItems[] = ['label' => 'Регистрация', 'url' => ['/user/registration/register']];
         $menuItems[] = ['label' => 'Вход', 'url' => ['/user/security/login']];
     } else {
-        $menuItems[] = [
-            'label' => 'Приложения',
-            'items' => [
-                ['label' => 'Каталог', 'url' => '/apps/list'],
-                ['label' => 'Создать новое', 'url' => '/apps/create']
-            ]
-        ];
 
         if (Yii::$app->user->can('admin')) {
+            $menuItems[] = [
+                'label' => 'Приложения',
+                'items' => [
+                    ['label' => 'Каталог', 'url' => '/apps/list'],
+                    ['label' => 'Создать новое', 'url' => '/apps/create']
+                ]
+            ];
             $menuItems[] = [
                 'label' => 'Панель управления',
                 'url' => ['/admin'],
                 'linkOptions' => ['target' => '_blank'],
+            ];
+        } else {
+            $menuItems[] = [
+                'label' => 'Приложения',
+                'гкд' => '/apps/list',
             ];
         }
 
