@@ -19,6 +19,11 @@
 ```bash
 composer install
 ./init
+./yii migrate/up
+./yii migrate-queue
+./yii migrate-user
+./yii migrate/up --migrationPath=@yii/rbac/migrations
+./yii rbac/init
 cd storage && docker-compose up -d
 ```
 7. Сконфигурировать данные доступа в `core/common/config/params-local.php`
