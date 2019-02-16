@@ -11,7 +11,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 
-$this->params['breadcrumbs'][] = ['label' => 'Apps', 'url' => ['/apps/list']];
+$this->params['breadcrumbs'][] = ['label' => 'Приложение', 'url' => ['/apps/list']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-about">
@@ -24,14 +24,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'preset' => 'basic'
     ]) ?>
     <?= $form->field($model, 'type')->dropDownList([
-        '0' => 'Static app',
-        '1' => 'Dynamic app',
+        '0' => 'Клиентское приложение',
+        '1' => 'Серверное приложение',
     ]) ?>
     <div class="form-group" id="dbReqiure">
-        <?= Html::checkbox("database", false, ['label' => 'Database required']) ?>
+        <?= Html::checkbox("database", false, ['label' => 'Необходима база данных']) ?>
     </div>
     <div class="form-group">
-        <?= Html::submitButton('Next', ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton('Далее', ['class' => 'btn btn-primary']) ?>
     </div>
     <script language="JavaScript" type="text/javascript">
         let appType = document.getElementById('apps-type');

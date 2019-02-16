@@ -35,12 +35,13 @@ print_style () {
 }
 
 display_options () {
-    printf "Available options:\n";
-    print_style "   install" "info"; printf "\t\t Installs compose packages gem on the host machine.\n"
-    print_style "   up [services]" "success"; printf "\t Runs docker compose services.\n"
-    print_style "   user-apps" "success"; printf "\t\t Runs users apps services.\n"
-    print_style "   down" "success"; printf "\t\t\t Stops containers.\n"
-    print_style "   bash" "success"; printf "\t\t\t Opens bash on the core.\n"
+    printf "Доступные действия:\n";
+    print_style "   install" "info"; printf "\t\t Установка пакетов composer для ядра.\n"
+    print_style "   up [services]" "success"; printf "\t Запуск сервисов docker-compose платформы.\n"
+    print_style "   user-apps" "success"; printf "\t\t Запуск пользовательских приложений.\n"
+    print_style "   down" "danger"; print_style "\t\t\t Остановка и удаление контейнеров.\n" "danger"
+    print_style "   bash" "success"; printf "\t\t\t Открыть терминал контенера с ядром.\n"
+    print_style "   user-sh" "success"; printf "\t\t Открыть терминал с пользовательскими приложениями.\n"
 }
 
 if [[ $# -eq 0 ]] ; then
@@ -50,30 +51,33 @@ if [[ $# -eq 0 ]] ; then
 fi
 
 if [ "$1" == "up" ] ; then
-    print_style "Running Docker Compose\n" "info"
+    print_style "Запуск сервисов платформы...\n" "info"
     shift # removing first argument
     docker-compose up -d ${@}
 
 elif [ "$1" == "down" ]; then
-    print_style "Stopping Docker Compose\n" "info"
+    print_style "Остановка и удаление контейнеров платформы...\n" "danger"
     docker-compose stop
 
 elif [ "$1" == "bash" ]; then
+    print_style "Терминал контейнера с ядром\n" "danger"
     docker-compose exec core bash
 
+elif [ "$1" == "user-sh" ]; then
+    print_style "Терминал контейнера с пользовательским docker-compose\n" "info"
+    docker-compose exec dind sh
+
 elif [ "$1" == "user-apps" ]; then
-    print_style "Running Docker Compose\n" "info"
-    docker-compose up -d
-    print_style "Running user apps\n" "info"
-    docker-compose exec core docker-compose -f /platform/storage/docker-compose.yml up -d
+    print_style "Запуск пользовательских сервисов...\n" "info"
+    docker-compose exec dind docker-compose -f /storage/docker-compose.yml up -d
 
 elif [ "$1" == "install" ]; then
-    print_style "Initializing Compose packages\n" "info"
-    print_style "May take a while on the first run\n" "info"
+    print_style "Установка пакетов composer\n" "info"
+    print_style "При первом запуске может занять некоторое время\n" "info"
     composer --working-dir=core install
 
 else
-    print_style "Invalid arguments.\n" "danger"
+    print_style "Неверная команда.\n" "danger"
     display_options
     exit 1
 fi

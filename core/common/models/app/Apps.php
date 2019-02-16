@@ -45,7 +45,7 @@ class Apps extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             [['description', 'url'], 'string'],
-            [['name'], 'string', 'max' => 32],
+            [['name'], 'string', 'max' => 255],
             [['timestamp'], 'safe'],
             [['type', 'category', 'owner_id', 'deleted'], 'integer'],
         ];

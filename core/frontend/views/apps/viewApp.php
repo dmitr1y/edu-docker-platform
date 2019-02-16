@@ -30,22 +30,22 @@ $this->params['breadcrumbs'][] = $this->title;;
                 if (isset($model->{$key}) || $key === 'status') {
                     echo "<tr>";
                     if ($key === 'url')
-                        echo "<td>" . $key . "</td><td><a href='" . $value . "'>" . $value . "</a></td>";
+                        echo "<td>" . $key . "</td><td><a href='" . $value . "' target='_blank'>" . $value . "</a></td>";
                     else {
                         if ($key === 'status') {
                             echo "<td>" . $key . "</td><td>";
                             switch ($value) {
                                 case 0:
-                                    echo 'off';
+                                    echo 'Выключено';
                                     break;
                                 case 1:
-                                    echo 'running';
+                                    echo 'Запускается';
                                     break;
                                 case 2:
-                                    echo 'on';
+                                    echo 'Запущено';
                                     break;
                                 default:
-                                    echo 'error';
+                                    echo 'Ошибка';
                                     break;
                             }
                             echo "</td>";
@@ -58,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;;
                 }
             }
         else
-            echo "NOT FOUNDED<br>";
+            throw new \yii\web\NotFoundHttpException("Приложение не найдено");
         ?>
     </table>
 
@@ -66,9 +66,9 @@ $this->params['breadcrumbs'][] = $this->title;;
     if (isset($model->url) && !empty($model->url)) {
     ?>
     <form class="form-group" action="/apps/manager" method="post">
-        <input class="btn btn-info" type="submit" name="action" value="Run"/>
-        <input class="btn btn-info" type="submit" name="action" value="Stop"/>
-        <input class="btn btn-danger" type="submit" name="action" value="Remove"/>
+        <input class="btn btn-info" type="submit" name="action" value="Запутсить"/>
+        <input class="btn btn-info" type="submit" name="action" value="Остановить"/>
+        <input class="btn btn-danger" type="submit" name="action" value="Удалить"/>
         <input type="hidden" name="app" value="<?= strtolower(preg_replace('/\s+/', '-', $model->name)) ?>">
         <input type="hidden" name="id" value="<?= $model->id ?>">
         <input id="form-token" type="hidden" name="<?= Yii::$app->request->csrfParam ?>"

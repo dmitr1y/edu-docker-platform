@@ -17,14 +17,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="panel panel-info autocollapse">
         <div class="panel-heading clickable">
             <h3 class="panel-title">
-                Please wait
+                Пожалуйста, подождите
             </h3>
         </div>
         <div class="panel-body">
-            Your app is running...
+            Ваше приложение запускается......
         </div>
     </div>
 
-    <a href="/apps/create" class="btn btn-info">Create new</a>
+    <a href="/apps/create" class="btn btn-info">Создать новое</a>
 
 </div>

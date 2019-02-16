@@ -34,10 +34,17 @@ class StaticAppUploadForm extends Model
         ];
     }
 
-    public function upload($userId = null, $appName = null)
+    /**
+     * Загрузка и распаковка архива статического приложения
+     *
+     * @param $userId - ID пользователя
+     * @param $appId - ID приложеня
+     * @return string
+     */
+    public function upload($userId, $appId)
     {
         if ($this->validate() && !empty($userId) && !empty($appName)) {
-            $this->path = $this->path . '/' . $userId . '/' . $appName;
+            $this->path = $this->path . '/' . $userId . '/app' . $appId;
 //            todo fix permissions
             if (!file_exists($this->path)) {
                 mkdir($this->path, 0777, true);
@@ -49,12 +56,11 @@ class StaticAppUploadForm extends Model
                     $zip->extractTo($this->path);
                     $zip->close();
                 } else
-                    return false;
+                    return '';
             } else
                 $this->app->saveAs($this->path . '/' . $this->app->baseName . '.' . $this->app->extension);
             return $this->path;
-        } else {
-            return false;
         }
+        return '';
     }
 }

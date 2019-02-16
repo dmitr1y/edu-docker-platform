@@ -4,12 +4,13 @@
 
 use yii\helpers\Html;
 
-$this->title = 'About';
+$this->title = 'Что такое Edu modules?';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>This is the About page. You may modify the following file to customize its content:</p>
+    <p>Сайт содержит работы студентов по математике, среди которых есть тренажеры, демострации работы алогритмов и даже
+        игры.</p>
 
 </div>

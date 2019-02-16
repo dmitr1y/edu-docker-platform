@@ -34,7 +34,7 @@ services:
     networks:
     - backend
     - docker
-  #    restart: always
+    restart: always
   mysql:
     image: mysql/mysql-server
     container_name: mysql_db
@@ -43,7 +43,7 @@ services:
     - MYSQL_DATABASE=edu
     - MYSQL_ROOT_HOST=%
     volumes:
-    - ~/db/mysql/core:/var/lib/mysql
+      - ~/db/mysql/core:/var/lib/mysql # Данные платформы
     - ./docker/mysql/my.cnf:/etc/my.cnf
     ports:
     - 3306:3306
@@ -51,7 +51,7 @@ services:
     - backend
   # docker in docker
   dind:
-    image: docker:dind
+    build: ./docker/dind/
     privileged: true
     command: --storage-driver=vfs
     volumes:
@@ -87,7 +87,7 @@ services:
       - user_apps_net
       - docker
     volumes:
-      - ~/db/mongo/default_apps:/data/db
+      - ~/db/mongo/default_apps:/data/db # Данные тренажера Евклида
 networks:
   frontend:
   backend:

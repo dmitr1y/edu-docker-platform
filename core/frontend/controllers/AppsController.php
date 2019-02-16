@@ -27,6 +27,7 @@ use Symfony\Component\CssSelector\Exception\InternalErrorException;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
+use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -36,9 +37,9 @@ class AppsController extends Controller
 {
 //    private $data_path = "/storage/user_app_data";
 
-    const ACTION_REMOVE = 'Remove';
-    const ACTION_START = 'Run';
-    const ACTION_STOP = 'Stop';
+    const ACTION_REMOVE = 'Удалить';
+    const ACTION_START = 'Запустить';
+    const ACTION_STOP = 'Остановить';
 
     public function behaviors()
     {
@@ -73,7 +74,7 @@ class AppsController extends Controller
 
     public function actionIndex()
     {
-        $this->view->title = " Discover apps";
+        $this->view->title = "Обзор приложения";
 
         return $this->render('index');
     }
@@ -106,6 +107,7 @@ class AppsController extends Controller
      *
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException
+     * @throws BadRequestHttpException
      */
     public function actionManager()
     {
@@ -117,7 +119,12 @@ class AppsController extends Controller
             throw  new NotFoundHttpException("Приложение не найдено");
         }
 
-        $app = Apps::findOne(['id' => $id]);
+        $app = Apps::findOne(['id' => $id, 'deleted' => 0]);
+
+        if (!$app) {
+            throw new NotFoundHttpException("Приложение не найдено");
+        }
+
         $dockerApp = DockerApps::findOne(['app_id' => $app->id]);
         $staticApp = StaticApps::findOne(['app_id' => $app->id]);
 
@@ -172,7 +179,7 @@ class AppsController extends Controller
                 $app->save();
                 return $this->render('removed');
             default:
-                throw  new NotFoundHttpException();
+                throw  new BadRequestHttpException("Неизвестное действие над приложением");
         }
 
 //       todo Вырезать из лога "storage_"
@@ -258,8 +265,11 @@ class AppsController extends Controller
 
             $app->url = $url;
             $app->save();
-            if ($dbRequire)
+
+            if ($dbRequire) {
                 return $this->redirect(['db/create', 'id' => $app->id]);
+            }
+
             return $this->redirect(['apps/manage', 'id' => $app->id]);
         }
         return $this->render('createDynamic', ['model' => $model, 'modelUpload' => $modelUpload]);
@@ -272,6 +282,7 @@ class AppsController extends Controller
      * @return string|\yii\web\Response
      * @throws ForbiddenHttpException
      * @throws NotFoundHttpException
+     * @throws \yii\base\ErrorException
      */
     public function actionCreateStatic($id = null)
     {
@@ -284,7 +295,7 @@ class AppsController extends Controller
                 throw new ForbiddenHttpException();
             }
 
-            $app = Apps::findOne(['id' => $id]);
+            $app = Apps::findOne(['id' => $id, 'deleted' => 0]);
 
             if (empty($app)) {
                 throw new NotFoundHttpException();
@@ -293,9 +304,7 @@ class AppsController extends Controller
             $modelUpload->app = UploadedFile::getInstance($model, 'path_to_index');
             $model->app_id = $app->id;
 
-            $appName = "app" . $app->id;
-
-            $appPath = $modelUpload->upload(Yii::$app->user->id, $appName);
+            $appPath = $modelUpload->upload(Yii::$app->user->id, $app->id);
             if (!empty($appPath)) {
                 $model->path_to_index = $appPath;
             }
@@ -314,7 +323,7 @@ class AppsController extends Controller
      */
     public function actionList()
     {
-        $this->view->title = "Apps catalog";
+        $this->view->title = "Каталог приложений";
         $appsQuery = Apps::find()->where(["deleted" => 0]);
         $dataProvider = new ActiveDataProvider([
             'query' => $appsQuery,
@@ -338,7 +347,11 @@ class AppsController extends Controller
             throw  new NotFoundHttpException("Приложение не найдено.");
         }
 
-        $model = Apps::findOne(['id' => $id]);
+        $model = Apps::findOne(['id' => $id, 'deleted' => 0]);
+
+        if (!$model) {
+            throw new NotFoundHttpException("Приложение не найдено.");
+        }
 
         return $this->render('_listViewAppDetail', ['model' => $model]);
     }

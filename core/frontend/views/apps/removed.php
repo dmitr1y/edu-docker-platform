@@ -17,15 +17,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="panel panel-success autocollapse">
         <div class="panel-heading clickable">
             <h3 class="panel-title">
-                Success!
+                Выполнено!
             </h3>
         </div>
         <div class="panel-body">
-            Your app was successfully removed.
+            Приложение успешно удалено.
         </div>
     </div>
 
-    <a href="/apps/create" class="btn btn-info">Create new</a>
-    <a href="/apps/create-static" class="btn btn-info">Create new static app</a>
+    <a href="/apps/create" class="btn btn-info">Создать новое</a>
+    <a href="/apps/list" class="btn btn-info">Каталог приложений</a>
 
 </div>

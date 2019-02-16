@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
-    <?= $form->field($model, 'index_name') ?>
+    <?= $form->field($model, 'index_name')->label('Имя главной страницы')->hint('index.html') ?>
     <?= $form->field($model, 'path_to_index')->fileInput()->label('ZIP архив или HTML страница') ?>
 
     <div class="form-group">

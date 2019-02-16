@@ -32,9 +32,9 @@ $appIcon .= '"></i>';
             echo $description;
         ?>
     </p>
-    <div>
-        <small>Category: <?= $model->category ?></small>
-    </div>
+    <!--    <div>-->
+    <!--        <small>Категория: --><? //= $model->category ?><!--</small>-->
+    <!--    </div>-->
     <div>
         <small><?= \dektrium\user\models\User::findOne(['id' => $model->owner_id])->username ?></small>
         <small><?= $model->timestamp ?></small>

@@ -41,7 +41,7 @@ BootboxAsset::overrideSystemConfirm();
     $menuItems = [
         ['label' => 'Главная', 'url' => ['/site/index']],
         ['label' => 'О нас', 'url' => ['/site/about']],
-        ['label' => 'Контакты', 'url' => ['/site/contact']],
+//        ['label' => 'Контакты', 'url' => ['/site/contact']],
         ['label' => 'Блог', 'url' => ['/blog']],
     ];
 
@@ -59,7 +59,11 @@ BootboxAsset::overrideSystemConfirm();
         ];
 
         if (Yii::$app->user->can('admin')) {
-            $menuItems[] = ['label' => 'Панель управления', 'url' => ['/admin'],];
+            $menuItems[] = [
+                'label' => 'Панель управления',
+                'url' => ['/admin'],
+                'linkOptions' => ['target' => '_blank'],
+            ];
         }
 
         $menuItems[] = '<li>'
