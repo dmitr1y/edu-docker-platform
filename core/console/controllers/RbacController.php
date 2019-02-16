@@ -20,55 +20,55 @@ class RbacController extends Controller
         $auth->removeAll();
 
 
-        echo 'добавляем разрешение "userAppManage"\n';
+        echo 'добавляем разрешение "userAppManage"' . PHP_EOL;
         $userAppManage = $auth->createPermission('userAppManage');
-        $userAppManage->description = 'Manage user app\n';
+        $userAppManage->description = 'Управление пользовательскими приложениями' . PHP_EOL;
         $auth->add($userAppManage);
 
-        echo 'добавляем разрешение "viewApps"\n';
+        echo 'добавляем разрешение "viewApps"' . PHP_EOL;
         $viewApps = $auth->createPermission('viewApps');
-        $viewApps->description = 'View apps catalog\n';
+        $viewApps->description = 'Просмотр каталога приложений' . PHP_EOL;
         $auth->add($viewApps);
 
-        echo 'добавляем разрешение "userDockerManage"\n';
+        echo 'добавляем разрешение "userDockerManage"' . PHP_EOL;
         $userDockerManage = $auth->createPermission('userDockerManage');
-        $userDockerManage->description = 'Manage user applications in the Docker\n';
+        $userDockerManage->description = 'Управление пользовательскими Docker контейнерами' . PHP_EOL;
         $auth->add($userDockerManage);
 
-        echo 'добавляем роль "user" и даём роли разрешение "createApp", "updateApp" и "viewApps"\n';
+        echo 'добавляем роль "user" и даём роли разрешение "createApp", "updateApp" и "viewApps"' . PHP_EOL;
         $user = $auth->createRole('user');
         $auth->add($user);
         $auth->addChild($user, $userAppManage);
         $auth->addChild($user, $viewApps);
         $auth->addChild($user, $userDockerManage);
 
-        echo 'добавляем разрешение "userManage"\n';
+        echo 'добавляем разрешение "userManage"' . PHP_EOL;
         $userManage = $auth->createPermission('userManage');
-        $userManage->description = 'User management\n';
+        $userManage->description = 'Управление пользователями' . PHP_EOL;
         $auth->add($userManage);
 
-        echo 'добавляем разрешение "webConsole"\n';
+        echo 'добавляем разрешение "webConsole"' . PHP_EOL;
         $webConsole = $auth->createPermission('webConsole');
-        $webConsole->description = 'Web console\n';
+        $webConsole->description = 'Web консоль' . PHP_EOL;
         $auth->add($webConsole);
 
-        echo 'добавляем разрешение "sysDockerManage"\n';
+        echo 'добавляем разрешение "sysDockerManage"' . PHP_EOL;
         $sysDockerManage = $auth->createPermission('sysDockerManage');
-        $sysDockerManage->description = 'Docker application core management\n';
+        $sysDockerManage->description = 'Управление Docker сервисами платформы' . PHP_EOL;
         $auth->add($sysDockerManage);
 
-        echo 'добавляем разрешение "categoryManage"\n';
+        echo 'добавляем разрешение "categoryManage"n';
         $categoryManage = $auth->createPermission('categoryManage');
-        $categoryManage->description = 'Category management\n';
+        $categoryManage->description = 'Управление категориями';
         $auth->add($categoryManage);
 
-        echo 'добавляем разрешение "userManage"\n';
+        echo 'добавляем разрешение "userManage"' . PHP_EOL;
         $dbManage = $auth->createPermission('dbManage');
-        $dbManage->description = 'Database management\n';
+        $dbManage->description = 'Управление БД' . PHP_EOL;
         $auth->add($dbManage);
 
-        echo 'добавляем роль "admin" и даём роли разрешение "updateApp"\n';
-        echo 'а также все разрешения роли "user"\n';
+        echo 'добавляем роль "admin" и даём роли разрешение "updateApp"' . PHP_EOL;
+        echo 'а также все разрешения роли "user"' . PHP_EOL;
         $admin = $auth->createRole('admin');
         $auth->add($admin);
         $auth->addChild($admin, $user);
@@ -79,9 +79,10 @@ class RbacController extends Controller
         $auth->addChild($admin, $categoryManage);
         $auth->addChild($admin, $dbManage);
 
-//        echo 'Назначение ролей пользователям. 1 и 2 это IDs возвращаемые IdentityInterface::getId()\n';
-//        echo 'обычно реализуемый в модели User.\n';
+//        echo 'Назначение ролей пользователям. 1 и 2 это IDs возвращаемые IdentityInterface::getId()'.PHP_EOL;
+//        echo 'обычно реализуемый в модели User.'.PHP_EOL;
 //       $auth->assign($user, 2);
+        echo 'добавляем роль "admin" пользователю с id=1' . PHP_EOL;
         $auth->assign($admin, 1);
 
         return 0;
