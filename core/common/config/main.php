@@ -62,7 +62,7 @@ return [
             'class' => 'dektrium\user\Module',
             'enableConfirmation' => true,
             'enableUnconfirmedLogin' => false,
-            'adminPermission' => 'role, permission',
+            'adminPermission' => 'admin',
             'admins' => ['admin'], // Логин администратора
             'mailer' => [
                 'sender' => [$params['noreplyEmail'] => $params['noreplyEmailTitle']],

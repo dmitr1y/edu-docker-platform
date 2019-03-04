@@ -43,24 +43,28 @@ class StaticAppUploadForm extends Model
      */
     public function upload($userId, $appId)
     {
-        if ($this->validate() && !empty($userId) && !empty($appName)) {
-            $this->path = $this->path . '/' . $userId . '/app' . $appId;
-//            todo fix permissions
-            if (!file_exists($this->path)) {
-                mkdir($this->path, 0777, true);
-            }
-            if ($this->app->extension === 'zip') {
-                $zip = new ZipArchive;
-                $res = $zip->open($this->app->tempName);
-                if ($res === TRUE) {
-                    $zip->extractTo($this->path);
-                    $zip->close();
-                } else
-                    return '';
-            } else
-                $this->app->saveAs($this->path . '/' . $this->app->baseName . '.' . $this->app->extension);
-            return $this->path;
+        if (!$this->validate() || empty($userId)) {
+            return '';
         }
-        return '';
+
+        $this->path = $this->path . '/' . $userId . '/app' . $appId;
+//            todo fix permissions
+        if (!file_exists($this->path)) {
+            mkdir($this->path, 0755, true);
+        }
+
+        if ($this->app->extension === 'zip') {
+            $zip = new ZipArchive;
+            $res = $zip->open($this->app->tempName);
+            if ($res === TRUE) {
+                $zip->extractTo($this->path);
+                $zip->close();
+            } else
+                return '';
+        } else {
+            $this->app->saveAs($this->path . '/' . $this->app->baseName . '.' . $this->app->extension);
+        }
+
+        return $this->path;
     }
 }

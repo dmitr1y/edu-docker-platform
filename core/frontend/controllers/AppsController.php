@@ -286,7 +286,6 @@ class AppsController extends Controller
      * @return string|\yii\web\Response
      * @throws ForbiddenHttpException
      * @throws NotFoundHttpException
-     * @throws \yii\base\ErrorException
      */
     public function actionCreateStatic($id = null)
     {
