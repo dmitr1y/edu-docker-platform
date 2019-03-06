@@ -67,7 +67,7 @@ BootboxAsset::overrideSystemConfirm();
         } else {
             $menuItems[] = [
                 'label' => 'Приложения',
-                'гкд' => '/apps/list',
+                'url' => '/apps/list',
             ];
         }
 
