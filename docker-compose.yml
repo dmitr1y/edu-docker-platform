@@ -52,6 +52,7 @@ services:
   # docker in docker
   dind:
     build: ./docker/dind/
+    container_name: dind
     privileged: true
     command: --storage-driver=vfs
     volumes:
