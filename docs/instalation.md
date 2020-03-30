@@ -14,16 +14,7 @@
 3. Сгенерировать и настроить сертификаты для nginx в `docker/nginx/confs/default.conf` и положить их в директорию 
 `docker/nginx/certs/`
 4. Сконфигурировать данные доступа для тренажареа Евклида в файле `docker/default_apps/evklid-trainer/access.js`
-5. Выполнить команду `docker-compose up -d` для запуска всех сервисов в фоновом режиме
-6. Зайти в сервис **core** через `docker-compose exec core bash` и произвести инициализацию
-```bash
-composer install
-./init
-./yii migrate/up
-./yii migrate-queue
-./yii migrate-user
-./yii migrate/up --migrationPath=@yii/rbac/migrations
-./yii rbac/init
-cd ../storage && docker-compose up -d
-```
+5. Запустить контейнеры в фоновом режиме с помощью команды `docker-compose up -d`
+6. Произвести инициализацию сервиса `./run.sh install`
 7. Сконфигурировать данные доступа в `core/common/config/params-local.php`
+8. Произвести инициализацию БД `./run.sh migrate`
