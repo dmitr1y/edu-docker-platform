@@ -15,7 +15,7 @@
 `docker/nginx/certs/`
 4. Сконфигурировать данные доступа для тренажареа Евклида в файле `docker/default_apps/evklid-trainer/access.js`
 5. Выполнить команду `docker-compose up -d` для запуска всех сервисов в фоновом режиме
-6. Зайти в сервеис **core** через `docker-compose exec core bash` и произвести инициализацию
+6. Зайти в сервис **core** через `docker-compose exec core bash` и произвести инициализацию
 ```bash
 composer install
 ./init
@@ -24,6 +24,6 @@ composer install
 ./yii migrate-user
 ./yii migrate/up --migrationPath=@yii/rbac/migrations
 ./yii rbac/init
-cd storage && docker-compose up -d
+cd ../storage && docker-compose up -d
 ```
 7. Сконфигурировать данные доступа в `core/common/config/params-local.php`
