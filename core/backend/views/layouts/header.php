@@ -16,7 +16,7 @@ use yii\helpers\Html;
             <span class="sr-only">Toggle navigation</span>
         </a>
 
-        <div class="navbar-custom-menu">
+        <div class="navbar-custom-menu" style="display: none">
 
             <ul class="nav navbar-nav">
 
