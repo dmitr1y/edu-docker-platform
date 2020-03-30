@@ -1,8 +1,7 @@
-FROM docker:dind
+FROM docker:18-dind
 
 # Установка docker-compose для ручного управления контейнерами пользователей
-RUN apk add --no-cache py-pip openssl bash
-RUN pip install docker-compose
+RUN apk add --no-cache docker-compose
 
 VOLUME /var/lib/docker
 EXPOSE 2375

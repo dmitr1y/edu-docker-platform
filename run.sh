@@ -36,7 +36,8 @@ print_style () {
 
 display_options () {
     printf "Доступные действия:\n";
-    print_style "   install" "info"; printf "\t\t Установка пакетов composer для ядра.\n"
+    print_style "   install" "info"; printf "\t\t Инициализация сервиса.\n"
+    print_style "   migrate" "info"; printf "\t\t Выполнить начальные миграции.\n"
     print_style "   up [services]" "success"; printf "\t Запуск сервисов docker-compose платформы.\n"
     print_style "   user-apps" "success"; printf "\t\t Запуск пользовательских приложений.\n"
     print_style "   down" "danger"; print_style "\t\t\t Остановка и удаление контейнеров.\n" "danger"
@@ -72,9 +73,12 @@ elif [ "$1" == "user-apps" ]; then
     docker-compose exec dind docker-compose -f /storage/docker-compose.yml up -d
 
 elif [ "$1" == "install" ]; then
-    print_style "Установка пакетов composer\n" "info"
-    print_style "При первом запуске может занять некоторое время\n" "info"
-    composer --working-dir=core install
+    print_style "Инициализация сервиса\n" "info"
+    docker-compose exec core bash install.sh
+
+elif [ "$1" == "migrate" ]; then
+    print_style "Инициализация базы данных\n" "info"
+    docker-compose exec core bash migrate.sh
 
 else
     print_style "Неверная команда.\n" "danger"
